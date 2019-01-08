@@ -1,7 +1,19 @@
 <template>
-<footer id="footer" class="footer">
-    <div class="container">
-        <div class="has-text-centered copyright">© {{year}} Tech Bringer Ltd.</div>
+<footer id="footer" :class="{'mini': signed}">
+    <div class="section">
+        <div class="container has-text-centered">
+            <figure>
+                <img src="@/assets/man.svg" />
+            </figure>
+            <p>{{display_name}}</p>
+        </div>
+        <ul class="menu">
+            <li><router-link class="is-home" :to="{ name: 'Homepage' }"><i class="fas fa-tachometer-alt"></i>Dashboard</router-link></li>
+            <li><router-link :to="{ name: 'Products' }"><i class="fas fa-shopping-bag"></i>Products</router-link></li>
+        </ul>
+    </div>
+    <div class="footer">
+        <div class="has-text-centered"><a href="#" @click.prevent="signout"><i class="fas fa-sign-out-alt"></i></a></div>
     </div>
 </footer>
 </template>
@@ -9,23 +21,52 @@
 <script>
 export default {
     name: 'Footer',
-    props: [
-
-    ],
-    data: function() {
+    props: [],
+    data() {
         return {
-
+            signed  :   false,
+            member  :   null
         };
     },
     components: {},
     watch: {
 
     },
-    computed: {
-        year() {
-            let d = new Date();
+    created() {
+        let me  =   this;
+        if (localStorage && localStorage.recent_member) {
+            me.member    =   JSON.parse(localStorage.recent_member);
+        }
 
-            return d.getFullYear();
+        this.$bus.$on('onLive', (member) => {
+            me.signed   =   true;
+            me.member   =   member;
+        });
+        this.$bus.$on('onDie', () => {
+            me.signed                   =   false;
+            me.member                   =   localStorage.recent_member ? JSON.parse(localStorage.recent_member) : null;
+            me.$parent.authenticated    =   null;
+        });
+        this.$bus.$on('onRecentMemberErased', () => {
+            me.member                   =   null;
+        });
+    },
+    computed: {
+        display_name() {
+            if (this.member) {
+                return this.member.first_name + ' ' + this.member.surname;
+            }
+            return 'Please sign in';
+        }
+    },
+    methods :   {
+        signout() {
+            let me      =   this;
+            axios.post(
+                base_url + endpoints.signout
+            ).then((resp) => {
+                me.$bus.$emit('onDie');
+            });
         }
     }
 }

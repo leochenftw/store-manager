@@ -12,7 +12,9 @@ var sassOptions = {
   outputStyle: 'expanded',
   importer: moduleImporter(),
   includePaths: [
-      '../node_modules/bulma'
+      '../node_modules/@fortawesome/fontawesome-free/scss',
+      '../node_modules/bulma',
+      '../node_modules/bulma-extensions'
   ]
 };
 

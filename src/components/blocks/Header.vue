@@ -1,8 +1,8 @@
 <template>
-<header id="header">
+<header id="header" :class="{'show': signed}">
     <nav class="navbar is-transparent">
         <div class="navbar-brand">
-            <router-link class="navbar-item" :to="{ name: 'Homepage' }">Home</router-link>
+            <router-link class="navbar-item" :to="{ name: 'Homepage' }"><i class="fas fa-kiwi-bird"></i> OneStore</router-link>
             <div v-on:click="show_mobile_menu" :class="{'navbar-burger': true, 'burger': true, 'is-active': mobile_menu_is_active}" data-target="mobile-menu">
                 <span></span>
                 <span></span>
@@ -24,9 +24,19 @@ export default {
     name: 'Header',
     data: function() {
         return {
+            signed: false,
             mobile_menu_is_active: false,
             navigation: []
         }
+    },
+    created() {
+        let me  =   this;
+        this.$bus.$on('onLive', (member) => {
+            me.signed   =   true;
+        });
+        this.$bus.$on('onDie', () => {
+            me.signed   =   false;
+        });
     },
     methods: {
         click_to_close: function(e) {

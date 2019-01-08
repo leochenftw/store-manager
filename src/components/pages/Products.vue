@@ -36,10 +36,18 @@
                 <template v-if="!no_result">
                     <div class="products__head">
                         <div class="columns products__head__item heading">
-                            <div class="column col-product">Product</div>
-                            <div class="column col-stock">Stock</div>
-                            <div class="column col-price">Price</div>
-                            <div class="column col-update">Updated</div>
+                            <div class="column col-product">
+                                <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('Title'), sort: 'Title'} }">Product <template v-if="$route.query.sort == 'Title'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                            </div>
+                            <div class="column col-stock">
+                                <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('StockCount'), sort: 'StockCount'} }">Stock <template v-if="$route.query.sort == 'StockCount'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                            </div>
+                            <div class="column col-price">
+                                <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('Price'), sort: 'Price'} }">Price <template v-if="$route.query.sort == 'Price'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                            </div>
+                            <div class="column col-update">
+                                <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('LastEdited'), sort: 'LastEdited'} }">Updated <template v-if="$route.query.sort == 'LastEdited'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                            </div>
                         </div>
                     </div>
                     <div class="products__body">
@@ -105,12 +113,22 @@ export default {
         }
     },
     created() {
-        // this.page   =   this.$route.query.page ? this.$route.query.page : 0;
         this.get_products();
     },
     computed    :   {
         page_left() {
             return this.total_page - this.page;
+        },
+        param_organiser() {
+            let params  =   new URLSearchParams();
+            params.append('page', this.page);
+            if (this.$route.query.sort) {
+                let sort    =   this.$route.query.sort,
+                    by      =   this.$route.query.by;
+                params.append('sort', sort);
+                params.append('by', by);
+            }
+            return '?' + params.toString();
         },
         pagination() {
             let pagination  =   [];
@@ -196,6 +214,12 @@ export default {
         }
     },
     methods     :   {
+        up_or_down(sort) {
+            if (sort == this.$route.query.sort) {
+                return this.$route.query.by == 'ASC' ? 'DESC' : 'ASC';
+            }
+            return 'ASC';
+        },
         reset_search_field() {
             this.go_back(true);
         },
@@ -209,9 +233,9 @@ export default {
 
             if (this.is_loading) return false;
             this.is_loading =   true;
-            let me  =   this;
+            let me      =   this;
             axios.get(
-                base_url + endpoints.product + '?page=' + me.page
+                base_url + endpoints.product + this.param_organiser
             ).then((resp) => {
                 me.is_loading   =   false;
                 me.products     =   resp.data.list;

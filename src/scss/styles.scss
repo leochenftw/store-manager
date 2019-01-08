@@ -327,6 +327,14 @@ $orange: rgba(207, 146, 74, 1);
                 .columns {
                     margin-bottom: 0;
                     border-bottom: 1px solid #dbdbdb;
+                    .column {
+                        &.col {
+                            &-stock,
+                            &-price {
+                                font-size: 11px;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -360,6 +368,22 @@ $orange: rgba(207, 146, 74, 1);
                     &-price {
                         width: 100px;
                         flex: none;
+                    }
+
+                    &-stock,
+                    &-price {
+                        text-align: center;
+                        font-size: 18px;
+                        span {
+                            font-size: 11px;
+                        }
+                        &.is-danger {
+                            color: $danger;
+                            font-weight: bold;
+                            span {
+                                font-weight: normal;
+                            }
+                        }
                     }
 
                     &-update {

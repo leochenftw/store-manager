@@ -26433,6 +26433,10 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   border-bottom: 1px solid #dbdbdb;
 }
 
+.main-content.products .products__head .columns .column.col-stock, .main-content.products .products__head .columns .column.col-price {
+  font-size: 11px;
+}
+
 .main-content.products .products__body {
   position: relative;
   height: calc(100% - 101px);
@@ -26467,6 +26471,24 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   -webkit-box-flex: 0;
       -ms-flex: none;
           flex: none;
+}
+
+.main-content.products .products__head .col-stock, .main-content.products .products__head .col-price, .main-content.products .products__body .col-stock, .main-content.products .products__body .col-price {
+  text-align: center;
+  font-size: 18px;
+}
+
+.main-content.products .products__head .col-stock span, .main-content.products .products__head .col-price span, .main-content.products .products__body .col-stock span, .main-content.products .products__body .col-price span {
+  font-size: 11px;
+}
+
+.main-content.products .products__head .col-stock.is-danger, .main-content.products .products__head .col-price.is-danger, .main-content.products .products__body .col-stock.is-danger, .main-content.products .products__body .col-price.is-danger {
+  color: #ff3860;
+  font-weight: bold;
+}
+
+.main-content.products .products__head .col-stock.is-danger span, .main-content.products .products__head .col-price.is-danger span, .main-content.products .products__body .col-stock.is-danger span, .main-content.products .products__body .col-price.is-danger span {
+  font-weight: normal;
 }
 
 .main-content.products .products__head .col-update, .main-content.products .products__body .col-update {

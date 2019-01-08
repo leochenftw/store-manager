@@ -37,7 +37,7 @@
                     <div class="products__head">
                         <div class="columns products__head__item heading">
                             <div class="column col-product">
-                                <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('Title'), sort: 'Title'} }">Product <template v-if="$route.query.sort == 'Title'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                                <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('Title'), sort: 'Title'} }">Product <template v-if="is_sorting_title"><i :class="['fas', {'fa-caret-up': !$route.query.by || $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                             </div>
                             <div class="column col-stock">
                                 <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('StockCount'), sort: 'StockCount'} }">Stock <template v-if="$route.query.sort == 'StockCount'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
@@ -70,14 +70,14 @@
             <ProductForm v-if="$route.params.id"/>
         </div>
         <nav v-if="pagination.length > 0 && !$route.params.id && !no_result" class="pagination" role="navigation" aria-label="pagination">
-            <router-link v-if="page - 1 >= 0" class="pagination-previous" :to="{ name: 'Products', query: { page : page - 1 } }">Prev</router-link>
+            <router-link v-if="page - 1 >= 0" class="pagination-previous" :to="{ name: 'Products', query: query_maker(page - 1) }">Prev</router-link>
             <a v-else disabled="disabled" class="pagination-previous">Prev</a>
-            <router-link v-if="page + 1 < total_page" class="pagination-next" :to="{ name: 'Products', query: { page : page + 1 } }">Next</router-link>
+            <router-link v-if="page + 1 < total_page" class="pagination-next" :to="{ name: 'Products', query: query_maker(page + 1) }">Next</router-link>
             <a v-else disabled="disabled" class="pagination-next">Next</a>
             <ul class="pagination-list">
                 <li v-for="item in pagination">
                     <span v-if="item.index == null" class="pagination-ellipsis">&hellip;</span>
-                    <router-link :class="['pagination-link', {'is-current': page == item.index}]" v-else :to="{ name: 'Products', query: { page : item.index } }">{{item.label}}</router-link>
+                    <router-link :class="['pagination-link', {'is-current': page == item.index}]" v-else :to="{ name: 'Products', query: query_maker(item.index) }">{{item.label}}</router-link>
                 </li>
             </ul>
         </nav>
@@ -116,6 +116,9 @@ export default {
         this.get_products();
     },
     computed    :   {
+        is_sorting_title() {
+            return !this.$route.query.sort || this.$route.query.sort == 'Title';
+        },
         page_left() {
             return this.total_page - this.page;
         },
@@ -214,7 +217,26 @@ export default {
         }
     },
     methods     :   {
+        query_maker(i) {
+            let data    =   {
+                page    :   i
+            };
+
+            if (this.$route.query.sort) {
+                data.sort   =   this.$route.query.sort;
+            }
+
+            if (this.$route.query.by) {
+                data.by   =   this.$route.query.by;
+            }
+
+            return data;
+        },
         up_or_down(sort) {
+            if (!this.$route.query.sort && sort == 'Title') {
+                return 'DESC';
+            }
+
             if (sort == this.$route.query.sort) {
                 return this.$route.query.by == 'ASC' ? 'DESC' : 'ASC';
             }
@@ -272,6 +294,15 @@ export default {
 
             params.append('term', this.search_term);
             params.append('page', this.page);
+
+            if (this.$route.query.sort) {
+                params.append('sort', this.$route.query.sort);
+            }
+
+            if (this.$route.query.by) {
+                params.append('by', this.$route.query.by);
+            }
+
             axios.post(
                 base_url + endpoints.search,
                 params

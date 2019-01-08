@@ -1,19 +1,17 @@
 <template>
 <header id="header" :class="{'show': signed}">
-    <nav class="navbar is-transparent">
+    <nav class="navbar is-transparent is-mobile">
         <div class="navbar-brand">
             <router-link class="navbar-item" :to="{ name: 'Homepage' }"><i class="fas fa-kiwi-bird"></i> OneStore</router-link>
-            <div v-on:click="show_mobile_menu" :class="{'navbar-burger': true, 'burger': true, 'is-active': mobile_menu_is_active}" data-target="mobile-menu">
+            <!-- <div v-on:click="show_mobile_menu" :class="{'navbar-burger': true, 'burger': true, 'is-active': mobile_menu_is_active}" data-target="mobile-menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </div> -->
         </div>
         <div id="mobile-menu" :class="{'navbar-menu': true, 'is-active': mobile_menu_is_active}">
             <div class="navbar-end">
-                <div class="navbar-item" v-for="item in navigation">
-                    <router-link :to="item.url">{{item.title}}</router-link>
-                </div>
+                <a class="navbar-item" href="https://store.one-stop.co.nz" target="_blank"><span class="icon"><i class="fas fa-cash-register"></i></span></a>
             </div>
         </div>
     </nav>

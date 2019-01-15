@@ -1,8 +1,10 @@
 {
-    "store"     :   "api/v/1/store",
-    "session"   :   "api/v/1/session",
-    "product"   :   "api/v/1/product",
-    "signin"    :   "api/v/1/signin",
-    "signout"   :   "api/v/1/signout",
-    "search"    :   "api/v/1/search"
+    "store"         :   "api/v/1/store",
+    "session"       :   "api/v/1/session",
+    "product"       :   "api/v/1/product",
+    "signin"        :   "api/v/1/signin",
+    "signout"       :   "api/v/1/signout",
+    "search"        :   "api/v/1/search",
+    "discount"      :   "api/v/1/discount",
+    "singlelookup"  :   "api/v/1/single-lookup"
 }

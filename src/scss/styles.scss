@@ -191,6 +191,10 @@ $orange: rgba(207, 146, 74, 1);
             }
         }
     }
+
+    @media print {
+        display: none;
+    }
 }
 
 #footer {
@@ -273,11 +277,18 @@ $orange: rgba(207, 146, 74, 1);
             }
         }
     }
+
+    @media print {
+        display: none;
+    }
 }
 
 #shim {
     min-width: 200px;
     width: 20vw;
+    @media print {
+        display: none;
+    }
 }
 
 #charts {
@@ -307,8 +318,12 @@ $orange: rgba(207, 146, 74, 1);
 
 .main-content {
     padding-top: 64px;
+
     header.columns {
         border-bottom: 1px solid #dbdbdb;
+        @media print {
+            display: none;
+        }
     }
 
     &.products {
@@ -393,8 +408,94 @@ $orange: rgba(207, 146, 74, 1);
             }
         }
     }
+
+    @media print {
+        padding-top: 0;
+        height: auto !important;
+    }
 }
 
 .chart {
     position: relative;
+}
+
+svg.barcode {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+}
+
+.discount-item {
+    &s {
+
+    }
+
+    svg {
+
+    }
+}
+
+.price-label {
+    &s {
+
+    }
+
+    &__qr,
+    &__content,
+    &__price,
+    &__content {
+        border: 1px solid #000;
+    }
+
+    &__price,
+    &__content {
+        color: #000;
+    }
+
+    &__price {
+        background-color: $red;
+        border-right: none;
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        font-weight: bold;
+        justify-content: center;
+    }
+
+    &__content {
+        border-left: none;
+        &.borderless-right {
+            border-right: none;
+        }
+        .title,
+        .subtitle {
+            line-height: 1;
+        }
+
+        .title {
+            color: #000;
+        }
+
+        .subtitle {
+            margin-bottom: 0 !important;
+        }
+    }
+
+    &__qr {
+        border-left: none;
+        &-code {
+            position: relative;
+            height: 100%;
+            padding-top: 100%;
+            canvas {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0;
+                display: block;
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+    }
 }

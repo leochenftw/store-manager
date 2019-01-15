@@ -26280,6 +26280,12 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   margin-right: 0.5rem;
 }
 
+@media print {
+  #header {
+    display: none;
+  }
+}
+
 #footer {
   z-index: 8;
   position: fixed;
@@ -26369,9 +26375,21 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   color: white;
 }
 
+@media print {
+  #footer {
+    display: none;
+  }
+}
+
 #shim {
   min-width: 200px;
   width: 20vw;
+}
+
+@media print {
+  #shim {
+    display: none;
+  }
 }
 
 #charts {
@@ -26409,6 +26427,12 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 
 .main-content header.columns {
   border-bottom: 1px solid #dbdbdb;
+}
+
+@media print {
+  .main-content header.columns {
+    display: none;
+  }
 }
 
 .main-content.products {
@@ -26495,6 +26519,85 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-size: 12px;
 }
 
+@media print {
+  .main-content {
+    padding-top: 0;
+    height: auto !important;
+  }
+}
+
 .chart {
   position: relative;
+}
+
+svg.barcode {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+.price-label__qr, .price-label__content, .price-label__price, .price-label__content {
+  border: 1px solid #000;
+}
+
+.price-label__price, .price-label__content {
+  color: #000;
+}
+
+.price-label__price {
+  background-color: #ff3860;
+  border-right: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.price-label__content {
+  border-left: none;
+}
+
+.price-label__content.borderless-right {
+  border-right: none;
+}
+
+.price-label__content .title,
+.price-label__content .subtitle {
+  line-height: 1;
+}
+
+.price-label__content .title {
+  color: #000;
+}
+
+.price-label__content .subtitle {
+  margin-bottom: 0 !important;
+}
+
+.price-label__qr {
+  border-left: none;
+}
+
+.price-label__qr-code {
+  position: relative;
+  height: 100%;
+  padding-top: 100%;
+}
+
+.price-label__qr-code canvas {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  left: 0;
+  display: block;
+  width: 100% !important;
+  height: auto !important;
 }

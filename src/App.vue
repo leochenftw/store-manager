@@ -19,6 +19,7 @@
     </div>
     <Footer />
     <SigninForm />
+    <MessageBox />
 </div>
 </template>
 
@@ -27,12 +28,14 @@ import Header from './components/blocks/Header';
 import Footer from './components/blocks/Footer';
 import slugify from 'slugify';
 import SigninForm from './components/blocks/forms/SigninForm';
+import MessageBox from './components/blocks/MessageBox';
 export default {
     name: 'App',
     components: {
         Header,
         Footer,
-        SigninForm
+        SigninForm,
+        MessageBox
     },
     data() {
         return {

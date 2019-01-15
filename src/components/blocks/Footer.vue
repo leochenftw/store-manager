@@ -10,6 +10,8 @@
         <ul class="menu">
             <li><router-link class="is-home" :to="{ name: 'Homepage' }"><i class="fas fa-tachometer-alt"></i>Dashboard</router-link></li>
             <li><router-link :to="{ name: 'Products' }"><i class="fas fa-shopping-bag"></i>Products</router-link></li>
+            <li><router-link :to="{ name: 'Discounts' }"><i class="fas fa-percent"></i>Discounts</router-link></li>
+            <li><router-link :to="{ name: 'Labels' }"><i class="fas fa-tags"></i>Labels</router-link></li>
         </ul>
     </div>
     <div class="footer">

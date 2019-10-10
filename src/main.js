@@ -23,7 +23,7 @@ global._ = _;
 global.TweenMax =   TweenMax;
 // global.NProgress = NProgress;
 global.axios = axios;
-global.base_url = location.hostname == 'localhost' ? 'https://www.one-stop.co.nz/' : '/';
+global.base_url = 'https://www.one-stop.co.nz/';
 global.endpoints = require('@/config/endpoints');
 global.store_info   =   null;
 

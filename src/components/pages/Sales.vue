@@ -1,13 +1,14 @@
 <template>
-<section class="main-content products">
+<section class="main-content sales">
     <div class="section">
         <div class="container">
             <header class="columns">
                 <div class="column is-narrow">
-                    <h1 class="title is-4"><button style="border: none;" v-if="$route.params.id" class="button is-small" @click.prevent="go_back()"><i class="fas fa-chevron-left"></i></button>Products</h1>
+                    <p v-if="!$route.params.id" class="subtitle is-6"><span>Total:</span> <strong>{{sum.toDollar()}}</strong></p>
+                    <h1 class="title is-4"><button style="border: none;" v-if="$route.params.id" class="button is-small" @click.prevent="go_back()"><i class="fas fa-chevron-left"></i></button>Transactions</h1>
                 </div>
                 <template v-if="!$route.params.id">
-                    <div class="column">
+                    <div class="column" v-if="!show_calendar">
                         <form class="form product-finder" method="post" @submit="lookup">
                             <div class="field has-addons has-addons-right">
                                 <div class="control has-icons-left has-icons-right">
@@ -20,39 +21,45 @@
                             </div>
                         </form>
                     </div>
+                    <div class="column" v-else>
+                        <form class="form columns is-variable is-1 transaction-finder" method="post" @submit="re_range">
+                            <div class="column is-narrow">From</div>
+                            <div class="column is-5 ">
+                                <input class="input" type="date" v-model="from_date">
+                            </div>
+                            <div class="column is-narrow">To</div>
+                            <div class="column is-5 ">
+                                <input class="input" type="date" v-model="to_date">
+                            </div>
+                        </form>
+                    </div>
                     <div class="column is-narrow">
-                        <router-link class="button is-success" :to="{ name: 'ProductViewer', params: {id: 'new'} }">
-                            <span class="icon"><i class="fas fa-plus"></i></span>
-                        </router-link>
+                        <button title="Search in date range" @click.prevent="show_calendar = !show_calendar" :class="['button', {'is-success': show_calendar}]"><i class="far fa-calendar-alt"></i></button>
                         <button class="button is-info"><span class="icon"><i class="fas fa-download"></i></span></button>
                     </div>
                 </template>
-                <div v-else-if="show_publish != null && $route.params.id != 'new'" class="column has-text-right">
-                    <button v-if="show_publish == false" @click.prevent="cease_product" class="button is-danger is-small">Cease product</button>
-                    <button v-else @click.prevent="publish_product" class="button is-success is-small">Publish product</button>
-                </div>
             </header>
             <template v-if="!$route.params.id">
                 <template v-if="!no_result">
-                    <div class="products__head">
-                        <div class="columns products__head__item heading">
-                            <div class="column col-product">
-                                <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('Title'), sort: 'Title'} }">Product <template v-if="is_sorting_title"><i :class="['fas', {'fa-caret-up': !$route.query.by || $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                    <div class="sales__head">
+                        <div class="columns sales__head__item heading">
+
+                            <div class="column col-receipt">Receipt No.</div>
+                            <div class="column col-when">
+                                <router-link style="white-space: nowrap;" :to="{ name: 'Sales', query: {page: page, by: up_or_down('Created'), sort: 'Created'} }">Date time <template v-if="$route.query.sort == 'Created'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                             </div>
-                            <div class="column col-stock">
-                                <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('StockCount'), sort: 'StockCount'} }">Stock <template v-if="$route.query.sort == 'StockCount'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                            <div class="column col-amount">
+                                <router-link style="white-space: nowrap;" :to="{ name: 'Sales', query: {page: page, by: up_or_down('TotalAmount'), sort: 'TotalAmount'} }">Amount <template v-if="$route.query.sort == 'TotalAmount'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                             </div>
-                            <div class="column col-price">
-                                <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('Price'), sort: 'Price'} }">Price <template v-if="$route.query.sort == 'Price'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                            <div class="column col-count is-2 has-text-centered">
+                                <router-link style="white-space: nowrap;" :to="{ name: 'Sales', query: {page: page, by: up_or_down('ItemCount'), sort: 'ItemCount'} }">Item(s) <template v-if="$route.query.sort == 'ItemCount'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                             </div>
-                            <div class="column col-update">
-                                <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('LastEdited'), sort: 'LastEdited'} }">Updated <template v-if="$route.query.sort == 'LastEdited'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
-                            </div>
+                            <div class="column col-by is-2">Operator</div>
                         </div>
                     </div>
-                    <div class="products__body" v-if="!is_loading">
-                        <ProductItem
-                            v-for="item in products"
+                    <div class="sales__body" v-if="!is_loading">
+                        <TransacItem
+                            v-for="item in transactions"
                             :key="'product-' + item.id"
                             :source="item"
                         />
@@ -67,7 +74,7 @@
                     </p>
                 </template>
             </template>
-            <ProductForm v-if="$route.params.id"/>
+            <TransactionViewer v-if="$route.params.id"/>
         </div>
         <nav v-if="pagination.length > 0 && !$route.params.id && !no_result" class="pagination" role="navigation" aria-label="pagination">
             <router-link v-if="page - 1 >= 0" class="pagination-previous" :to="{ name: 'Products', query: query_maker(page - 1) }">Prev</router-link>
@@ -81,39 +88,66 @@
                 </li>
             </ul>
         </nav>
+        <div v-else-if="$route.params.id" class="columns misc-footer">
+            <div class="column">
+                <a class="button is-primary" :href="'https://store.one-stop.co.nz?receipt=' + receipt" target="_blank">re-Print</a>
+            </div>
+            <div class="column is-narrow">
+                <em class="is-small">Operator: </em><em class="is-large">{{operator}}</em>
+            </div>
+        </div>
     </div>
 </section>
 </template>
 
 <script>
-import ProductItem from '../blocks/ProductItem';
-import ProductForm from '../blocks/forms/ProductForm';
+import TransacItem from '../blocks/TransacItem';
+import TransactionViewer from '../blocks/forms/TransactionViewer';
 export default {
-    name        :   'Products',
+    name        :   'Sales',
     props       :   ['member'],
-    components  :   { ProductItem, ProductForm },
+    components  :   { TransacItem, TransactionViewer },
     data() {
         return {
             page            :   parseInt(this.$route.query.page ? this.$route.query.page : 0),
             total_page      :   null,
             search_term     :   null,
-            products        :   [],
+            transactions    :   [],
+            sum             :   0,
             is_loading      :   false,
-            show_publish    :   null,
-            no_result       :   false
+            show_calendar   :   false,
+            no_result       :   false,
+            from_date       :   null,
+            to_date         :   null,
+            operator        :   null,
+            receipt         :   null
         }
     },
     watch       :   {
         $route(nv, ov) {
             if (nv.query && nv.query.page != undefined) {
-                $(this.$el).find('.products__body').scrollTop(0);
+                $(this.$el).find('.sales__body').scrollTop(0);
                 this.page   =   parseInt(nv.query.page);
-                this.get_products();
+            }
+            this.get_transacs();
+        },
+        from_date(nv, ov) {
+            this.page   =   0;
+            this.get_transacs();
+        },
+        to_date(nv, ov) {
+            this.page   =   0;
+            this.get_transacs();
+        },
+        show_calendar(nv, ov) {
+            if (nv === false) {
+                this.from_date  =   null;
+                this.to_date    =   null;
             }
         }
     },
     created() {
-        this.get_products();
+        this.get_transacs();
     },
     computed    :   {
         is_sorting_title() {
@@ -130,6 +164,12 @@ export default {
                     by      =   this.$route.query.by;
                 params.append('sort', sort);
                 params.append('by', by);
+            }
+            if (this.from_date) {
+                params.append('from', this.from_date);
+            }
+            if (this.to_date) {
+                params.append('to', this.to_date);
             }
             return '?' + params.toString();
         },
@@ -245,7 +285,12 @@ export default {
         reset_search_field() {
             this.go_back(true);
         },
-        get_products() {
+        re_range(f)
+        {
+            console.log(f);
+        },
+        get_transacs() {
+            if (this.$route.params.id) return false;
             this.show_publish   =   null;
             this.no_result      =   false;
             if (this.search_term != null && this.search_term.trim().length > 0) {
@@ -257,12 +302,13 @@ export default {
             this.is_loading =   true;
             let me      =   this;
             axios.get(
-                base_url + endpoints.product + this.param_organiser
+                base_url + endpoints.order + this.param_organiser
             ).then((resp) => {
                 me.is_loading   =   false;
-                me.products     =   resp.data.list;
+                me.sum          =   resp.data.sum;
+                me.transactions =   resp.data.list;
                 me.total_page   =   resp.data.total_page;
-                if (me.products.length == 0) {
+                if (me.transactions.length == 0) {
                     me.no_result    =   true;
                 }
             }).catch((error) => {
@@ -282,7 +328,7 @@ export default {
             }
 
             if (this.search_term == null || this.search_term.trim().length == 0) {
-                this.get_products();
+                this.get_transacs();
                 return false;
             }
 
@@ -307,9 +353,9 @@ export default {
                 base_url + endpoints.search,
                 params
             ).then((resp) => {
-                $(me.$el).find('.products__body').scrollTop(0);
+                $(me.$el).find('.sales__body').scrollTop(0);
                 me.is_loading   =   false;
-                me.products     =   resp.data.list;
+                me.transactions     =   resp.data.list;
                 me.total_page   =   resp.data.total_page;
             }).catch((error) => {
                 me.is_loading   =   false;
@@ -349,8 +395,8 @@ export default {
                 this.page           =   0;
                 this.search_term    =   null;
             }
-            this.$router.push({name: 'Products'});
-            this.get_products();
+            this.$router.push({name: 'Sales'});
+            this.get_transacs();
         }
     }
 }

@@ -53,6 +53,18 @@ $orange: rgba(207, 146, 74, 1);
 }
 
 .form {
+    .field {
+        .field {
+            &:not(:last-child) {
+                margin-bottom: 12px;
+            }
+        }
+    }
+
+    &.profile-form {
+        margin-bottom: 3rem;
+    }
+
     &.signin {
         padding-top: 0;
         padding-bottom: 0;
@@ -68,6 +80,7 @@ $orange: rgba(207, 146, 74, 1);
         }
     }
 
+    &.transaction-form,
     &.product-form {
         height: calc(100% - 60px);
         overflow: hidden;
@@ -85,11 +98,6 @@ $orange: rgba(207, 146, 74, 1);
         }
 
         .field {
-            .field {
-                &:not(:last-child) {
-                    margin-bottom: 12px;
-                }
-            }
 
             &s {
                 padding: 0 1.5rem 0 0;
@@ -157,6 +165,10 @@ $orange: rgba(207, 146, 74, 1);
                 border-width: 12px;
             }
         }
+    }
+
+    &.transaction-form {
+        padding-top: 0;
     }
 }
 
@@ -321,11 +333,19 @@ $orange: rgba(207, 146, 74, 1);
 
     header.columns {
         border-bottom: 1px solid #dbdbdb;
+        align-items: flex-end;
+        .subtitle {
+            vertical-align: bottom;
+            span {
+                font-size: 12px;
+            }
+        }
         @media print {
             display: none;
         }
     }
 
+    &.sales,
     &.products {
         height: 100vh !important;
         .section {
@@ -336,7 +356,30 @@ $orange: rgba(207, 146, 74, 1);
             .pagination {
                 transform: translateY(12px);
             }
+            .misc-footer {
+                align-items: flex-end;
+                margin-top: 0;
+                margin-bottom: 0;
+                span, em {
+                    line-height: 1;
+                    &:first-child {
+                        margin-right: 0.5em;
+                    }
+                }
+                .is {
+                    &-small {
+                        font-size: 12px;
+                        transform: translateY(-2px);
+                    }
+
+                    &-large {
+                        font-size: 20px;
+                        font-weight: bold;
+                    }
+                }
+            }
         }
+        .sales,
         .products {
             &__head {
                 .columns {
@@ -356,6 +399,7 @@ $orange: rgba(207, 146, 74, 1);
             &__body {
                 position: relative;
                 height: calc(100% - 101px);
+                padding-bottom: 1.5rem;
                 overflow: hidden;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
@@ -371,6 +415,20 @@ $orange: rgba(207, 146, 74, 1);
                         position: relative;
                         font-style: italic;
                         background-color: rgba($danger, 0.2);
+                    }
+
+                    .col {
+                        &-amount {
+                            i {
+                                margin-right: 0.5em;
+                            }
+                        }
+
+                        &-action {
+                            .button {
+                                pointer-events: none;
+                            }
+                        }
                     }
                 }
             }
@@ -412,6 +470,12 @@ $orange: rgba(207, 146, 74, 1);
     @media print {
         padding-top: 0;
         height: auto !important;
+    }
+}
+
+.main-content.sales .sales__body__item.goods {
+    .column {
+        line-height: 27px;
     }
 }
 
@@ -495,6 +559,37 @@ svg.barcode {
                 display: block;
                 width: 100% !important;
                 height: auto !important;
+            }
+        }
+    }
+}
+
+.profile {
+    .form-title {
+        margin-bottom: 0.5rem !important;
+        .column {
+            &.title-col {
+                align-items: center;
+                display: flex;
+            }
+        }
+    }
+
+    hr {
+        margin-top: 0;
+    }
+}
+
+.transaction {
+    &-finder {
+        &.columns {
+            align-items: center;
+            justify-content: flex-end;
+            .column {
+                &.is-narrow {
+                    font-size: 12px;
+                    font-weight: bold;
+                }
             }
         }
     }

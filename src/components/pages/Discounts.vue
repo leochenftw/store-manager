@@ -4,7 +4,7 @@
         <div class="container">
             <header class="columns">
                 <div class="column is-narrow">
-                    <h1 class="title is-4"><button style="border: none;" v-if="$route.params.id" class="button is-small" @click.prevent="go_back()"><i class="fas fa-chevron-left"></i></button>Discounts</h1>
+                    <h1 class="title is-4">Discounts</h1>
                 </div>
                 <div class="column has-text-right">
                     <router-link class="button is-success" :to="{ name: 'ProductViewer', params: {id: 'new'} }">

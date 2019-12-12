@@ -77,14 +77,14 @@
             <TransactionViewer v-if="$route.params.id"/>
         </div>
         <nav v-if="pagination.length > 0 && !$route.params.id && !no_result" class="pagination" role="navigation" aria-label="pagination">
-            <router-link v-if="page - 1 >= 0" class="pagination-previous" :to="{ name: 'Products', query: query_maker(page - 1) }">Prev</router-link>
+            <router-link v-if="page - 1 >= 0" class="pagination-previous" :to="{ name: 'Sales', query: query_maker(page - 1) }">Prev</router-link>
             <a v-else disabled="disabled" class="pagination-previous">Prev</a>
-            <router-link v-if="page + 1 < total_page" class="pagination-next" :to="{ name: 'Products', query: query_maker(page + 1) }">Next</router-link>
+            <router-link v-if="page + 1 < total_page" class="pagination-next" :to="{ name: 'Sales', query: query_maker(page + 1) }">Next</router-link>
             <a v-else disabled="disabled" class="pagination-next">Next</a>
             <ul class="pagination-list">
                 <li v-for="item in pagination">
                     <span v-if="item.index == null" class="pagination-ellipsis">&hellip;</span>
-                    <router-link :class="['pagination-link', {'is-current': page == item.index}]" v-else :to="{ name: 'Products', query: query_maker(item.index) }">{{item.label}}</router-link>
+                    <router-link :class="['pagination-link', {'is-current': page == item.index}]" v-else :to="{ name: 'Sales', query: query_maker(item.index) }">{{item.label}}</router-link>
                 </li>
             </ul>
         </nav>
@@ -327,36 +327,19 @@ export default {
                 e.preventDefault();
             }
 
-            if (this.search_term == null || this.search_term.trim().length == 0) {
-                this.get_transacs();
-                return false;
-            }
-
             if (this.is_loading) return false;
             this.is_loading =   true;
 
-            let me      =   this,
-                params  =   new FormData();
-
-            params.append('term', this.search_term);
-            params.append('page', this.page);
-
-            if (this.$route.query.sort) {
-                params.append('sort', this.$route.query.sort);
-            }
-
-            if (this.$route.query.by) {
-                params.append('by', this.$route.query.by);
-            }
+            let me      =   this;
 
             axios.post(
-                base_url + endpoints.search,
-                params
+                base_url + endpoints.order + '/' + this.search_term.replace(/receipt\-/gi, '')
             ).then((resp) => {
                 $(me.$el).find('.sales__body').scrollTop(0);
                 me.is_loading   =   false;
-                me.transactions     =   resp.data.list;
+                me.transactions =   resp.data.list;
                 me.total_page   =   resp.data.total_page;
+                me.sum          =   resp.data.sum;
             }).catch((error) => {
                 me.is_loading   =   false;
                 if (error.response && error.response.data && error.response.data.code) {

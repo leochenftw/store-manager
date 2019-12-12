@@ -10,7 +10,7 @@
                     <router-link class="button is-success" :to="{ name: 'ProductViewer', params: {id: 'new'} }">
                         <span class="icon"><i class="fas fa-plus"></i></span>
                     </router-link>
-                    <button class="button is-info"><span class="icon"><i class="fas fa-print"></i></span></button>
+                    <button @click.prevent="do_print" class="button is-info"><span class="icon"><i class="fas fa-print"></i></span></button>
                 </div>
             </header>
             <div class="columns is-multiline discount-items">
@@ -49,6 +49,9 @@ export default
         this.get_discounts();
     },
     methods :   {
+        do_print() {
+            window.print();
+        },
         get_discounts() {
             this.no_result      =   false;
             if (this.search_term != null && this.search_term.trim().length > 0) {

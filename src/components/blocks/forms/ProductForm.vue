@@ -107,6 +107,31 @@
                         <div class="accordion-content">
                             <div class="field is-horizontal">
                                 <div class="field-label is-normal">
+                                    <label class="label">Brand &amp; Supplier</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control is-expanded has-icons-left">
+                                            <input type="text" class="input" v-model="manufacturer" placeholder="Manufacturer" />
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-tag"></i>
+                                            </span>
+                                        </div>
+                                        <p class="help has-text-right">The product is made by (brand)</p>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control is-expanded has-icons-left">
+                                            <input type="text" class="input" v-model="supplier" placeholder="Supplier" />
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-people-carry"></i>
+                                            </span>
+                                        </div>
+                                        <p class="help has-text-right">The people who supply this product</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label is-normal">
                                     <label class="label">Measurements</label>
                                 </div>
                                 <div class="field-body">
@@ -221,7 +246,9 @@ export default {
             discountable    :   null,
             updated         :   null,
             expiries        :   [],
-            is_published    :   null
+            is_published    :   null,
+            manufacturer    :   null,
+            supplier        :   null
         }
     },
     created() {
@@ -265,6 +292,8 @@ export default {
             params.append('outofstock', this.outofstock);
             params.append('lowpoint', this.lowpoint);
             params.append('discountable', this.discountable);
+            params.append('manufacturer', this.manufacturer);
+            params.append('supplier', this.supplier);
             params.append('expiries', JSON.stringify(this.expiries));
             return params;
         },
@@ -303,6 +332,8 @@ export default {
             this.outofstock     =   data.outofstock;
             this.lowpoint       =   data.lowpoint;
             this.discountable   =   data.discountable;
+            this.manufacturer   =   data.manufacturer;
+            this.supplier       =   data.supplier;
             this.updated        =   data.updated;
             this.is_published   =   data.is_published;
             me.$parent.show_publish   =   !data.is_published;

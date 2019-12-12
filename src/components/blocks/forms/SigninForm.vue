@@ -1,19 +1,21 @@
 <template>
 <form v-if="!hide" class="form signin section" method="post" @submit="submit">
-    <div class="field">
-        <label v-if="recent_member" class="label has-text-centered">{{recent_member.email}} <a href="#" @click.prevent="erase_recent">not me</a></label>
-        <div v-else class="control">
-            <input type="email" class="input" v-model="email" placeholder="Email" />
+    <fieldset :disabled="is_loading">
+        <div class="field">
+            <label v-if="recent_member" class="label has-text-centered">{{recent_member.email}} <a href="#" @click.prevent="erase_recent">not me</a></label>
+            <div v-else class="control">
+                <input type="email" class="input" v-model="email" placeholder="Email" />
+            </div>
         </div>
-    </div>
-    <div class="field">
-        <div class="control">
-            <input type="password" class="input" v-model="pass" placeholder="Password" />
+        <div class="field">
+            <div class="control">
+                <input type="password" class="input" v-model="pass" placeholder="Password" />
+            </div>
         </div>
-    </div>
-    <div class="field action">
-        <button :class="['button is-primary is-fullwidth', {'is-loading': is_loading}]">SIGNIN</button>
-    </div>
+        <div class="field action">
+            <button :class="['button is-primary is-fullwidth', {'is-loading': is_loading}]">SIGNIN</button>
+        </div>
+    </fieldset>
 </form>
 </template>
 
@@ -32,7 +34,7 @@ export default
     },
     created() {
         let me  =   this;
-        if (localStorage && localStorage.recent_member) {
+        if (localStorage && localStorage.recent_member && localStorage.recent_member != 'undefined') {
             me.recent_member    =   JSON.parse(localStorage.recent_member);
         }
         this.$bus.$on('onLive', (member) => {
@@ -73,6 +75,7 @@ export default
                 params.append('email', this.email);
             }
             params.append('pass', this.pass);
+            me.$bus.$emit('onSigninBegin');
             axios.post(
                 base_url + endpoints.signin,
                 params
@@ -80,7 +83,7 @@ export default
                 me.$bus.$emit('onLive', resp.data);
             }).catch((error) => {
                 me.is_loading   =   false;
-                me.failed       =   true;
+                me.$bus.$emit('onSigninFailed');
             });
         }
     }

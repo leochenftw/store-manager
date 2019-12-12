@@ -45,7 +45,6 @@ export default {
     },
     computed: {
         class_name() {
-            console.log(this.$route);
             return slugify(this.$route.name, {lower: true});
         }
     },
@@ -71,7 +70,7 @@ export default {
             ).then((resp) => {
                 me.$nextTick().then(() => {
                     me.$nextTick().then(() => {
-                        me.$bus.$emit('onLive', resp.data);
+                        me.$bus.$emit('onLive', resp.data.member);
                     });
                 });
             }).catch((error) => {

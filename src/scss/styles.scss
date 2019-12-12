@@ -231,6 +231,13 @@ $orange: rgba(207, 146, 74, 1);
             img {
                 display: block;
             }
+
+            &.shake {
+                animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+                transform: translate3d(0, 0, 0);
+                backface-visibility: hidden;
+                perspective: 1000px;
+            }
         }
         .menu {
             transition: all ease-in 0.5s;
@@ -345,6 +352,7 @@ $orange: rgba(207, 146, 74, 1);
         }
     }
 
+    &.suppliers,
     &.sales,
     &.products {
         height: 100vh !important;
@@ -379,6 +387,7 @@ $orange: rgba(207, 146, 74, 1);
                 }
             }
         }
+        .suppliers,
         .sales,
         .products {
             &__head {
@@ -550,15 +559,14 @@ svg.barcode {
         &-code {
             position: relative;
             height: 100%;
-            padding-top: 100%;
             canvas {
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
-                left: 0;
+                right: 0;
                 display: block;
-                width: 100% !important;
-                height: auto !important;
+                width: auto !important;
+                height: 100% !important;
             }
         }
     }
@@ -591,6 +599,14 @@ svg.barcode {
                     font-weight: bold;
                 }
             }
+        }
+    }
+}
+
+.ranking-finder {
+    .field {
+        .field:not(:last-child) {
+            margin-bottom: 0;
         }
     }
 }

@@ -8,5 +8,6 @@
     "search"        :   "api/v/1/search",
     "discount"      :   "api/v/1/discount",
     "singlelookup"  :   "api/v/1/single-lookup",
-    "member"        :   "api/v/1/member"
+    "member"        :   "api/v/1/member",
+    "ranking"       :   "api/v/1/ranking"
 }

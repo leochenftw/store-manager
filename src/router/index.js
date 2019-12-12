@@ -5,6 +5,8 @@ import Products from '@/components/pages/Products'
 import Discounts from '@/components/pages/Discounts'
 import Labels from '@/components/pages/Labels'
 import Sales from '@/components/pages/Sales'
+import Suppliers from '@/components/pages/Suppliers'
+import Ranking from '@/components/pages/Ranking'
 import StoreProfile from '@/components/pages/StoreProfile'
 
 Vue.use(Router)
@@ -63,6 +65,16 @@ export default new Router({
             component: Sales
         },
         {
+            path: '/suppliers',
+            name: 'Suppliers',
+            component: Suppliers
+        },
+        {
+            path: '/suppliers/:id',
+            name: 'SupplierViewer',
+            component: Suppliers
+        },
+        {
             path: '/store-profile',
             name: 'StoreProfile',
             component: StoreProfile
@@ -71,6 +83,11 @@ export default new Router({
             path: '/store-profile/:section',
             name: 'StoreProfileSections',
             component: StoreProfile
+        },
+        {
+            path: '/ranking',
+            name: 'Ranking',
+            component: Ranking
         }
     ]
 })

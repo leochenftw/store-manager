@@ -1,5 +1,5 @@
 /*!
- * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.12.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 @font-face {
@@ -16,7 +16,7 @@
 }
 
 /*!
- * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.12.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 @font-face {
@@ -35,7 +35,7 @@
 }
 
 /*!
- * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.12.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 @font-face {
@@ -53,7 +53,7 @@
 }
 
 /*!
- * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.12.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 .fa,
@@ -623,6 +623,10 @@ readers do not read off random characters that represent icons */
   content: "\f7e5";
 }
 
+.fa-bahai:before {
+  content: "\f666";
+}
+
 .fa-balance-scale:before {
   content: "\f24e";
 }
@@ -1043,6 +1047,10 @@ readers do not read off random characters that represent icons */
   content: "\f5e4";
 }
 
+.fa-caravan:before {
+  content: "\f8ff";
+}
+
 .fa-caret-down:before {
   content: "\f0d7";
 }
@@ -1453,6 +1461,10 @@ readers do not read off random characters that represent icons */
 
 .fa-compress:before {
   content: "\f066";
+}
+
+.fa-compress-alt:before {
+  content: "\f422";
 }
 
 .fa-compress-arrows-alt:before {
@@ -1987,6 +1999,10 @@ readers do not read off random characters that represent icons */
   content: "\f065";
 }
 
+.fa-expand-alt:before {
+  content: "\f424";
+}
+
 .fa-expand-arrows-alt:before {
   content: "\f31e";
 }
@@ -2205,6 +2221,10 @@ readers do not read off random characters that represent icons */
 
 .fa-firefox:before {
   content: "\f269";
+}
+
+.fa-firefox-browser:before {
+  content: "\f907";
 }
 
 .fa-first-aid:before {
@@ -2779,10 +2799,6 @@ readers do not read off random characters that represent icons */
   content: "\f6e8";
 }
 
-.fa-haykal:before {
-  content: "\f666";
-}
-
 .fa-hdd:before {
   content: "\f0a0";
 }
@@ -2961,6 +2977,10 @@ readers do not read off random characters that represent icons */
 
 .fa-id-card-alt:before {
   content: "\f47f";
+}
+
+.fa-ideal:before {
+  content: "\f913";
 }
 
 .fa-igloo:before {
@@ -3483,6 +3503,10 @@ readers do not read off random characters that represent icons */
   content: "\f753";
 }
 
+.fa-microblog:before {
+  content: "\f91a";
+}
+
 .fa-microchip:before {
   content: "\f2db";
 }
@@ -3933,6 +3957,10 @@ readers do not read off random characters that represent icons */
 
 .fa-pied-piper-pp:before {
   content: "\f1a7";
+}
+
+.fa-pied-piper-square:before {
+  content: "\f91e";
 }
 
 .fa-piggy-bank:before {
@@ -5231,6 +5259,10 @@ readers do not read off random characters that represent icons */
   content: "\f637";
 }
 
+.fa-trailer:before {
+  content: "\f941";
+}
+
 .fa-train:before {
   content: "\f238";
 }
@@ -5373,6 +5405,10 @@ readers do not read off random characters that represent icons */
 
 .fa-uniregistry:before {
   content: "\f404";
+}
+
+.fa-unity:before {
+  content: "\f949";
 }
 
 .fa-universal-access:before {
@@ -5913,6 +5949,44 @@ readers do not read off random characters that represent icons */
   to {
     -webkit-transform: translateY(0);
             transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes shake {
+  10%, 90% {
+    -webkit-transform: translate3d(-1px, 0, 0);
+            transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    -webkit-transform: translate3d(2px, 0, 0);
+            transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    -webkit-transform: translate3d(-4px, 0, 0);
+            transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    -webkit-transform: translate3d(4px, 0, 0);
+            transform: translate3d(4px, 0, 0);
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    -webkit-transform: translate3d(-1px, 0, 0);
+            transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    -webkit-transform: translate3d(2px, 0, 0);
+            transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    -webkit-transform: translate3d(-4px, 0, 0);
+            transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    -webkit-transform: translate3d(4px, 0, 0);
+            transform: translate3d(4px, 0, 0);
   }
 }
 
@@ -26922,6 +26996,17 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   display: block;
 }
 
+#footer .section figure.shake {
+  -webkit-animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+          animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
+
 #footer .section .menu {
   -webkit-transition: all ease-in 0.5s;
   transition: all ease-in 0.5s;
@@ -27053,24 +27138,24 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   }
 }
 
-.main-content.sales, .main-content.products {
+.main-content.suppliers, .main-content.sales, .main-content.products {
   height: 100vh !important;
 }
 
-.main-content.sales .section, .main-content.products .section {
+.main-content.suppliers .section, .main-content.sales .section, .main-content.products .section {
   height: 100%;
 }
 
-.main-content.sales .section .container, .main-content.products .section .container {
+.main-content.suppliers .section .container, .main-content.sales .section .container, .main-content.products .section .container {
   height: 100%;
 }
 
-.main-content.sales .section .pagination, .main-content.products .section .pagination {
+.main-content.suppliers .section .pagination, .main-content.sales .section .pagination, .main-content.products .section .pagination {
   -webkit-transform: translateY(12px);
           transform: translateY(12px);
 }
 
-.main-content.sales .section .misc-footer, .main-content.products .section .misc-footer {
+.main-content.suppliers .section .misc-footer, .main-content.sales .section .misc-footer, .main-content.products .section .misc-footer {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
@@ -27078,42 +27163,58 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   margin-bottom: 0;
 }
 
-.main-content.sales .section .misc-footer span, .main-content.sales .section .misc-footer em, .main-content.products .section .misc-footer span, .main-content.products .section .misc-footer em {
+.main-content.suppliers .section .misc-footer span, .main-content.suppliers .section .misc-footer em, .main-content.sales .section .misc-footer span, .main-content.sales .section .misc-footer em, .main-content.products .section .misc-footer span, .main-content.products .section .misc-footer em {
   line-height: 1;
 }
 
-.main-content.sales .section .misc-footer span:first-child, .main-content.sales .section .misc-footer em:first-child, .main-content.products .section .misc-footer span:first-child, .main-content.products .section .misc-footer em:first-child {
+.main-content.suppliers .section .misc-footer span:first-child, .main-content.suppliers .section .misc-footer em:first-child, .main-content.sales .section .misc-footer span:first-child, .main-content.sales .section .misc-footer em:first-child, .main-content.products .section .misc-footer span:first-child, .main-content.products .section .misc-footer em:first-child {
   margin-right: 0.5em;
 }
 
-.main-content.sales .section .misc-footer .is-small, .main-content.products .section .misc-footer .is-small {
+.main-content.suppliers .section .misc-footer .is-small, .main-content.sales .section .misc-footer .is-small, .main-content.products .section .misc-footer .is-small {
   font-size: 12px;
   -webkit-transform: translateY(-2px);
           transform: translateY(-2px);
 }
 
-.main-content.sales .section .misc-footer .is-large, .main-content.products .section .misc-footer .is-large {
+.main-content.suppliers .section .misc-footer .is-large, .main-content.sales .section .misc-footer .is-large, .main-content.products .section .misc-footer .is-large {
   font-size: 20px;
   font-weight: bold;
 }
 
+.main-content.suppliers .suppliers__head .columns,
+.main-content.suppliers .sales__head .columns,
+.main-content.suppliers .products__head .columns, .main-content.sales .suppliers__head .columns,
 .main-content.sales .sales__head .columns,
-.main-content.sales .products__head .columns, .main-content.products .sales__head .columns,
+.main-content.sales .products__head .columns, .main-content.products .suppliers__head .columns,
+.main-content.products .sales__head .columns,
 .main-content.products .products__head .columns {
   margin-bottom: 0;
   border-bottom: 1px solid #dbdbdb;
 }
 
-.main-content.sales .sales__head .columns .column.col-stock, .main-content.sales .sales__head .columns .column.col-price,
+.main-content.suppliers .suppliers__head .columns .column.col-stock, .main-content.suppliers .suppliers__head .columns .column.col-price,
+.main-content.suppliers .sales__head .columns .column.col-stock,
+.main-content.suppliers .sales__head .columns .column.col-price,
+.main-content.suppliers .products__head .columns .column.col-stock,
+.main-content.suppliers .products__head .columns .column.col-price, .main-content.sales .suppliers__head .columns .column.col-stock, .main-content.sales .suppliers__head .columns .column.col-price,
+.main-content.sales .sales__head .columns .column.col-stock,
+.main-content.sales .sales__head .columns .column.col-price,
 .main-content.sales .products__head .columns .column.col-stock,
-.main-content.sales .products__head .columns .column.col-price, .main-content.products .sales__head .columns .column.col-stock, .main-content.products .sales__head .columns .column.col-price,
+.main-content.sales .products__head .columns .column.col-price, .main-content.products .suppliers__head .columns .column.col-stock, .main-content.products .suppliers__head .columns .column.col-price,
+.main-content.products .sales__head .columns .column.col-stock,
+.main-content.products .sales__head .columns .column.col-price,
 .main-content.products .products__head .columns .column.col-stock,
 .main-content.products .products__head .columns .column.col-price {
   font-size: 11px;
 }
 
+.main-content.suppliers .suppliers__body,
+.main-content.suppliers .sales__body,
+.main-content.suppliers .products__body, .main-content.sales .suppliers__body,
 .main-content.sales .sales__body,
-.main-content.sales .products__body, .main-content.products .sales__body,
+.main-content.sales .products__body, .main-content.products .suppliers__body,
+.main-content.products .sales__body,
 .main-content.products .products__body {
   position: relative;
   height: calc(100% - 101px);
@@ -27123,8 +27224,12 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   -webkit-overflow-scrolling: touch;
 }
 
+.main-content.suppliers .suppliers__body__item,
+.main-content.suppliers .sales__body__item,
+.main-content.suppliers .products__body__item, .main-content.sales .suppliers__body__item,
 .main-content.sales .sales__body__item,
-.main-content.sales .products__body__item, .main-content.products .sales__body__item,
+.main-content.sales .products__body__item, .main-content.products .suppliers__body__item,
+.main-content.products .sales__body__item,
 .main-content.products .products__body__item {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -27132,45 +27237,89 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
           user-select: none;
 }
 
+.main-content.suppliers .suppliers__body__item:first-child,
+.main-content.suppliers .sales__body__item:first-child,
+.main-content.suppliers .products__body__item:first-child, .main-content.sales .suppliers__body__item:first-child,
 .main-content.sales .sales__body__item:first-child,
-.main-content.sales .products__body__item:first-child, .main-content.products .sales__body__item:first-child,
+.main-content.sales .products__body__item:first-child, .main-content.products .suppliers__body__item:first-child,
+.main-content.products .sales__body__item:first-child,
 .main-content.products .products__body__item:first-child {
   margin-top: 0;
 }
 
+.main-content.suppliers .suppliers__body__item:not(:last-child),
+.main-content.suppliers .sales__body__item:not(:last-child),
+.main-content.suppliers .products__body__item:not(:last-child), .main-content.sales .suppliers__body__item:not(:last-child),
 .main-content.sales .sales__body__item:not(:last-child),
-.main-content.sales .products__body__item:not(:last-child), .main-content.products .sales__body__item:not(:last-child),
+.main-content.sales .products__body__item:not(:last-child), .main-content.products .suppliers__body__item:not(:last-child),
+.main-content.products .sales__body__item:not(:last-child),
 .main-content.products .products__body__item:not(:last-child) {
   border-bottom: 1px solid #dbdbdb;
 }
 
+.main-content.suppliers .suppliers__body__item.is-unpublished,
+.main-content.suppliers .sales__body__item.is-unpublished,
+.main-content.suppliers .products__body__item.is-unpublished, .main-content.sales .suppliers__body__item.is-unpublished,
 .main-content.sales .sales__body__item.is-unpublished,
-.main-content.sales .products__body__item.is-unpublished, .main-content.products .sales__body__item.is-unpublished,
+.main-content.sales .products__body__item.is-unpublished, .main-content.products .suppliers__body__item.is-unpublished,
+.main-content.products .sales__body__item.is-unpublished,
 .main-content.products .products__body__item.is-unpublished {
   position: relative;
   font-style: italic;
   background-color: rgba(255, 56, 96, 0.2);
 }
 
+.main-content.suppliers .suppliers__body__item .col-amount i,
+.main-content.suppliers .sales__body__item .col-amount i,
+.main-content.suppliers .products__body__item .col-amount i, .main-content.sales .suppliers__body__item .col-amount i,
 .main-content.sales .sales__body__item .col-amount i,
-.main-content.sales .products__body__item .col-amount i, .main-content.products .sales__body__item .col-amount i,
+.main-content.sales .products__body__item .col-amount i, .main-content.products .suppliers__body__item .col-amount i,
+.main-content.products .sales__body__item .col-amount i,
 .main-content.products .products__body__item .col-amount i {
   margin-right: 0.5em;
 }
 
+.main-content.suppliers .suppliers__body__item .col-action .button,
+.main-content.suppliers .sales__body__item .col-action .button,
+.main-content.suppliers .products__body__item .col-action .button, .main-content.sales .suppliers__body__item .col-action .button,
 .main-content.sales .sales__body__item .col-action .button,
-.main-content.sales .products__body__item .col-action .button, .main-content.products .sales__body__item .col-action .button,
+.main-content.sales .products__body__item .col-action .button, .main-content.products .suppliers__body__item .col-action .button,
+.main-content.products .sales__body__item .col-action .button,
 .main-content.products .products__body__item .col-action .button {
   pointer-events: none;
 }
 
-.main-content.sales .sales__head .col-update, .main-content.sales .sales__head .col-stock, .main-content.sales .sales__head .col-price, .main-content.sales .sales__body .col-update, .main-content.sales .sales__body .col-stock, .main-content.sales .sales__body .col-price,
+.main-content.suppliers .suppliers__head .col-update, .main-content.suppliers .suppliers__head .col-stock, .main-content.suppliers .suppliers__head .col-price, .main-content.suppliers .suppliers__body .col-update, .main-content.suppliers .suppliers__body .col-stock, .main-content.suppliers .suppliers__body .col-price,
+.main-content.suppliers .sales__head .col-update,
+.main-content.suppliers .sales__head .col-stock,
+.main-content.suppliers .sales__head .col-price,
+.main-content.suppliers .sales__body .col-update,
+.main-content.suppliers .sales__body .col-stock,
+.main-content.suppliers .sales__body .col-price,
+.main-content.suppliers .products__head .col-update,
+.main-content.suppliers .products__head .col-stock,
+.main-content.suppliers .products__head .col-price,
+.main-content.suppliers .products__body .col-update,
+.main-content.suppliers .products__body .col-stock,
+.main-content.suppliers .products__body .col-price, .main-content.sales .suppliers__head .col-update, .main-content.sales .suppliers__head .col-stock, .main-content.sales .suppliers__head .col-price, .main-content.sales .suppliers__body .col-update, .main-content.sales .suppliers__body .col-stock, .main-content.sales .suppliers__body .col-price,
+.main-content.sales .sales__head .col-update,
+.main-content.sales .sales__head .col-stock,
+.main-content.sales .sales__head .col-price,
+.main-content.sales .sales__body .col-update,
+.main-content.sales .sales__body .col-stock,
+.main-content.sales .sales__body .col-price,
 .main-content.sales .products__head .col-update,
 .main-content.sales .products__head .col-stock,
 .main-content.sales .products__head .col-price,
 .main-content.sales .products__body .col-update,
 .main-content.sales .products__body .col-stock,
-.main-content.sales .products__body .col-price, .main-content.products .sales__head .col-update, .main-content.products .sales__head .col-stock, .main-content.products .sales__head .col-price, .main-content.products .sales__body .col-update, .main-content.products .sales__body .col-stock, .main-content.products .sales__body .col-price,
+.main-content.sales .products__body .col-price, .main-content.products .suppliers__head .col-update, .main-content.products .suppliers__head .col-stock, .main-content.products .suppliers__head .col-price, .main-content.products .suppliers__body .col-update, .main-content.products .suppliers__body .col-stock, .main-content.products .suppliers__body .col-price,
+.main-content.products .sales__head .col-update,
+.main-content.products .sales__head .col-stock,
+.main-content.products .sales__head .col-price,
+.main-content.products .sales__body .col-update,
+.main-content.products .sales__body .col-stock,
+.main-content.products .sales__body .col-price,
 .main-content.products .products__head .col-update,
 .main-content.products .products__head .col-stock,
 .main-content.products .products__head .col-price,
@@ -27183,11 +27332,27 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
           flex: none;
 }
 
-.main-content.sales .sales__head .col-stock, .main-content.sales .sales__head .col-price, .main-content.sales .sales__body .col-stock, .main-content.sales .sales__body .col-price,
+.main-content.suppliers .suppliers__head .col-stock, .main-content.suppliers .suppliers__head .col-price, .main-content.suppliers .suppliers__body .col-stock, .main-content.suppliers .suppliers__body .col-price,
+.main-content.suppliers .sales__head .col-stock,
+.main-content.suppliers .sales__head .col-price,
+.main-content.suppliers .sales__body .col-stock,
+.main-content.suppliers .sales__body .col-price,
+.main-content.suppliers .products__head .col-stock,
+.main-content.suppliers .products__head .col-price,
+.main-content.suppliers .products__body .col-stock,
+.main-content.suppliers .products__body .col-price, .main-content.sales .suppliers__head .col-stock, .main-content.sales .suppliers__head .col-price, .main-content.sales .suppliers__body .col-stock, .main-content.sales .suppliers__body .col-price,
+.main-content.sales .sales__head .col-stock,
+.main-content.sales .sales__head .col-price,
+.main-content.sales .sales__body .col-stock,
+.main-content.sales .sales__body .col-price,
 .main-content.sales .products__head .col-stock,
 .main-content.sales .products__head .col-price,
 .main-content.sales .products__body .col-stock,
-.main-content.sales .products__body .col-price, .main-content.products .sales__head .col-stock, .main-content.products .sales__head .col-price, .main-content.products .sales__body .col-stock, .main-content.products .sales__body .col-price,
+.main-content.sales .products__body .col-price, .main-content.products .suppliers__head .col-stock, .main-content.products .suppliers__head .col-price, .main-content.products .suppliers__body .col-stock, .main-content.products .suppliers__body .col-price,
+.main-content.products .sales__head .col-stock,
+.main-content.products .sales__head .col-price,
+.main-content.products .sales__body .col-stock,
+.main-content.products .sales__body .col-price,
 .main-content.products .products__head .col-stock,
 .main-content.products .products__head .col-price,
 .main-content.products .products__body .col-stock,
@@ -27196,11 +27361,27 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-size: 18px;
 }
 
-.main-content.sales .sales__head .col-stock span, .main-content.sales .sales__head .col-price span, .main-content.sales .sales__body .col-stock span, .main-content.sales .sales__body .col-price span,
+.main-content.suppliers .suppliers__head .col-stock span, .main-content.suppliers .suppliers__head .col-price span, .main-content.suppliers .suppliers__body .col-stock span, .main-content.suppliers .suppliers__body .col-price span,
+.main-content.suppliers .sales__head .col-stock span,
+.main-content.suppliers .sales__head .col-price span,
+.main-content.suppliers .sales__body .col-stock span,
+.main-content.suppliers .sales__body .col-price span,
+.main-content.suppliers .products__head .col-stock span,
+.main-content.suppliers .products__head .col-price span,
+.main-content.suppliers .products__body .col-stock span,
+.main-content.suppliers .products__body .col-price span, .main-content.sales .suppliers__head .col-stock span, .main-content.sales .suppliers__head .col-price span, .main-content.sales .suppliers__body .col-stock span, .main-content.sales .suppliers__body .col-price span,
+.main-content.sales .sales__head .col-stock span,
+.main-content.sales .sales__head .col-price span,
+.main-content.sales .sales__body .col-stock span,
+.main-content.sales .sales__body .col-price span,
 .main-content.sales .products__head .col-stock span,
 .main-content.sales .products__head .col-price span,
 .main-content.sales .products__body .col-stock span,
-.main-content.sales .products__body .col-price span, .main-content.products .sales__head .col-stock span, .main-content.products .sales__head .col-price span, .main-content.products .sales__body .col-stock span, .main-content.products .sales__body .col-price span,
+.main-content.sales .products__body .col-price span, .main-content.products .suppliers__head .col-stock span, .main-content.products .suppliers__head .col-price span, .main-content.products .suppliers__body .col-stock span, .main-content.products .suppliers__body .col-price span,
+.main-content.products .sales__head .col-stock span,
+.main-content.products .sales__head .col-price span,
+.main-content.products .sales__body .col-stock span,
+.main-content.products .sales__body .col-price span,
 .main-content.products .products__head .col-stock span,
 .main-content.products .products__head .col-price span,
 .main-content.products .products__body .col-stock span,
@@ -27208,11 +27389,27 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-size: 11px;
 }
 
-.main-content.sales .sales__head .col-stock.is-danger, .main-content.sales .sales__head .col-price.is-danger, .main-content.sales .sales__body .col-stock.is-danger, .main-content.sales .sales__body .col-price.is-danger,
+.main-content.suppliers .suppliers__head .col-stock.is-danger, .main-content.suppliers .suppliers__head .col-price.is-danger, .main-content.suppliers .suppliers__body .col-stock.is-danger, .main-content.suppliers .suppliers__body .col-price.is-danger,
+.main-content.suppliers .sales__head .col-stock.is-danger,
+.main-content.suppliers .sales__head .col-price.is-danger,
+.main-content.suppliers .sales__body .col-stock.is-danger,
+.main-content.suppliers .sales__body .col-price.is-danger,
+.main-content.suppliers .products__head .col-stock.is-danger,
+.main-content.suppliers .products__head .col-price.is-danger,
+.main-content.suppliers .products__body .col-stock.is-danger,
+.main-content.suppliers .products__body .col-price.is-danger, .main-content.sales .suppliers__head .col-stock.is-danger, .main-content.sales .suppliers__head .col-price.is-danger, .main-content.sales .suppliers__body .col-stock.is-danger, .main-content.sales .suppliers__body .col-price.is-danger,
+.main-content.sales .sales__head .col-stock.is-danger,
+.main-content.sales .sales__head .col-price.is-danger,
+.main-content.sales .sales__body .col-stock.is-danger,
+.main-content.sales .sales__body .col-price.is-danger,
 .main-content.sales .products__head .col-stock.is-danger,
 .main-content.sales .products__head .col-price.is-danger,
 .main-content.sales .products__body .col-stock.is-danger,
-.main-content.sales .products__body .col-price.is-danger, .main-content.products .sales__head .col-stock.is-danger, .main-content.products .sales__head .col-price.is-danger, .main-content.products .sales__body .col-stock.is-danger, .main-content.products .sales__body .col-price.is-danger,
+.main-content.sales .products__body .col-price.is-danger, .main-content.products .suppliers__head .col-stock.is-danger, .main-content.products .suppliers__head .col-price.is-danger, .main-content.products .suppliers__body .col-stock.is-danger, .main-content.products .suppliers__body .col-price.is-danger,
+.main-content.products .sales__head .col-stock.is-danger,
+.main-content.products .sales__head .col-price.is-danger,
+.main-content.products .sales__body .col-stock.is-danger,
+.main-content.products .sales__body .col-price.is-danger,
 .main-content.products .products__head .col-stock.is-danger,
 .main-content.products .products__head .col-price.is-danger,
 .main-content.products .products__body .col-stock.is-danger,
@@ -27221,11 +27418,27 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-weight: bold;
 }
 
-.main-content.sales .sales__head .col-stock.is-danger span, .main-content.sales .sales__head .col-price.is-danger span, .main-content.sales .sales__body .col-stock.is-danger span, .main-content.sales .sales__body .col-price.is-danger span,
+.main-content.suppliers .suppliers__head .col-stock.is-danger span, .main-content.suppliers .suppliers__head .col-price.is-danger span, .main-content.suppliers .suppliers__body .col-stock.is-danger span, .main-content.suppliers .suppliers__body .col-price.is-danger span,
+.main-content.suppliers .sales__head .col-stock.is-danger span,
+.main-content.suppliers .sales__head .col-price.is-danger span,
+.main-content.suppliers .sales__body .col-stock.is-danger span,
+.main-content.suppliers .sales__body .col-price.is-danger span,
+.main-content.suppliers .products__head .col-stock.is-danger span,
+.main-content.suppliers .products__head .col-price.is-danger span,
+.main-content.suppliers .products__body .col-stock.is-danger span,
+.main-content.suppliers .products__body .col-price.is-danger span, .main-content.sales .suppliers__head .col-stock.is-danger span, .main-content.sales .suppliers__head .col-price.is-danger span, .main-content.sales .suppliers__body .col-stock.is-danger span, .main-content.sales .suppliers__body .col-price.is-danger span,
+.main-content.sales .sales__head .col-stock.is-danger span,
+.main-content.sales .sales__head .col-price.is-danger span,
+.main-content.sales .sales__body .col-stock.is-danger span,
+.main-content.sales .sales__body .col-price.is-danger span,
 .main-content.sales .products__head .col-stock.is-danger span,
 .main-content.sales .products__head .col-price.is-danger span,
 .main-content.sales .products__body .col-stock.is-danger span,
-.main-content.sales .products__body .col-price.is-danger span, .main-content.products .sales__head .col-stock.is-danger span, .main-content.products .sales__head .col-price.is-danger span, .main-content.products .sales__body .col-stock.is-danger span, .main-content.products .sales__body .col-price.is-danger span,
+.main-content.sales .products__body .col-price.is-danger span, .main-content.products .suppliers__head .col-stock.is-danger span, .main-content.products .suppliers__head .col-price.is-danger span, .main-content.products .suppliers__body .col-stock.is-danger span, .main-content.products .suppliers__body .col-price.is-danger span,
+.main-content.products .sales__head .col-stock.is-danger span,
+.main-content.products .sales__head .col-price.is-danger span,
+.main-content.products .sales__body .col-stock.is-danger span,
+.main-content.products .sales__body .col-price.is-danger span,
 .main-content.products .products__head .col-stock.is-danger span,
 .main-content.products .products__head .col-price.is-danger span,
 .main-content.products .products__body .col-stock.is-danger span,
@@ -27233,9 +27446,17 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-weight: normal;
 }
 
-.main-content.sales .sales__head .col-update, .main-content.sales .sales__body .col-update,
+.main-content.suppliers .suppliers__head .col-update, .main-content.suppliers .suppliers__body .col-update,
+.main-content.suppliers .sales__head .col-update,
+.main-content.suppliers .sales__body .col-update,
+.main-content.suppliers .products__head .col-update,
+.main-content.suppliers .products__body .col-update, .main-content.sales .suppliers__head .col-update, .main-content.sales .suppliers__body .col-update,
+.main-content.sales .sales__head .col-update,
+.main-content.sales .sales__body .col-update,
 .main-content.sales .products__head .col-update,
-.main-content.sales .products__body .col-update, .main-content.products .sales__head .col-update, .main-content.products .sales__body .col-update,
+.main-content.sales .products__body .col-update, .main-content.products .suppliers__head .col-update, .main-content.products .suppliers__body .col-update,
+.main-content.products .sales__head .col-update,
+.main-content.products .sales__body .col-update,
 .main-content.products .products__head .col-update,
 .main-content.products .products__body .col-update {
   font-size: 12px;
@@ -27314,7 +27535,6 @@ svg.barcode {
 .price-label__qr-code {
   position: relative;
   height: 100%;
-  padding-top: 100%;
 }
 
 .price-label__qr-code canvas {
@@ -27322,10 +27542,10 @@ svg.barcode {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  left: 0;
+  right: 0;
   display: block;
-  width: 100% !important;
-  height: auto !important;
+  width: auto !important;
+  height: 100% !important;
 }
 
 .profile .form-title {
@@ -27357,4 +27577,8 @@ svg.barcode {
 .transaction-finder.columns .column.is-narrow {
   font-size: 12px;
   font-weight: bold;
+}
+
+.ranking-finder .field .field:not(:last-child) {
+  margin-bottom: 0;
 }

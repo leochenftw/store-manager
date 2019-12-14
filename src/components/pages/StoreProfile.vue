@@ -2,12 +2,12 @@
     <section class="main-content profile">
         <div class="section">
             <div class="container">
-                <header class="columns profile-head">
+                <header class="columns profile__head">
                     <div class="column is-narrow">
                         <h1 class="title is-4">Profile</h1>
                     </div>
                 </header>
-                <div class="profile-body">
+                <div class="profile__body">
                     <div class="tabs">
                         <ul>
                             <li :class="{'is-active': !this.$route.params.section}">
@@ -76,6 +76,7 @@ import AccountForm from '../blocks/forms/AccountForm';
 import OperatorForm from '../blocks/forms/OperatorForm';
 export default {
     name            :   'StoreProfile',
+    props           :   ['member'],
     components      :   {StoreInfoForm, AccountForm, OperatorForm},
     data()
     {

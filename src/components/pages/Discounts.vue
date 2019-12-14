@@ -4,22 +4,26 @@
         <div class="container">
             <header class="columns">
                 <div class="column is-narrow">
-                    <h1 class="title is-4">Discounts</h1>
+                    <h1 class="title is-4"><button style="border: none;" v-if="$route.params.id" class="button is-small" @click.prevent="go_back()"><i class="fas fa-chevron-left"></i></button> Discounts</h1>
                 </div>
-                <div class="column has-text-right">
-                    <router-link class="button is-success" :to="{ name: 'ProductViewer', params: {id: 'new'} }">
+                <div v-if="!$route.params.id" class="column has-text-right">
+                    <router-link class="button is-success" :to="{ name: 'DiscountViewer', params: {id: 'new'} }">
                         <span class="icon"><i class="fas fa-plus"></i></span>
                     </router-link>
                     <button @click.prevent="do_print" class="button is-info"><span class="icon"><i class="fas fa-print"></i></span></button>
                 </div>
+                <div v-else-if="$route.params.id != 'new'" class="column has-text-right">
+                    <button @click.prevent="delete_discount" class="button is-danger is-small">Delete Discount</button>
+                </div>
             </header>
-            <div class="columns is-multiline discount-items">
+            <div v-if="!$route.params.id" class="columns is-multiline discount-items">
                 <DiscountItem
                     v-for="item in discounts"
                     :source="item"
                     :key="item.id"
                 />
             </div>
+            <DiscountForm v-else />
         </div>
     </div>
 </section>
@@ -27,14 +31,14 @@
 
 <script>
 import DiscountItem from '../blocks/DiscountItem';
+import DiscountForm from '../blocks/forms/DiscountForm';
 export default
 {
     name        :   'Discounts',
     props       :   ['member'],
-    components  :   { DiscountItem },
+    components  :   { DiscountItem, DiscountForm },
     data() {
         return {
-            search_term     :   null,
             discounts       :   [],
             is_loading      :   false,
             no_result       :   false
@@ -42,7 +46,9 @@ export default
     },
     watch       :   {
         $route(nv, ov) {
-
+            if (!this.$route.params.id) {
+                this.get_discounts();
+            }
         }
     },
     created() {
@@ -51,6 +57,10 @@ export default
     methods :   {
         do_print() {
             window.print();
+        },
+        go_back() {
+            this.$router.push({name: 'Discounts'});
+            this.get_discounts();
         },
         get_discounts() {
             this.no_result      =   false;
@@ -76,6 +86,18 @@ export default
                 }
             });
         },
+        delete_discount(e)
+        {
+            if (confirm('You are deleting this discount')) {
+                axios.post(
+                    base_url + endpoints.discount + '/' + this.$route.params.id + '/delete'
+                ).then(resp => {
+                    this.go_back();
+                }).catch(error => {
+
+                });
+            }
+        }
     }
 }
 </script>

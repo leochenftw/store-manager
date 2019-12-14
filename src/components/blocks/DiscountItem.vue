@@ -1,8 +1,10 @@
 <template>
-<div class="column is-half discount-item has-text-centered" v-if="source">
-    <p class="title is-2">{{source.title}}</p>
-    <p class="subtitle is-6 is-marginless-bottom">{{description}}</p>
-    <p><Barcode :barcode="source.barcode" /></p>
+<div class="column is-half has-text-centered" v-if="source">
+    <router-link class="discount-item" :to="{ name: 'DiscountViewer', params: {id: source.id} }">
+        <p class="title is-2">{{source.title}}</p>
+        <p class="subtitle is-6 is-marginless-bottom">{{description}}</p>
+        <p><Barcode :barcode="'DCNT-' + source.code" /></p>
+    </router-link>
 </div>
 </template>
 
@@ -15,16 +17,11 @@ export default {
     computed    :   {
         description() {
             if (!this.source) return null;
-
-            let type    =   this.source.type,
-                value   =   this.source.value,
-                desc    =   '';
-
-            if (type == 'byAmount') {
-                return '-' + value.toDollar();
+            if (this.source.by == '%') {
+                return 'Discount: -' + this.source.rate + this.source.by;
             }
 
-            return '-' + value + '%';
+            return 'Discount: -' + this.source.rate.toDollar();
         }
     }
 }

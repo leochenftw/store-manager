@@ -24,7 +24,7 @@
                         <router-link class="button is-success" :to="{ name: 'ProductViewer', params: {id: 'new'} }">
                             <span class="icon"><i class="fas fa-plus"></i></span>
                         </router-link>
-                        <button class="button is-info"><span class="icon"><i class="fas fa-download"></i></span></button>
+                        <button @click.prevent="download" class="button is-info"><span class="icon"><i class="fas fa-download"></i></span></button>
                     </div>
                 </template>
                 <div v-else-if="show_publish != null && $route.params.id != 'new'" class="column has-text-right">
@@ -351,6 +351,11 @@ export default {
             }
             this.$router.push({name: 'Products'});
             this.get_products();
+        },
+        download(e)
+        {
+            let win =   window.open(base_url + endpoints.product + '/All/download', '_blank');
+            win.focus();
         }
     }
 }

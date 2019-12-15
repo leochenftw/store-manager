@@ -26812,6 +26812,10 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   margin-bottom: 3rem;
 }
 
+.form.profile-form .field-body .field {
+  margin-bottom: 0;
+}
+
 .form.signin {
   padding-top: 0;
   padding-bottom: 0;
@@ -27675,7 +27679,7 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1;
 }
 
 @media print {
@@ -27808,4 +27812,8 @@ svg.barcode {
 
 .ranking-finder .field .field:not(:last-child) {
   margin-bottom: 0;
+}
+
+.modal .message-foot {
+  padding-bottom: 1.5rem;
 }

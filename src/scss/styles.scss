@@ -63,6 +63,13 @@ $orange: rgba(207, 146, 74, 1);
 
     &.profile-form {
         margin-bottom: 3rem;
+        .field {
+            &-body {
+                .field {
+                    margin-bottom: 0;
+                }
+            }
+        }
     }
 
     &.signin {
@@ -486,7 +493,7 @@ $orange: rgba(207, 146, 74, 1);
                 background-color: $white;
                 position: sticky;
                 top: 0;
-                z-index: 10;
+                z-index: 1;
             }
         }
     }
@@ -628,6 +635,14 @@ svg.barcode {
     .field {
         .field:not(:last-child) {
             margin-bottom: 0;
+        }
+    }
+}
+
+.modal {
+    .message {
+        &-foot {
+            padding-bottom: 1.5rem;
         }
     }
 }

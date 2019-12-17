@@ -35,7 +35,7 @@
                     </div>
                     <div class="column is-narrow">
                         <button title="Search in date range" @click.prevent="show_calendar = !show_calendar" :class="['button', {'is-success': show_calendar}]"><i class="far fa-calendar-alt"></i></button>
-                        <button class="button is-info"><span class="icon"><i class="fas fa-download"></i></span></button>
+                        <button @click.prevent="download" class="button is-info"><span class="icon"><i class="fas fa-download"></i></span></button>
                     </div>
                 </template>
             </header>
@@ -380,6 +380,11 @@ export default {
             }
             this.$router.push({name: 'Sales'});
             this.get_transacs();
+        },
+        download(e)
+        {
+            let win =   window.open(base_url + endpoints.order + '/All/download', '_blank');
+            win.focus();
         }
     }
 }

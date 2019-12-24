@@ -4,7 +4,11 @@
         <div class="container">
             <header class="columns">
                 <div class="column is-narrow">
-                    <p v-if="!$route.params.id" class="subtitle is-6"><span>Total:</span> <strong>{{sum.toDollar()}}</strong></p>
+                    <p v-if="!$route.params.id" class="subtitle is-6">
+                        <span>Total:</span>
+                        <strong>{{sum.toDollar()}}</strong>
+                        <span v-if="total_items"> / {{total_items}} transactions</span>
+                    </p>
                     <h1 class="title is-4"><button style="border: none;" v-if="$route.params.id" class="button is-small" @click.prevent="go_back()"><i class="fas fa-chevron-left"></i></button>Transactions</h1>
                 </div>
                 <template v-if="!$route.params.id">
@@ -92,6 +96,10 @@
             <div class="column">
                 <a class="button is-primary" :href="'https://store.one-stop.co.nz?receipt=' + receipt" target="_blank">re-Print</a>
             </div>
+            <div class="column is-narrow" v-if="customer">
+                <em class="is-small">Customer: </em>
+                <router-link :to="{ name: 'MemberViewer', params: {id: customer.id} }"><em class="is-large">{{(customer.first_name + ' ' + customer.surname).trim()}}</em></router-link>
+            </div>
             <div class="column is-narrow">
                 <em class="is-small">Operator: </em><em class="is-large">{{operator}}</em>
             </div>
@@ -114,13 +122,15 @@ export default {
             search_term     :   null,
             transactions    :   [],
             sum             :   0,
+            total_items     :   0,
             is_loading      :   false,
             show_calendar   :   false,
             no_result       :   false,
             from_date       :   null,
             to_date         :   null,
             operator        :   null,
-            receipt         :   null
+            receipt         :   null,
+            customer        :   null
         }
     },
     watch       :   {
@@ -308,6 +318,7 @@ export default {
                 me.sum          =   resp.data.sum;
                 me.transactions =   resp.data.list;
                 me.total_page   =   resp.data.total_page;
+                me.total_items  =   resp.data.total_items;
                 if (me.transactions.length == 0) {
                     me.no_result    =   true;
                 }
@@ -383,7 +394,7 @@ export default {
         },
         download(e)
         {
-            let win =   window.open(base_url + endpoints.order + '/All/download', '_blank');
+            let win =   window.open(base_url + endpoints.order + '/All/download' + this.param_organiser, '_blank');
             win.focus();
         }
     }

@@ -21,7 +21,7 @@ export default {
     data() {
         return {
             show        :   false,
-            type        :   'danger',
+            type        :   'success',
             content     :   null,
             callback    :   null
         };
@@ -64,7 +64,7 @@ export default {
                 this.callback();
             }
             this.show       =   false;
-            this.type       =   'danger';
+            this.type       =   'success';
             this.content    =   null;
             this.callback   =   null;
         }

@@ -52,6 +52,13 @@ $orange: rgba(207, 146, 74, 1);
     }
 }
 
+.field {
+    &.is-static {
+        padding-top: 6px;
+        line-height: 24px;
+    }
+}
+
 .form {
     .field {
         .field {
@@ -231,10 +238,14 @@ $orange: rgba(207, 146, 74, 1);
         color: $white;
         height: 100%;
         padding: 20vh 1.5rem 56px;
-        figure {
+        .current-user {
             margin: 0 auto 1rem;
             width: 100%;
             max-width: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+
             img {
                 display: block;
             }
@@ -244,6 +255,25 @@ $orange: rgba(207, 146, 74, 1);
                 transform: translate3d(0, 0, 0);
                 backface-visibility: hidden;
                 perspective: 1000px;
+            }
+
+            &__action {
+                transition: all ease-in 0.3s;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                left: 0;
+                background-color: rgba($black, 0.8);
+                transform: translateY(100%);
+                color: $white;
+                padding: .25rem 0;
+                font-size: 12px;
+            }
+
+            &:hover {
+                .current-user__action {
+                    transform: translateY(0);
+                }
             }
         }
         .menu {
@@ -359,6 +389,7 @@ $orange: rgba(207, 146, 74, 1);
         }
     }
 
+    &.customers,
     &.profile,
     &.suppliers,
     &.sales,
@@ -396,6 +427,7 @@ $orange: rgba(207, 146, 74, 1);
             }
         }
 
+        .customers,
         .profile,
         .suppliers,
         .sales,
@@ -447,6 +479,12 @@ $orange: rgba(207, 146, 74, 1);
                             .button {
                                 pointer-events: none;
                             }
+                        }
+
+                        &-email {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
                         }
                     }
                 }

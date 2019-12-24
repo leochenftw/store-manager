@@ -51,7 +51,7 @@
         </div>
         <div class="field-body">
             <div class="field" v-if="!pass_reset">
-                <p><button @click.prevent="pass_reset = true" class="button is-text">Change password...</button></p>
+                <p><button tabindex="-1" @click.prevent="pass_reset = true" class="button is-text">Change password...</button></p>
             </div>
             <div class="field" v-else>
                 <div class="field">
@@ -168,6 +168,7 @@ export default {
             ).then((resp) => {
                 me.is_loading   =   false;
                 this.prep(resp);
+                me.$bus.$emit('onLive', resp.data);
                 me.$bus.$emit('showMessage', 'Store information has been updated', 'success');
             }).catch((error) => {
                 me.is_loading   =   false;

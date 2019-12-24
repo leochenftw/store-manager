@@ -26804,6 +26804,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   margin-bottom: 0 !important;
 }
 
+.field.is-static {
+  padding-top: 6px;
+  line-height: 24px;
+}
+
 .form .field .field:not(:last-child) {
   margin-bottom: 12px;
 }
@@ -26990,17 +26995,20 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   padding: 20vh 1.5rem 56px;
 }
 
-#footer .section figure {
+#footer .section .current-user {
   margin: 0 auto 1rem;
   width: 100%;
   max-width: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
 }
 
-#footer .section figure img {
+#footer .section .current-user img {
   display: block;
 }
 
-#footer .section figure.shake {
+#footer .section .current-user.shake {
   -webkit-animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
           animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   -webkit-transform: translate3d(0, 0, 0);
@@ -27009,6 +27017,26 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
           backface-visibility: hidden;
   -webkit-perspective: 1000px;
           perspective: 1000px;
+}
+
+#footer .section .current-user__action {
+  -webkit-transition: all ease-in 0.3s;
+  transition: all ease-in 0.3s;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  background-color: rgba(10, 10, 10, 0.8);
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  color: white;
+  padding: .25rem 0;
+  font-size: 12px;
+}
+
+#footer .section .current-user:hover .current-user__action {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
 }
 
 #footer .section .menu {
@@ -27142,24 +27170,24 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   }
 }
 
-.main-content.profile, .main-content.suppliers, .main-content.sales, .main-content.products {
+.main-content.customers, .main-content.profile, .main-content.suppliers, .main-content.sales, .main-content.products {
   height: 100vh !important;
 }
 
-.main-content.profile .section, .main-content.suppliers .section, .main-content.sales .section, .main-content.products .section {
+.main-content.customers .section, .main-content.profile .section, .main-content.suppliers .section, .main-content.sales .section, .main-content.products .section {
   height: 100%;
 }
 
-.main-content.profile .section .container, .main-content.suppliers .section .container, .main-content.sales .section .container, .main-content.products .section .container {
+.main-content.customers .section .container, .main-content.profile .section .container, .main-content.suppliers .section .container, .main-content.sales .section .container, .main-content.products .section .container {
   height: 100%;
 }
 
-.main-content.profile .section .pagination, .main-content.suppliers .section .pagination, .main-content.sales .section .pagination, .main-content.products .section .pagination {
+.main-content.customers .section .pagination, .main-content.profile .section .pagination, .main-content.suppliers .section .pagination, .main-content.sales .section .pagination, .main-content.products .section .pagination {
   -webkit-transform: translateY(12px);
           transform: translateY(12px);
 }
 
-.main-content.profile .section .misc-footer, .main-content.suppliers .section .misc-footer, .main-content.sales .section .misc-footer, .main-content.products .section .misc-footer {
+.main-content.customers .section .misc-footer, .main-content.profile .section .misc-footer, .main-content.suppliers .section .misc-footer, .main-content.sales .section .misc-footer, .main-content.products .section .misc-footer {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
@@ -27167,35 +27195,43 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   margin-bottom: 0;
 }
 
-.main-content.profile .section .misc-footer span, .main-content.profile .section .misc-footer em, .main-content.suppliers .section .misc-footer span, .main-content.suppliers .section .misc-footer em, .main-content.sales .section .misc-footer span, .main-content.sales .section .misc-footer em, .main-content.products .section .misc-footer span, .main-content.products .section .misc-footer em {
+.main-content.customers .section .misc-footer span, .main-content.customers .section .misc-footer em, .main-content.profile .section .misc-footer span, .main-content.profile .section .misc-footer em, .main-content.suppliers .section .misc-footer span, .main-content.suppliers .section .misc-footer em, .main-content.sales .section .misc-footer span, .main-content.sales .section .misc-footer em, .main-content.products .section .misc-footer span, .main-content.products .section .misc-footer em {
   line-height: 1;
 }
 
-.main-content.profile .section .misc-footer span:first-child, .main-content.profile .section .misc-footer em:first-child, .main-content.suppliers .section .misc-footer span:first-child, .main-content.suppliers .section .misc-footer em:first-child, .main-content.sales .section .misc-footer span:first-child, .main-content.sales .section .misc-footer em:first-child, .main-content.products .section .misc-footer span:first-child, .main-content.products .section .misc-footer em:first-child {
+.main-content.customers .section .misc-footer span:first-child, .main-content.customers .section .misc-footer em:first-child, .main-content.profile .section .misc-footer span:first-child, .main-content.profile .section .misc-footer em:first-child, .main-content.suppliers .section .misc-footer span:first-child, .main-content.suppliers .section .misc-footer em:first-child, .main-content.sales .section .misc-footer span:first-child, .main-content.sales .section .misc-footer em:first-child, .main-content.products .section .misc-footer span:first-child, .main-content.products .section .misc-footer em:first-child {
   margin-right: 0.5em;
 }
 
-.main-content.profile .section .misc-footer .is-small, .main-content.suppliers .section .misc-footer .is-small, .main-content.sales .section .misc-footer .is-small, .main-content.products .section .misc-footer .is-small {
+.main-content.customers .section .misc-footer .is-small, .main-content.profile .section .misc-footer .is-small, .main-content.suppliers .section .misc-footer .is-small, .main-content.sales .section .misc-footer .is-small, .main-content.products .section .misc-footer .is-small {
   font-size: 12px;
   -webkit-transform: translateY(-2px);
           transform: translateY(-2px);
 }
 
-.main-content.profile .section .misc-footer .is-large, .main-content.suppliers .section .misc-footer .is-large, .main-content.sales .section .misc-footer .is-large, .main-content.products .section .misc-footer .is-large {
+.main-content.customers .section .misc-footer .is-large, .main-content.profile .section .misc-footer .is-large, .main-content.suppliers .section .misc-footer .is-large, .main-content.sales .section .misc-footer .is-large, .main-content.products .section .misc-footer .is-large {
   font-size: 20px;
   font-weight: bold;
 }
 
+.main-content.customers .customers__head .columns,
+.main-content.customers .profile__head .columns,
+.main-content.customers .suppliers__head .columns,
+.main-content.customers .sales__head .columns,
+.main-content.customers .products__head .columns, .main-content.profile .customers__head .columns,
 .main-content.profile .profile__head .columns,
 .main-content.profile .suppliers__head .columns,
 .main-content.profile .sales__head .columns,
-.main-content.profile .products__head .columns, .main-content.suppliers .profile__head .columns,
+.main-content.profile .products__head .columns, .main-content.suppliers .customers__head .columns,
+.main-content.suppliers .profile__head .columns,
 .main-content.suppliers .suppliers__head .columns,
 .main-content.suppliers .sales__head .columns,
-.main-content.suppliers .products__head .columns, .main-content.sales .profile__head .columns,
+.main-content.suppliers .products__head .columns, .main-content.sales .customers__head .columns,
+.main-content.sales .profile__head .columns,
 .main-content.sales .suppliers__head .columns,
 .main-content.sales .sales__head .columns,
-.main-content.sales .products__head .columns, .main-content.products .profile__head .columns,
+.main-content.sales .products__head .columns, .main-content.products .customers__head .columns,
+.main-content.products .profile__head .columns,
 .main-content.products .suppliers__head .columns,
 .main-content.products .sales__head .columns,
 .main-content.products .products__head .columns {
@@ -27203,25 +27239,41 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   border-bottom: 1px solid #dbdbdb;
 }
 
-.main-content.profile .profile__head .columns .column.col-stock, .main-content.profile .profile__head .columns .column.col-price,
+.main-content.customers .customers__head .columns .column.col-stock, .main-content.customers .customers__head .columns .column.col-price,
+.main-content.customers .profile__head .columns .column.col-stock,
+.main-content.customers .profile__head .columns .column.col-price,
+.main-content.customers .suppliers__head .columns .column.col-stock,
+.main-content.customers .suppliers__head .columns .column.col-price,
+.main-content.customers .sales__head .columns .column.col-stock,
+.main-content.customers .sales__head .columns .column.col-price,
+.main-content.customers .products__head .columns .column.col-stock,
+.main-content.customers .products__head .columns .column.col-price, .main-content.profile .customers__head .columns .column.col-stock, .main-content.profile .customers__head .columns .column.col-price,
+.main-content.profile .profile__head .columns .column.col-stock,
+.main-content.profile .profile__head .columns .column.col-price,
 .main-content.profile .suppliers__head .columns .column.col-stock,
 .main-content.profile .suppliers__head .columns .column.col-price,
 .main-content.profile .sales__head .columns .column.col-stock,
 .main-content.profile .sales__head .columns .column.col-price,
 .main-content.profile .products__head .columns .column.col-stock,
-.main-content.profile .products__head .columns .column.col-price, .main-content.suppliers .profile__head .columns .column.col-stock, .main-content.suppliers .profile__head .columns .column.col-price,
+.main-content.profile .products__head .columns .column.col-price, .main-content.suppliers .customers__head .columns .column.col-stock, .main-content.suppliers .customers__head .columns .column.col-price,
+.main-content.suppliers .profile__head .columns .column.col-stock,
+.main-content.suppliers .profile__head .columns .column.col-price,
 .main-content.suppliers .suppliers__head .columns .column.col-stock,
 .main-content.suppliers .suppliers__head .columns .column.col-price,
 .main-content.suppliers .sales__head .columns .column.col-stock,
 .main-content.suppliers .sales__head .columns .column.col-price,
 .main-content.suppliers .products__head .columns .column.col-stock,
-.main-content.suppliers .products__head .columns .column.col-price, .main-content.sales .profile__head .columns .column.col-stock, .main-content.sales .profile__head .columns .column.col-price,
+.main-content.suppliers .products__head .columns .column.col-price, .main-content.sales .customers__head .columns .column.col-stock, .main-content.sales .customers__head .columns .column.col-price,
+.main-content.sales .profile__head .columns .column.col-stock,
+.main-content.sales .profile__head .columns .column.col-price,
 .main-content.sales .suppliers__head .columns .column.col-stock,
 .main-content.sales .suppliers__head .columns .column.col-price,
 .main-content.sales .sales__head .columns .column.col-stock,
 .main-content.sales .sales__head .columns .column.col-price,
 .main-content.sales .products__head .columns .column.col-stock,
-.main-content.sales .products__head .columns .column.col-price, .main-content.products .profile__head .columns .column.col-stock, .main-content.products .profile__head .columns .column.col-price,
+.main-content.sales .products__head .columns .column.col-price, .main-content.products .customers__head .columns .column.col-stock, .main-content.products .customers__head .columns .column.col-price,
+.main-content.products .profile__head .columns .column.col-stock,
+.main-content.products .profile__head .columns .column.col-price,
 .main-content.products .suppliers__head .columns .column.col-stock,
 .main-content.products .suppliers__head .columns .column.col-price,
 .main-content.products .sales__head .columns .column.col-stock,
@@ -27231,16 +27283,24 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-size: 11px;
 }
 
+.main-content.customers .customers__body,
+.main-content.customers .profile__body,
+.main-content.customers .suppliers__body,
+.main-content.customers .sales__body,
+.main-content.customers .products__body, .main-content.profile .customers__body,
 .main-content.profile .profile__body,
 .main-content.profile .suppliers__body,
 .main-content.profile .sales__body,
-.main-content.profile .products__body, .main-content.suppliers .profile__body,
+.main-content.profile .products__body, .main-content.suppliers .customers__body,
+.main-content.suppliers .profile__body,
 .main-content.suppliers .suppliers__body,
 .main-content.suppliers .sales__body,
-.main-content.suppliers .products__body, .main-content.sales .profile__body,
+.main-content.suppliers .products__body, .main-content.sales .customers__body,
+.main-content.sales .profile__body,
 .main-content.sales .suppliers__body,
 .main-content.sales .sales__body,
-.main-content.sales .products__body, .main-content.products .profile__body,
+.main-content.sales .products__body, .main-content.products .customers__body,
+.main-content.products .profile__body,
 .main-content.products .suppliers__body,
 .main-content.products .sales__body,
 .main-content.products .products__body {
@@ -27252,16 +27312,24 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   -webkit-overflow-scrolling: touch;
 }
 
+.main-content.customers .customers__body__item,
+.main-content.customers .profile__body__item,
+.main-content.customers .suppliers__body__item,
+.main-content.customers .sales__body__item,
+.main-content.customers .products__body__item, .main-content.profile .customers__body__item,
 .main-content.profile .profile__body__item,
 .main-content.profile .suppliers__body__item,
 .main-content.profile .sales__body__item,
-.main-content.profile .products__body__item, .main-content.suppliers .profile__body__item,
+.main-content.profile .products__body__item, .main-content.suppliers .customers__body__item,
+.main-content.suppliers .profile__body__item,
 .main-content.suppliers .suppliers__body__item,
 .main-content.suppliers .sales__body__item,
-.main-content.suppliers .products__body__item, .main-content.sales .profile__body__item,
+.main-content.suppliers .products__body__item, .main-content.sales .customers__body__item,
+.main-content.sales .profile__body__item,
 .main-content.sales .suppliers__body__item,
 .main-content.sales .sales__body__item,
-.main-content.sales .products__body__item, .main-content.products .profile__body__item,
+.main-content.sales .products__body__item, .main-content.products .customers__body__item,
+.main-content.products .profile__body__item,
 .main-content.products .suppliers__body__item,
 .main-content.products .sales__body__item,
 .main-content.products .products__body__item {
@@ -27271,48 +27339,72 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
           user-select: none;
 }
 
+.main-content.customers .customers__body__item:first-child,
+.main-content.customers .profile__body__item:first-child,
+.main-content.customers .suppliers__body__item:first-child,
+.main-content.customers .sales__body__item:first-child,
+.main-content.customers .products__body__item:first-child, .main-content.profile .customers__body__item:first-child,
 .main-content.profile .profile__body__item:first-child,
 .main-content.profile .suppliers__body__item:first-child,
 .main-content.profile .sales__body__item:first-child,
-.main-content.profile .products__body__item:first-child, .main-content.suppliers .profile__body__item:first-child,
+.main-content.profile .products__body__item:first-child, .main-content.suppliers .customers__body__item:first-child,
+.main-content.suppliers .profile__body__item:first-child,
 .main-content.suppliers .suppliers__body__item:first-child,
 .main-content.suppliers .sales__body__item:first-child,
-.main-content.suppliers .products__body__item:first-child, .main-content.sales .profile__body__item:first-child,
+.main-content.suppliers .products__body__item:first-child, .main-content.sales .customers__body__item:first-child,
+.main-content.sales .profile__body__item:first-child,
 .main-content.sales .suppliers__body__item:first-child,
 .main-content.sales .sales__body__item:first-child,
-.main-content.sales .products__body__item:first-child, .main-content.products .profile__body__item:first-child,
+.main-content.sales .products__body__item:first-child, .main-content.products .customers__body__item:first-child,
+.main-content.products .profile__body__item:first-child,
 .main-content.products .suppliers__body__item:first-child,
 .main-content.products .sales__body__item:first-child,
 .main-content.products .products__body__item:first-child {
   margin-top: 0;
 }
 
+.main-content.customers .customers__body__item:not(:last-child),
+.main-content.customers .profile__body__item:not(:last-child),
+.main-content.customers .suppliers__body__item:not(:last-child),
+.main-content.customers .sales__body__item:not(:last-child),
+.main-content.customers .products__body__item:not(:last-child), .main-content.profile .customers__body__item:not(:last-child),
 .main-content.profile .profile__body__item:not(:last-child),
 .main-content.profile .suppliers__body__item:not(:last-child),
 .main-content.profile .sales__body__item:not(:last-child),
-.main-content.profile .products__body__item:not(:last-child), .main-content.suppliers .profile__body__item:not(:last-child),
+.main-content.profile .products__body__item:not(:last-child), .main-content.suppliers .customers__body__item:not(:last-child),
+.main-content.suppliers .profile__body__item:not(:last-child),
 .main-content.suppliers .suppliers__body__item:not(:last-child),
 .main-content.suppliers .sales__body__item:not(:last-child),
-.main-content.suppliers .products__body__item:not(:last-child), .main-content.sales .profile__body__item:not(:last-child),
+.main-content.suppliers .products__body__item:not(:last-child), .main-content.sales .customers__body__item:not(:last-child),
+.main-content.sales .profile__body__item:not(:last-child),
 .main-content.sales .suppliers__body__item:not(:last-child),
 .main-content.sales .sales__body__item:not(:last-child),
-.main-content.sales .products__body__item:not(:last-child), .main-content.products .profile__body__item:not(:last-child),
+.main-content.sales .products__body__item:not(:last-child), .main-content.products .customers__body__item:not(:last-child),
+.main-content.products .profile__body__item:not(:last-child),
 .main-content.products .suppliers__body__item:not(:last-child),
 .main-content.products .sales__body__item:not(:last-child),
 .main-content.products .products__body__item:not(:last-child) {
   border-bottom: 1px solid #dbdbdb;
 }
 
+.main-content.customers .customers__body__item.is-unpublished,
+.main-content.customers .profile__body__item.is-unpublished,
+.main-content.customers .suppliers__body__item.is-unpublished,
+.main-content.customers .sales__body__item.is-unpublished,
+.main-content.customers .products__body__item.is-unpublished, .main-content.profile .customers__body__item.is-unpublished,
 .main-content.profile .profile__body__item.is-unpublished,
 .main-content.profile .suppliers__body__item.is-unpublished,
 .main-content.profile .sales__body__item.is-unpublished,
-.main-content.profile .products__body__item.is-unpublished, .main-content.suppliers .profile__body__item.is-unpublished,
+.main-content.profile .products__body__item.is-unpublished, .main-content.suppliers .customers__body__item.is-unpublished,
+.main-content.suppliers .profile__body__item.is-unpublished,
 .main-content.suppliers .suppliers__body__item.is-unpublished,
 .main-content.suppliers .sales__body__item.is-unpublished,
-.main-content.suppliers .products__body__item.is-unpublished, .main-content.sales .profile__body__item.is-unpublished,
+.main-content.suppliers .products__body__item.is-unpublished, .main-content.sales .customers__body__item.is-unpublished,
+.main-content.sales .profile__body__item.is-unpublished,
 .main-content.sales .suppliers__body__item.is-unpublished,
 .main-content.sales .sales__body__item.is-unpublished,
-.main-content.sales .products__body__item.is-unpublished, .main-content.products .profile__body__item.is-unpublished,
+.main-content.sales .products__body__item.is-unpublished, .main-content.products .customers__body__item.is-unpublished,
+.main-content.products .profile__body__item.is-unpublished,
 .main-content.products .suppliers__body__item.is-unpublished,
 .main-content.products .sales__body__item.is-unpublished,
 .main-content.products .products__body__item.is-unpublished {
@@ -27321,39 +27413,111 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   background-color: rgba(255, 56, 96, 0.2);
 }
 
+.main-content.customers .customers__body__item .col-amount i,
+.main-content.customers .profile__body__item .col-amount i,
+.main-content.customers .suppliers__body__item .col-amount i,
+.main-content.customers .sales__body__item .col-amount i,
+.main-content.customers .products__body__item .col-amount i, .main-content.profile .customers__body__item .col-amount i,
 .main-content.profile .profile__body__item .col-amount i,
 .main-content.profile .suppliers__body__item .col-amount i,
 .main-content.profile .sales__body__item .col-amount i,
-.main-content.profile .products__body__item .col-amount i, .main-content.suppliers .profile__body__item .col-amount i,
+.main-content.profile .products__body__item .col-amount i, .main-content.suppliers .customers__body__item .col-amount i,
+.main-content.suppliers .profile__body__item .col-amount i,
 .main-content.suppliers .suppliers__body__item .col-amount i,
 .main-content.suppliers .sales__body__item .col-amount i,
-.main-content.suppliers .products__body__item .col-amount i, .main-content.sales .profile__body__item .col-amount i,
+.main-content.suppliers .products__body__item .col-amount i, .main-content.sales .customers__body__item .col-amount i,
+.main-content.sales .profile__body__item .col-amount i,
 .main-content.sales .suppliers__body__item .col-amount i,
 .main-content.sales .sales__body__item .col-amount i,
-.main-content.sales .products__body__item .col-amount i, .main-content.products .profile__body__item .col-amount i,
+.main-content.sales .products__body__item .col-amount i, .main-content.products .customers__body__item .col-amount i,
+.main-content.products .profile__body__item .col-amount i,
 .main-content.products .suppliers__body__item .col-amount i,
 .main-content.products .sales__body__item .col-amount i,
 .main-content.products .products__body__item .col-amount i {
   margin-right: 0.5em;
 }
 
+.main-content.customers .customers__body__item .col-action .button,
+.main-content.customers .profile__body__item .col-action .button,
+.main-content.customers .suppliers__body__item .col-action .button,
+.main-content.customers .sales__body__item .col-action .button,
+.main-content.customers .products__body__item .col-action .button, .main-content.profile .customers__body__item .col-action .button,
 .main-content.profile .profile__body__item .col-action .button,
 .main-content.profile .suppliers__body__item .col-action .button,
 .main-content.profile .sales__body__item .col-action .button,
-.main-content.profile .products__body__item .col-action .button, .main-content.suppliers .profile__body__item .col-action .button,
+.main-content.profile .products__body__item .col-action .button, .main-content.suppliers .customers__body__item .col-action .button,
+.main-content.suppliers .profile__body__item .col-action .button,
 .main-content.suppliers .suppliers__body__item .col-action .button,
 .main-content.suppliers .sales__body__item .col-action .button,
-.main-content.suppliers .products__body__item .col-action .button, .main-content.sales .profile__body__item .col-action .button,
+.main-content.suppliers .products__body__item .col-action .button, .main-content.sales .customers__body__item .col-action .button,
+.main-content.sales .profile__body__item .col-action .button,
 .main-content.sales .suppliers__body__item .col-action .button,
 .main-content.sales .sales__body__item .col-action .button,
-.main-content.sales .products__body__item .col-action .button, .main-content.products .profile__body__item .col-action .button,
+.main-content.sales .products__body__item .col-action .button, .main-content.products .customers__body__item .col-action .button,
+.main-content.products .profile__body__item .col-action .button,
 .main-content.products .suppliers__body__item .col-action .button,
 .main-content.products .sales__body__item .col-action .button,
 .main-content.products .products__body__item .col-action .button {
   pointer-events: none;
 }
 
-.main-content.profile .profile__head .col-update, .main-content.profile .profile__head .col-stock, .main-content.profile .profile__head .col-price, .main-content.profile .profile__body .col-update, .main-content.profile .profile__body .col-stock, .main-content.profile .profile__body .col-price,
+.main-content.customers .customers__body__item .col-email,
+.main-content.customers .profile__body__item .col-email,
+.main-content.customers .suppliers__body__item .col-email,
+.main-content.customers .sales__body__item .col-email,
+.main-content.customers .products__body__item .col-email, .main-content.profile .customers__body__item .col-email,
+.main-content.profile .profile__body__item .col-email,
+.main-content.profile .suppliers__body__item .col-email,
+.main-content.profile .sales__body__item .col-email,
+.main-content.profile .products__body__item .col-email, .main-content.suppliers .customers__body__item .col-email,
+.main-content.suppliers .profile__body__item .col-email,
+.main-content.suppliers .suppliers__body__item .col-email,
+.main-content.suppliers .sales__body__item .col-email,
+.main-content.suppliers .products__body__item .col-email, .main-content.sales .customers__body__item .col-email,
+.main-content.sales .profile__body__item .col-email,
+.main-content.sales .suppliers__body__item .col-email,
+.main-content.sales .sales__body__item .col-email,
+.main-content.sales .products__body__item .col-email, .main-content.products .customers__body__item .col-email,
+.main-content.products .profile__body__item .col-email,
+.main-content.products .suppliers__body__item .col-email,
+.main-content.products .sales__body__item .col-email,
+.main-content.products .products__body__item .col-email {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.main-content.customers .customers__head .col-update, .main-content.customers .customers__head .col-stock, .main-content.customers .customers__head .col-price, .main-content.customers .customers__body .col-update, .main-content.customers .customers__body .col-stock, .main-content.customers .customers__body .col-price,
+.main-content.customers .profile__head .col-update,
+.main-content.customers .profile__head .col-stock,
+.main-content.customers .profile__head .col-price,
+.main-content.customers .profile__body .col-update,
+.main-content.customers .profile__body .col-stock,
+.main-content.customers .profile__body .col-price,
+.main-content.customers .suppliers__head .col-update,
+.main-content.customers .suppliers__head .col-stock,
+.main-content.customers .suppliers__head .col-price,
+.main-content.customers .suppliers__body .col-update,
+.main-content.customers .suppliers__body .col-stock,
+.main-content.customers .suppliers__body .col-price,
+.main-content.customers .sales__head .col-update,
+.main-content.customers .sales__head .col-stock,
+.main-content.customers .sales__head .col-price,
+.main-content.customers .sales__body .col-update,
+.main-content.customers .sales__body .col-stock,
+.main-content.customers .sales__body .col-price,
+.main-content.customers .products__head .col-update,
+.main-content.customers .products__head .col-stock,
+.main-content.customers .products__head .col-price,
+.main-content.customers .products__body .col-update,
+.main-content.customers .products__body .col-stock,
+.main-content.customers .products__body .col-price, .main-content.profile .customers__head .col-update, .main-content.profile .customers__head .col-stock, .main-content.profile .customers__head .col-price, .main-content.profile .customers__body .col-update, .main-content.profile .customers__body .col-stock, .main-content.profile .customers__body .col-price,
+.main-content.profile .profile__head .col-update,
+.main-content.profile .profile__head .col-stock,
+.main-content.profile .profile__head .col-price,
+.main-content.profile .profile__body .col-update,
+.main-content.profile .profile__body .col-stock,
+.main-content.profile .profile__body .col-price,
 .main-content.profile .suppliers__head .col-update,
 .main-content.profile .suppliers__head .col-stock,
 .main-content.profile .suppliers__head .col-price,
@@ -27371,7 +27535,13 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.profile .products__head .col-price,
 .main-content.profile .products__body .col-update,
 .main-content.profile .products__body .col-stock,
-.main-content.profile .products__body .col-price, .main-content.suppliers .profile__head .col-update, .main-content.suppliers .profile__head .col-stock, .main-content.suppliers .profile__head .col-price, .main-content.suppliers .profile__body .col-update, .main-content.suppliers .profile__body .col-stock, .main-content.suppliers .profile__body .col-price,
+.main-content.profile .products__body .col-price, .main-content.suppliers .customers__head .col-update, .main-content.suppliers .customers__head .col-stock, .main-content.suppliers .customers__head .col-price, .main-content.suppliers .customers__body .col-update, .main-content.suppliers .customers__body .col-stock, .main-content.suppliers .customers__body .col-price,
+.main-content.suppliers .profile__head .col-update,
+.main-content.suppliers .profile__head .col-stock,
+.main-content.suppliers .profile__head .col-price,
+.main-content.suppliers .profile__body .col-update,
+.main-content.suppliers .profile__body .col-stock,
+.main-content.suppliers .profile__body .col-price,
 .main-content.suppliers .suppliers__head .col-update,
 .main-content.suppliers .suppliers__head .col-stock,
 .main-content.suppliers .suppliers__head .col-price,
@@ -27389,7 +27559,13 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.suppliers .products__head .col-price,
 .main-content.suppliers .products__body .col-update,
 .main-content.suppliers .products__body .col-stock,
-.main-content.suppliers .products__body .col-price, .main-content.sales .profile__head .col-update, .main-content.sales .profile__head .col-stock, .main-content.sales .profile__head .col-price, .main-content.sales .profile__body .col-update, .main-content.sales .profile__body .col-stock, .main-content.sales .profile__body .col-price,
+.main-content.suppliers .products__body .col-price, .main-content.sales .customers__head .col-update, .main-content.sales .customers__head .col-stock, .main-content.sales .customers__head .col-price, .main-content.sales .customers__body .col-update, .main-content.sales .customers__body .col-stock, .main-content.sales .customers__body .col-price,
+.main-content.sales .profile__head .col-update,
+.main-content.sales .profile__head .col-stock,
+.main-content.sales .profile__head .col-price,
+.main-content.sales .profile__body .col-update,
+.main-content.sales .profile__body .col-stock,
+.main-content.sales .profile__body .col-price,
 .main-content.sales .suppliers__head .col-update,
 .main-content.sales .suppliers__head .col-stock,
 .main-content.sales .suppliers__head .col-price,
@@ -27407,7 +27583,13 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.sales .products__head .col-price,
 .main-content.sales .products__body .col-update,
 .main-content.sales .products__body .col-stock,
-.main-content.sales .products__body .col-price, .main-content.products .profile__head .col-update, .main-content.products .profile__head .col-stock, .main-content.products .profile__head .col-price, .main-content.products .profile__body .col-update, .main-content.products .profile__body .col-stock, .main-content.products .profile__body .col-price,
+.main-content.sales .products__body .col-price, .main-content.products .customers__head .col-update, .main-content.products .customers__head .col-stock, .main-content.products .customers__head .col-price, .main-content.products .customers__body .col-update, .main-content.products .customers__body .col-stock, .main-content.products .customers__body .col-price,
+.main-content.products .profile__head .col-update,
+.main-content.products .profile__head .col-stock,
+.main-content.products .profile__head .col-price,
+.main-content.products .profile__body .col-update,
+.main-content.products .profile__body .col-stock,
+.main-content.products .profile__body .col-price,
 .main-content.products .suppliers__head .col-update,
 .main-content.products .suppliers__head .col-stock,
 .main-content.products .suppliers__head .col-price,
@@ -27432,7 +27614,27 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
           flex: none;
 }
 
-.main-content.profile .profile__head .col-stock, .main-content.profile .profile__head .col-price, .main-content.profile .profile__body .col-stock, .main-content.profile .profile__body .col-price,
+.main-content.customers .customers__head .col-stock, .main-content.customers .customers__head .col-price, .main-content.customers .customers__body .col-stock, .main-content.customers .customers__body .col-price,
+.main-content.customers .profile__head .col-stock,
+.main-content.customers .profile__head .col-price,
+.main-content.customers .profile__body .col-stock,
+.main-content.customers .profile__body .col-price,
+.main-content.customers .suppliers__head .col-stock,
+.main-content.customers .suppliers__head .col-price,
+.main-content.customers .suppliers__body .col-stock,
+.main-content.customers .suppliers__body .col-price,
+.main-content.customers .sales__head .col-stock,
+.main-content.customers .sales__head .col-price,
+.main-content.customers .sales__body .col-stock,
+.main-content.customers .sales__body .col-price,
+.main-content.customers .products__head .col-stock,
+.main-content.customers .products__head .col-price,
+.main-content.customers .products__body .col-stock,
+.main-content.customers .products__body .col-price, .main-content.profile .customers__head .col-stock, .main-content.profile .customers__head .col-price, .main-content.profile .customers__body .col-stock, .main-content.profile .customers__body .col-price,
+.main-content.profile .profile__head .col-stock,
+.main-content.profile .profile__head .col-price,
+.main-content.profile .profile__body .col-stock,
+.main-content.profile .profile__body .col-price,
 .main-content.profile .suppliers__head .col-stock,
 .main-content.profile .suppliers__head .col-price,
 .main-content.profile .suppliers__body .col-stock,
@@ -27444,7 +27646,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.profile .products__head .col-stock,
 .main-content.profile .products__head .col-price,
 .main-content.profile .products__body .col-stock,
-.main-content.profile .products__body .col-price, .main-content.suppliers .profile__head .col-stock, .main-content.suppliers .profile__head .col-price, .main-content.suppliers .profile__body .col-stock, .main-content.suppliers .profile__body .col-price,
+.main-content.profile .products__body .col-price, .main-content.suppliers .customers__head .col-stock, .main-content.suppliers .customers__head .col-price, .main-content.suppliers .customers__body .col-stock, .main-content.suppliers .customers__body .col-price,
+.main-content.suppliers .profile__head .col-stock,
+.main-content.suppliers .profile__head .col-price,
+.main-content.suppliers .profile__body .col-stock,
+.main-content.suppliers .profile__body .col-price,
 .main-content.suppliers .suppliers__head .col-stock,
 .main-content.suppliers .suppliers__head .col-price,
 .main-content.suppliers .suppliers__body .col-stock,
@@ -27456,7 +27662,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.suppliers .products__head .col-stock,
 .main-content.suppliers .products__head .col-price,
 .main-content.suppliers .products__body .col-stock,
-.main-content.suppliers .products__body .col-price, .main-content.sales .profile__head .col-stock, .main-content.sales .profile__head .col-price, .main-content.sales .profile__body .col-stock, .main-content.sales .profile__body .col-price,
+.main-content.suppliers .products__body .col-price, .main-content.sales .customers__head .col-stock, .main-content.sales .customers__head .col-price, .main-content.sales .customers__body .col-stock, .main-content.sales .customers__body .col-price,
+.main-content.sales .profile__head .col-stock,
+.main-content.sales .profile__head .col-price,
+.main-content.sales .profile__body .col-stock,
+.main-content.sales .profile__body .col-price,
 .main-content.sales .suppliers__head .col-stock,
 .main-content.sales .suppliers__head .col-price,
 .main-content.sales .suppliers__body .col-stock,
@@ -27468,7 +27678,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.sales .products__head .col-stock,
 .main-content.sales .products__head .col-price,
 .main-content.sales .products__body .col-stock,
-.main-content.sales .products__body .col-price, .main-content.products .profile__head .col-stock, .main-content.products .profile__head .col-price, .main-content.products .profile__body .col-stock, .main-content.products .profile__body .col-price,
+.main-content.sales .products__body .col-price, .main-content.products .customers__head .col-stock, .main-content.products .customers__head .col-price, .main-content.products .customers__body .col-stock, .main-content.products .customers__body .col-price,
+.main-content.products .profile__head .col-stock,
+.main-content.products .profile__head .col-price,
+.main-content.products .profile__body .col-stock,
+.main-content.products .profile__body .col-price,
 .main-content.products .suppliers__head .col-stock,
 .main-content.products .suppliers__head .col-price,
 .main-content.products .suppliers__body .col-stock,
@@ -27485,7 +27699,27 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-size: 18px;
 }
 
-.main-content.profile .profile__head .col-stock span, .main-content.profile .profile__head .col-price span, .main-content.profile .profile__body .col-stock span, .main-content.profile .profile__body .col-price span,
+.main-content.customers .customers__head .col-stock span, .main-content.customers .customers__head .col-price span, .main-content.customers .customers__body .col-stock span, .main-content.customers .customers__body .col-price span,
+.main-content.customers .profile__head .col-stock span,
+.main-content.customers .profile__head .col-price span,
+.main-content.customers .profile__body .col-stock span,
+.main-content.customers .profile__body .col-price span,
+.main-content.customers .suppliers__head .col-stock span,
+.main-content.customers .suppliers__head .col-price span,
+.main-content.customers .suppliers__body .col-stock span,
+.main-content.customers .suppliers__body .col-price span,
+.main-content.customers .sales__head .col-stock span,
+.main-content.customers .sales__head .col-price span,
+.main-content.customers .sales__body .col-stock span,
+.main-content.customers .sales__body .col-price span,
+.main-content.customers .products__head .col-stock span,
+.main-content.customers .products__head .col-price span,
+.main-content.customers .products__body .col-stock span,
+.main-content.customers .products__body .col-price span, .main-content.profile .customers__head .col-stock span, .main-content.profile .customers__head .col-price span, .main-content.profile .customers__body .col-stock span, .main-content.profile .customers__body .col-price span,
+.main-content.profile .profile__head .col-stock span,
+.main-content.profile .profile__head .col-price span,
+.main-content.profile .profile__body .col-stock span,
+.main-content.profile .profile__body .col-price span,
 .main-content.profile .suppliers__head .col-stock span,
 .main-content.profile .suppliers__head .col-price span,
 .main-content.profile .suppliers__body .col-stock span,
@@ -27497,7 +27731,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.profile .products__head .col-stock span,
 .main-content.profile .products__head .col-price span,
 .main-content.profile .products__body .col-stock span,
-.main-content.profile .products__body .col-price span, .main-content.suppliers .profile__head .col-stock span, .main-content.suppliers .profile__head .col-price span, .main-content.suppliers .profile__body .col-stock span, .main-content.suppliers .profile__body .col-price span,
+.main-content.profile .products__body .col-price span, .main-content.suppliers .customers__head .col-stock span, .main-content.suppliers .customers__head .col-price span, .main-content.suppliers .customers__body .col-stock span, .main-content.suppliers .customers__body .col-price span,
+.main-content.suppliers .profile__head .col-stock span,
+.main-content.suppliers .profile__head .col-price span,
+.main-content.suppliers .profile__body .col-stock span,
+.main-content.suppliers .profile__body .col-price span,
 .main-content.suppliers .suppliers__head .col-stock span,
 .main-content.suppliers .suppliers__head .col-price span,
 .main-content.suppliers .suppliers__body .col-stock span,
@@ -27509,7 +27747,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.suppliers .products__head .col-stock span,
 .main-content.suppliers .products__head .col-price span,
 .main-content.suppliers .products__body .col-stock span,
-.main-content.suppliers .products__body .col-price span, .main-content.sales .profile__head .col-stock span, .main-content.sales .profile__head .col-price span, .main-content.sales .profile__body .col-stock span, .main-content.sales .profile__body .col-price span,
+.main-content.suppliers .products__body .col-price span, .main-content.sales .customers__head .col-stock span, .main-content.sales .customers__head .col-price span, .main-content.sales .customers__body .col-stock span, .main-content.sales .customers__body .col-price span,
+.main-content.sales .profile__head .col-stock span,
+.main-content.sales .profile__head .col-price span,
+.main-content.sales .profile__body .col-stock span,
+.main-content.sales .profile__body .col-price span,
 .main-content.sales .suppliers__head .col-stock span,
 .main-content.sales .suppliers__head .col-price span,
 .main-content.sales .suppliers__body .col-stock span,
@@ -27521,7 +27763,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.sales .products__head .col-stock span,
 .main-content.sales .products__head .col-price span,
 .main-content.sales .products__body .col-stock span,
-.main-content.sales .products__body .col-price span, .main-content.products .profile__head .col-stock span, .main-content.products .profile__head .col-price span, .main-content.products .profile__body .col-stock span, .main-content.products .profile__body .col-price span,
+.main-content.sales .products__body .col-price span, .main-content.products .customers__head .col-stock span, .main-content.products .customers__head .col-price span, .main-content.products .customers__body .col-stock span, .main-content.products .customers__body .col-price span,
+.main-content.products .profile__head .col-stock span,
+.main-content.products .profile__head .col-price span,
+.main-content.products .profile__body .col-stock span,
+.main-content.products .profile__body .col-price span,
 .main-content.products .suppliers__head .col-stock span,
 .main-content.products .suppliers__head .col-price span,
 .main-content.products .suppliers__body .col-stock span,
@@ -27537,7 +27783,27 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-size: 11px;
 }
 
-.main-content.profile .profile__head .col-stock.is-danger, .main-content.profile .profile__head .col-price.is-danger, .main-content.profile .profile__body .col-stock.is-danger, .main-content.profile .profile__body .col-price.is-danger,
+.main-content.customers .customers__head .col-stock.is-danger, .main-content.customers .customers__head .col-price.is-danger, .main-content.customers .customers__body .col-stock.is-danger, .main-content.customers .customers__body .col-price.is-danger,
+.main-content.customers .profile__head .col-stock.is-danger,
+.main-content.customers .profile__head .col-price.is-danger,
+.main-content.customers .profile__body .col-stock.is-danger,
+.main-content.customers .profile__body .col-price.is-danger,
+.main-content.customers .suppliers__head .col-stock.is-danger,
+.main-content.customers .suppliers__head .col-price.is-danger,
+.main-content.customers .suppliers__body .col-stock.is-danger,
+.main-content.customers .suppliers__body .col-price.is-danger,
+.main-content.customers .sales__head .col-stock.is-danger,
+.main-content.customers .sales__head .col-price.is-danger,
+.main-content.customers .sales__body .col-stock.is-danger,
+.main-content.customers .sales__body .col-price.is-danger,
+.main-content.customers .products__head .col-stock.is-danger,
+.main-content.customers .products__head .col-price.is-danger,
+.main-content.customers .products__body .col-stock.is-danger,
+.main-content.customers .products__body .col-price.is-danger, .main-content.profile .customers__head .col-stock.is-danger, .main-content.profile .customers__head .col-price.is-danger, .main-content.profile .customers__body .col-stock.is-danger, .main-content.profile .customers__body .col-price.is-danger,
+.main-content.profile .profile__head .col-stock.is-danger,
+.main-content.profile .profile__head .col-price.is-danger,
+.main-content.profile .profile__body .col-stock.is-danger,
+.main-content.profile .profile__body .col-price.is-danger,
 .main-content.profile .suppliers__head .col-stock.is-danger,
 .main-content.profile .suppliers__head .col-price.is-danger,
 .main-content.profile .suppliers__body .col-stock.is-danger,
@@ -27549,7 +27815,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.profile .products__head .col-stock.is-danger,
 .main-content.profile .products__head .col-price.is-danger,
 .main-content.profile .products__body .col-stock.is-danger,
-.main-content.profile .products__body .col-price.is-danger, .main-content.suppliers .profile__head .col-stock.is-danger, .main-content.suppliers .profile__head .col-price.is-danger, .main-content.suppliers .profile__body .col-stock.is-danger, .main-content.suppliers .profile__body .col-price.is-danger,
+.main-content.profile .products__body .col-price.is-danger, .main-content.suppliers .customers__head .col-stock.is-danger, .main-content.suppliers .customers__head .col-price.is-danger, .main-content.suppliers .customers__body .col-stock.is-danger, .main-content.suppliers .customers__body .col-price.is-danger,
+.main-content.suppliers .profile__head .col-stock.is-danger,
+.main-content.suppliers .profile__head .col-price.is-danger,
+.main-content.suppliers .profile__body .col-stock.is-danger,
+.main-content.suppliers .profile__body .col-price.is-danger,
 .main-content.suppliers .suppliers__head .col-stock.is-danger,
 .main-content.suppliers .suppliers__head .col-price.is-danger,
 .main-content.suppliers .suppliers__body .col-stock.is-danger,
@@ -27561,7 +27831,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.suppliers .products__head .col-stock.is-danger,
 .main-content.suppliers .products__head .col-price.is-danger,
 .main-content.suppliers .products__body .col-stock.is-danger,
-.main-content.suppliers .products__body .col-price.is-danger, .main-content.sales .profile__head .col-stock.is-danger, .main-content.sales .profile__head .col-price.is-danger, .main-content.sales .profile__body .col-stock.is-danger, .main-content.sales .profile__body .col-price.is-danger,
+.main-content.suppliers .products__body .col-price.is-danger, .main-content.sales .customers__head .col-stock.is-danger, .main-content.sales .customers__head .col-price.is-danger, .main-content.sales .customers__body .col-stock.is-danger, .main-content.sales .customers__body .col-price.is-danger,
+.main-content.sales .profile__head .col-stock.is-danger,
+.main-content.sales .profile__head .col-price.is-danger,
+.main-content.sales .profile__body .col-stock.is-danger,
+.main-content.sales .profile__body .col-price.is-danger,
 .main-content.sales .suppliers__head .col-stock.is-danger,
 .main-content.sales .suppliers__head .col-price.is-danger,
 .main-content.sales .suppliers__body .col-stock.is-danger,
@@ -27573,7 +27847,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.sales .products__head .col-stock.is-danger,
 .main-content.sales .products__head .col-price.is-danger,
 .main-content.sales .products__body .col-stock.is-danger,
-.main-content.sales .products__body .col-price.is-danger, .main-content.products .profile__head .col-stock.is-danger, .main-content.products .profile__head .col-price.is-danger, .main-content.products .profile__body .col-stock.is-danger, .main-content.products .profile__body .col-price.is-danger,
+.main-content.sales .products__body .col-price.is-danger, .main-content.products .customers__head .col-stock.is-danger, .main-content.products .customers__head .col-price.is-danger, .main-content.products .customers__body .col-stock.is-danger, .main-content.products .customers__body .col-price.is-danger,
+.main-content.products .profile__head .col-stock.is-danger,
+.main-content.products .profile__head .col-price.is-danger,
+.main-content.products .profile__body .col-stock.is-danger,
+.main-content.products .profile__body .col-price.is-danger,
 .main-content.products .suppliers__head .col-stock.is-danger,
 .main-content.products .suppliers__head .col-price.is-danger,
 .main-content.products .suppliers__body .col-stock.is-danger,
@@ -27590,7 +27868,27 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-weight: bold;
 }
 
-.main-content.profile .profile__head .col-stock.is-danger span, .main-content.profile .profile__head .col-price.is-danger span, .main-content.profile .profile__body .col-stock.is-danger span, .main-content.profile .profile__body .col-price.is-danger span,
+.main-content.customers .customers__head .col-stock.is-danger span, .main-content.customers .customers__head .col-price.is-danger span, .main-content.customers .customers__body .col-stock.is-danger span, .main-content.customers .customers__body .col-price.is-danger span,
+.main-content.customers .profile__head .col-stock.is-danger span,
+.main-content.customers .profile__head .col-price.is-danger span,
+.main-content.customers .profile__body .col-stock.is-danger span,
+.main-content.customers .profile__body .col-price.is-danger span,
+.main-content.customers .suppliers__head .col-stock.is-danger span,
+.main-content.customers .suppliers__head .col-price.is-danger span,
+.main-content.customers .suppliers__body .col-stock.is-danger span,
+.main-content.customers .suppliers__body .col-price.is-danger span,
+.main-content.customers .sales__head .col-stock.is-danger span,
+.main-content.customers .sales__head .col-price.is-danger span,
+.main-content.customers .sales__body .col-stock.is-danger span,
+.main-content.customers .sales__body .col-price.is-danger span,
+.main-content.customers .products__head .col-stock.is-danger span,
+.main-content.customers .products__head .col-price.is-danger span,
+.main-content.customers .products__body .col-stock.is-danger span,
+.main-content.customers .products__body .col-price.is-danger span, .main-content.profile .customers__head .col-stock.is-danger span, .main-content.profile .customers__head .col-price.is-danger span, .main-content.profile .customers__body .col-stock.is-danger span, .main-content.profile .customers__body .col-price.is-danger span,
+.main-content.profile .profile__head .col-stock.is-danger span,
+.main-content.profile .profile__head .col-price.is-danger span,
+.main-content.profile .profile__body .col-stock.is-danger span,
+.main-content.profile .profile__body .col-price.is-danger span,
 .main-content.profile .suppliers__head .col-stock.is-danger span,
 .main-content.profile .suppliers__head .col-price.is-danger span,
 .main-content.profile .suppliers__body .col-stock.is-danger span,
@@ -27602,7 +27900,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.profile .products__head .col-stock.is-danger span,
 .main-content.profile .products__head .col-price.is-danger span,
 .main-content.profile .products__body .col-stock.is-danger span,
-.main-content.profile .products__body .col-price.is-danger span, .main-content.suppliers .profile__head .col-stock.is-danger span, .main-content.suppliers .profile__head .col-price.is-danger span, .main-content.suppliers .profile__body .col-stock.is-danger span, .main-content.suppliers .profile__body .col-price.is-danger span,
+.main-content.profile .products__body .col-price.is-danger span, .main-content.suppliers .customers__head .col-stock.is-danger span, .main-content.suppliers .customers__head .col-price.is-danger span, .main-content.suppliers .customers__body .col-stock.is-danger span, .main-content.suppliers .customers__body .col-price.is-danger span,
+.main-content.suppliers .profile__head .col-stock.is-danger span,
+.main-content.suppliers .profile__head .col-price.is-danger span,
+.main-content.suppliers .profile__body .col-stock.is-danger span,
+.main-content.suppliers .profile__body .col-price.is-danger span,
 .main-content.suppliers .suppliers__head .col-stock.is-danger span,
 .main-content.suppliers .suppliers__head .col-price.is-danger span,
 .main-content.suppliers .suppliers__body .col-stock.is-danger span,
@@ -27614,7 +27916,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.suppliers .products__head .col-stock.is-danger span,
 .main-content.suppliers .products__head .col-price.is-danger span,
 .main-content.suppliers .products__body .col-stock.is-danger span,
-.main-content.suppliers .products__body .col-price.is-danger span, .main-content.sales .profile__head .col-stock.is-danger span, .main-content.sales .profile__head .col-price.is-danger span, .main-content.sales .profile__body .col-stock.is-danger span, .main-content.sales .profile__body .col-price.is-danger span,
+.main-content.suppliers .products__body .col-price.is-danger span, .main-content.sales .customers__head .col-stock.is-danger span, .main-content.sales .customers__head .col-price.is-danger span, .main-content.sales .customers__body .col-stock.is-danger span, .main-content.sales .customers__body .col-price.is-danger span,
+.main-content.sales .profile__head .col-stock.is-danger span,
+.main-content.sales .profile__head .col-price.is-danger span,
+.main-content.sales .profile__body .col-stock.is-danger span,
+.main-content.sales .profile__body .col-price.is-danger span,
 .main-content.sales .suppliers__head .col-stock.is-danger span,
 .main-content.sales .suppliers__head .col-price.is-danger span,
 .main-content.sales .suppliers__body .col-stock.is-danger span,
@@ -27626,7 +27932,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .main-content.sales .products__head .col-stock.is-danger span,
 .main-content.sales .products__head .col-price.is-danger span,
 .main-content.sales .products__body .col-stock.is-danger span,
-.main-content.sales .products__body .col-price.is-danger span, .main-content.products .profile__head .col-stock.is-danger span, .main-content.products .profile__head .col-price.is-danger span, .main-content.products .profile__body .col-stock.is-danger span, .main-content.products .profile__body .col-price.is-danger span,
+.main-content.sales .products__body .col-price.is-danger span, .main-content.products .customers__head .col-stock.is-danger span, .main-content.products .customers__head .col-price.is-danger span, .main-content.products .customers__body .col-stock.is-danger span, .main-content.products .customers__body .col-price.is-danger span,
+.main-content.products .profile__head .col-stock.is-danger span,
+.main-content.products .profile__head .col-price.is-danger span,
+.main-content.products .profile__body .col-stock.is-danger span,
+.main-content.products .profile__body .col-price.is-danger span,
 .main-content.products .suppliers__head .col-stock.is-danger span,
 .main-content.products .suppliers__head .col-price.is-danger span,
 .main-content.products .suppliers__body .col-stock.is-danger span,
@@ -27642,25 +27952,41 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-weight: normal;
 }
 
-.main-content.profile .profile__head .col-update, .main-content.profile .profile__body .col-update,
+.main-content.customers .customers__head .col-update, .main-content.customers .customers__body .col-update,
+.main-content.customers .profile__head .col-update,
+.main-content.customers .profile__body .col-update,
+.main-content.customers .suppliers__head .col-update,
+.main-content.customers .suppliers__body .col-update,
+.main-content.customers .sales__head .col-update,
+.main-content.customers .sales__body .col-update,
+.main-content.customers .products__head .col-update,
+.main-content.customers .products__body .col-update, .main-content.profile .customers__head .col-update, .main-content.profile .customers__body .col-update,
+.main-content.profile .profile__head .col-update,
+.main-content.profile .profile__body .col-update,
 .main-content.profile .suppliers__head .col-update,
 .main-content.profile .suppliers__body .col-update,
 .main-content.profile .sales__head .col-update,
 .main-content.profile .sales__body .col-update,
 .main-content.profile .products__head .col-update,
-.main-content.profile .products__body .col-update, .main-content.suppliers .profile__head .col-update, .main-content.suppliers .profile__body .col-update,
+.main-content.profile .products__body .col-update, .main-content.suppliers .customers__head .col-update, .main-content.suppliers .customers__body .col-update,
+.main-content.suppliers .profile__head .col-update,
+.main-content.suppliers .profile__body .col-update,
 .main-content.suppliers .suppliers__head .col-update,
 .main-content.suppliers .suppliers__body .col-update,
 .main-content.suppliers .sales__head .col-update,
 .main-content.suppliers .sales__body .col-update,
 .main-content.suppliers .products__head .col-update,
-.main-content.suppliers .products__body .col-update, .main-content.sales .profile__head .col-update, .main-content.sales .profile__body .col-update,
+.main-content.suppliers .products__body .col-update, .main-content.sales .customers__head .col-update, .main-content.sales .customers__body .col-update,
+.main-content.sales .profile__head .col-update,
+.main-content.sales .profile__body .col-update,
 .main-content.sales .suppliers__head .col-update,
 .main-content.sales .suppliers__body .col-update,
 .main-content.sales .sales__head .col-update,
 .main-content.sales .sales__body .col-update,
 .main-content.sales .products__head .col-update,
-.main-content.sales .products__body .col-update, .main-content.products .profile__head .col-update, .main-content.products .profile__body .col-update,
+.main-content.sales .products__body .col-update, .main-content.products .customers__head .col-update, .main-content.products .customers__body .col-update,
+.main-content.products .profile__head .col-update,
+.main-content.products .profile__body .col-update,
 .main-content.products .suppliers__head .col-update,
 .main-content.products .suppliers__body .col-update,
 .main-content.products .sales__head .col-update,

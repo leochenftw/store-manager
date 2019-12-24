@@ -7,6 +7,7 @@ import Labels from '@/components/pages/Labels'
 import Sales from '@/components/pages/Sales'
 import Suppliers from '@/components/pages/Suppliers'
 import Ranking from '@/components/pages/Ranking'
+import Members from '@/components/pages/Members'
 import StoreProfile from '@/components/pages/StoreProfile'
 
 Vue.use(Router)
@@ -83,6 +84,16 @@ export default new Router({
             path: '/store-profile/:section',
             name: 'StoreProfileSections',
             component: StoreProfile
+        },
+        {
+            path: '/members',
+            name: 'Members',
+            component: Members
+        },
+        {
+            path: '/members/:id',
+            name: 'MemberViewer',
+            component: Members
         },
         {
             path: '/ranking',

@@ -4,95 +4,87 @@
         <div class="container">
             <header class="columns">
                 <div class="column is-narrow">
-                    <h1 class="title is-4"><button style="border: none;" v-if="$route.params.id" class="button is-small" @click.prevent="go_back()"><i class="fas fa-chevron-left"></i></button>Ranking</h1>
+                    <h1 class="title is-4">Ranking</h1>
                 </div>
-                <template v-if="!$route.params.id">
-                    <div class="column">
-                        <form class="form ranking-finder" method="post" @submit.prevent="lookup">
-                            <div class="field is-horizontal">
-                                <div class="field-body">
-                                    <div class="field has-addons has-addons-right">
-                                        <p class="control">
-                                            <span class="select">
-                                                <select v-model="view_type">
-                                                    <option :value="null">Freeview</option>
-                                                    <option :value="'barcode'">Barcode</option>
-                                                    <option :value="'supplier'">Supplier</option>
-                                                </select>
-                                            </span>
-                                        </p>
-                                        <p class="control">
-                                            <input :disabled="!view_type" type="text" class="input" v-model="search_term" />
-                                        </p>
-                                    </div>
-                                    <div class="field">
-                                        <input type="date" class="input" v-model="start" />
-                                    </div>
-                                    <div class="field">
-                                        <input type="date" class="input" v-model="end" />
-                                    </div>
+                <div class="column">
+                    <form class="form ranking-finder" method="post" @submit.prevent="lookup">
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field has-addons has-addons-right">
+                                    <p class="control">
+                                        <span class="select">
+                                            <select v-model="view_type">
+                                                <option :value="null">Freeview</option>
+                                                <option :value="'barcode'">Barcode</option>
+                                                <option :value="'supplier'">Supplier</option>
+                                            </select>
+                                        </span>
+                                    </p>
+                                    <p class="control">
+                                        <input :disabled="!view_type" type="text" class="input" v-model="search_term" />
+                                    </p>
+                                </div>
+                                <div class="field">
+                                    <input type="date" class="input" v-model="start" />
+                                </div>
+                                <div class="field">
+                                    <input type="date" class="input" v-model="end" />
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </template>
-                <div v-else-if="$route.params.id != 'new'" class="column has-text-right">
-                    <button @click.prevent="delete_supplier" class="button is-danger is-small">Delete Supplier</button>
+                        </div>
+                    </form>
                 </div>
             </header>
-            <template v-if="!$route.params.id">
-                <template v-if="!no_result">
-                    <div class="suppliers__head">
-                        <div class="columns suppliers__head__item heading">
-                            <div class="column is-3 col-barcode">
-                                Barcode
-                            </div>
-                            <div class="column col-product">
-                                <router-link style="white-space: nowrap;" :to="{ name: 'Ranking', query: {page: page, by: up_or_down('Product.Title'), sort: 'Product.Title'} }">Product <template v-if="$route.query.sort == 'Product.Title'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
-                            </div>
-                            <div class="column is-2 col-suppliers">
-                                Supplier
-                            </div>
-                            <div class="column is-2 col-sold">
-                                <router-link style="white-space: nowrap;" :to="{ name: 'Ranking', query: {page: page, by: up_or_down('Subtotal'), sort: 'Subtotal'} }">Sold <template v-if="$route.query.sort == 'Subtotal'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
-                            </div>
-                            <div class="column is-1 col-qty has-text-centered">
-                                <router-link style="white-space: nowrap;" :to="{ name: 'Ranking', query: {page: page, by: up_or_down('Quantity'), sort: 'Quantity'} }">Qty <template v-if="$route.query.sort == 'Quantity'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
-                            </div>
+            <template v-if="!no_result">
+                <div class="suppliers__head">
+                    <div class="columns suppliers__head__item heading">
+                        <div class="column is-3 col-barcode">
+                            Barcode
+                        </div>
+                        <div class="column col-product">
+                            <router-link style="white-space: nowrap;" :to="{ name: 'Ranking', query: {page: page, by: up_or_down('Product.Title'), sort: 'Product.Title'} }">Product <template v-if="$route.query.sort == 'Product.Title'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                        </div>
+                        <div class="column is-2 col-suppliers">
+                            Supplier
+                        </div>
+                        <div class="column is-2 col-sold">
+                            <router-link style="white-space: nowrap;" :to="{ name: 'Ranking', query: {page: page, by: up_or_down('Subtotal'), sort: 'Subtotal'} }">Sold <template v-if="$route.query.sort == 'Subtotal'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                        </div>
+                        <div class="column is-1 col-qty has-text-centered">
+                            <router-link style="white-space: nowrap;" :to="{ name: 'Ranking', query: {page: page, by: up_or_down('Quantity'), sort: 'Quantity'} }">Qty <template v-if="$route.query.sort == 'Quantity'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                         </div>
                     </div>
-                    <div class="suppliers__body" v-if="!is_loading">
-                        <div class="columns suppliers__body__item is-mobile" v-for="item in list">
-                            <div class="column is-3 col-barcode">
-                                {{item.barcode}}
-                            </div>
-                            <div class="column col-product">
-                                {{item.product}}
-                            </div>
-                            <div class="column is-2 col-suppliers">
-                                {{item.suppliers}}
-                            </div>
-                            <div class="column is-2 col-sold">
-                                {{item.amount.toDollar()}}
-                            </div>
-                            <div class="column is-1 col-qty has-text-centered">
-                                {{item.quantity}}
-                            </div>
+                </div>
+                <div class="suppliers__body" v-if="!is_loading">
+                    <div class="columns suppliers__body__item is-mobile" v-for="item in list">
+                        <div class="column is-3 col-barcode">
+                            {{item.barcode}}
+                        </div>
+                        <div class="column col-product">
+                            {{item.product}}
+                        </div>
+                        <div class="column is-2 col-suppliers">
+                            {{item.suppliers}}
+                        </div>
+                        <div class="column is-2 col-sold">
+                            {{item.amount.toDollar()}}
+                        </div>
+                        <div class="column is-1 col-qty has-text-centered">
+                            {{item.quantity}}
                         </div>
                     </div>
-                </template>
-                <template v-else>
-                    <p class="title is-1">&nbsp;</p>
-                    <p class="is-1 title has-text-centered">¯\_(ツ)_/¯</p>
-                    <p class="subtitle is-2 has-text-centered">- no result -</p>
-                    <p class="has-text-centered">
-                        <button @click.prevent="go_back(true)" class="button is-info">Go back</button>
-                    </p>
-                </template>
+                </div>
             </template>
-            <SupplierForm v-if="$route.params.id"/>
+            <template v-else>
+                <p class="title is-1">&nbsp;</p>
+                <p class="is-1 title has-text-centered">¯\_(ツ)_/¯</p>
+                <p class="subtitle is-2 has-text-centered">- no result -</p>
+                <p class="has-text-centered">
+                    <button @click.prevent="go_back(true)" class="button is-info">Go back</button>
+                </p>
+            </template>
         </div>
-        <nav v-if="pagination.length > 0 && !$route.params.id && !no_result" class="pagination" role="navigation" aria-label="pagination">
+        <nav v-if="pagination.length > 0 && !no_result" class="pagination" role="navigation" aria-label="pagination">
             <router-link v-if="page - 1 >= 0" class="pagination-previous" :to="{ name: 'Ranking', query: query_maker(page - 1) }">Prev</router-link>
             <a v-else disabled="disabled" class="pagination-previous">Prev</a>
             <router-link v-if="page + 1 < total_page" class="pagination-next" :to="{ name: 'Ranking', query: query_maker(page + 1) }">Next</router-link>

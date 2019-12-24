@@ -2,14 +2,15 @@
 <footer id="footer" :class="{'mini': signed}">
     <div class="section">
         <div class="container has-text-centered">
-            <figure :class="{'shake': shaking}">
+            <router-link :to="!signed ? '/' : { name: 'StoreProfile' }" :class="['is-block current-user', {'shake': shaking}]">
                 <img src="@/assets/man.svg" />
-            </figure>
+                <span v-if="signed" class="current-user__action has-text-centered">Edit</span>
+            </router-link>
             <p>{{display_name}}</p>
         </div>
         <ul class="menu">
             <li><router-link class="is-home" :to="{ name: 'Homepage' }"><i class="fas fa-tachometer-alt"></i>Dashboard</router-link></li>
-            <li><router-link :to="{ name: 'StoreProfile' }"><i class="fas fa-user-circle"></i>Profile</router-link></li>
+            <li><router-link :to="{ name: 'Members' }"><i class="fas fa-user-circle"></i>Members</router-link></li>
             <li><router-link :to="{ name: 'Products' }"><i class="fas fa-shopping-bag"></i>Products</router-link></li>
             <li><router-link :to="{ name: 'Suppliers' }"><i class="fas fa-people-carry"></i></i>Suppliers</router-link></li>
             <li><router-link :to="{ name: 'Discounts' }"><i class="fas fa-percent"></i>Discounts</router-link></li>
@@ -43,7 +44,7 @@ export default {
         let me  =   this;
 
         if (localStorage && localStorage.recent_member && localStorage.recent_member != 'undefined') {
-            me.member    =   JSON.parse(localStorage.recent_member);
+            this.member =   JSON.parse(localStorage.recent_member);
         }
 
         this.$bus.$on('onSigninBegin', () => {
@@ -55,8 +56,8 @@ export default {
         });
 
         this.$bus.$on('onLive', (member) => {
-            me.signed   =   true;
-            me.member   =   member;
+            this.signed =   true;
+            this.member =   member;
         });
         this.$bus.$on('onDie', () => {
             me.signed                   =   false;

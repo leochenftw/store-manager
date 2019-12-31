@@ -28030,6 +28030,7 @@ svg.barcode {
 }
 
 .discount-item {
+  height: 100%;
   display: block;
   padding: .75rem;
   -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -28142,4 +28143,10 @@ svg.barcode {
 
 .modal .message-foot {
   padding-bottom: 1.5rem;
+}
+
+#discount-dropdown .dropdown-menu {
+  left: auto;
+  right: 0;
+  z-index: 8;
 }

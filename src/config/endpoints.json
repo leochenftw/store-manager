@@ -7,6 +7,7 @@
     "signout"       :   "api/v/1/signout",
     "search"        :   "api/v/1/search",
     "discount"      :   "api/v/1/discount",
+    "voucher"       :   "api/v/1/voucher",
     "singlelookup"  :   "api/v/1/single-lookup",
     "member"        :   "api/v/1/member",
     "ranking"       :   "api/v/1/ranking",

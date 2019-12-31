@@ -3,45 +3,38 @@
     <fieldset :disabled="is_loading">
         <div class="field is-horizontal">
             <div class="field-label is-normal">
-                <label class="label">Discount Label</label>
+                <label class="label">Voucher Label</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <p class="control">
-                        <input class="input" v-model="label" type="text" placeholder="e.g. Loyal Customer">
+                        <input class="input" v-model="label" type="text" placeholder="e.g. Loyal Customer" />
                     </p>
                 </div>
             </div>
         </div>
         <div class="field is-horizontal">
             <div class="field-label is-normal">
-                <label class="label">Discount Type</label>
+                <label class="label">ShopPoint(s)</label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div class="control">
-                        <label class="radio">
-                            <input type="radio" v-model="type" value="by_percentage" name="type"> by Percentage
-                        </label>
-                        <label class="radio">
-                            <input type="radio" v-model="type" value="by_amount" name="type"> by Amount
-                        </label>
-                    </div>
+                    <p class="control">
+                        <input class="input" v-model="points" type="number" />
+                    </p>
                 </div>
             </div>
         </div>
         <div class="field is-horizontal">
             <div class="field-label is-normal">
-                <label class="label">Discount Value</label>
+                <label class="label">Voucher Worths</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <p class="control">
                         <input class="input" v-model="rate" type="number" step=".01" />
                     </p>
-                    <p class="help">
-                        <template v-if="type && rate">{{type == 'by_amount' ? '$' : ''}}{{rate}}{{type == 'by_percentage' ? '%' : ''}} off</template><template v-else>Please choose the type and then enter a value</template>
-                    </p>
+                    <p class="help" v-if="rate">This voucher worths <strong>{{rate.toDollar()}}</strong>.</p>
                 </div>
             </div>
         </div>
@@ -61,7 +54,7 @@
 <script>
 
 export default {
-    name        :   'DiscountForm',
+    name        :   'VoucherForm',
     data()
     {
         return {
@@ -69,7 +62,7 @@ export default {
             is_submitting   :   false,
             id              :   this.$route.params.id,
             label           :   null,
-            type            :   null,
+            points          :   null,
             rate            :   null
         }
     },
@@ -85,11 +78,11 @@ export default {
             let data    =   new FormData();
 
             data.append('label', this.label);
-            data.append('type', this.type);
-            data.append('rate', this.rate);
+            data.append('worth', this.rate);
+            data.append('points', this.points);
 
             axios.post(
-                base_url + endpoints.discount + '/' + this.id + (this.id == 'new' ? '/create_discount' : '/update'),
+                base_url + endpoints.voucher + '/' + this.id + (this.id == 'new' ? '/create_coupon' : '/update'),
                 data
             ).then(resp => {
                 this.is_loading =   false;
@@ -105,12 +98,12 @@ export default {
             if (this.is_loading) return false;
             this.is_loading =   true;
             axios.get(
-                base_url + endpoints.discount + '/' + this.id
+                base_url + endpoints.voucher + '/' + this.id
             ).then(resp => {
                 this.is_loading =   false;
-                this.type       =   resp.data.by == '%' ? 'by_percentage' : 'by_amount';
                 this.label      =   resp.data.title;
-                this.rate       =   resp.data.rate;
+                this.points     =   resp.data.points;
+                this.rate       =   resp.data.worth;
             }).catch(error => {
                 this.is_loading =   false;
             });

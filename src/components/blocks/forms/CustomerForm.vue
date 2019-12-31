@@ -55,8 +55,7 @@
                     </div>
                     <div class="field-body">
                         <div class="field is-static">
-                            <div class="control">{{points}}</div>
-                            <p class="help">Every $500 expense at the shop will gain the customer 50 points.</p>
+                            <div class="control">{{points.kmark()}}</div>
                         </div>
                     </div>
                 </div>

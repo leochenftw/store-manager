@@ -7,13 +7,30 @@
                     <h1 class="title is-4"><button style="border: none;" v-if="$route.params.id" class="button is-small" @click.prevent="go_back()"><i class="fas fa-chevron-left"></i></button> Discounts</h1>
                 </div>
                 <div v-if="!$route.params.id" class="column has-text-right">
-                    <router-link class="button is-success" :to="{ name: 'DiscountViewer', params: {id: 'new'} }">
-                        <span class="icon"><i class="fas fa-plus"></i></span>
-                    </router-link>
+                    <div id="discount-dropdown" :class="['dropdown', {'is-active': show_drpdown}]" @mouseleave="show_drpdown = false">
+                        <div class="dropdown-trigger">
+                            <button @click.prevent="show_drpdown = !show_drpdown" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                <span>Create...</span>
+                                <span class="icon is-small">
+                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                                <router-link class="dropdown-item" :to="{ name: 'DiscountViewer', params: {id: 'new', type: 'discount'} }">
+                                    Discount
+                                </router-link>
+                                <router-link class="dropdown-item" :to="{ name: 'DiscountViewer', params: {id: 'new', type: 'voucher'} }">
+                                    ShopPoint Voucher
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
                     <button @click.prevent="do_print" class="button is-info"><span class="icon"><i class="fas fa-print"></i></span></button>
                 </div>
                 <div v-else-if="$route.params.id != 'new'" class="column has-text-right">
-                    <button @click.prevent="delete_discount" class="button is-danger is-small">Delete Discount</button>
+                    <button @click.prevent="delete_discount" class="button is-danger is-small">Delete {{$route.params.type == 'voucher' ? 'Voucher' : 'Discount'}}</button>
                 </div>
             </header>
             <div v-if="!$route.params.id" class="columns is-multiline discount-items">
@@ -21,9 +38,13 @@
                     v-for="item in discounts"
                     :source="item"
                     :key="item.id"
+                    :type="item.type"
                 />
             </div>
-            <DiscountForm v-else />
+            <template v-else>
+                <DiscountForm v-if="$route.params.type == 'discount'" />
+                <VoucherForm v-if="$route.params.type == 'voucher'" />
+            </template>
         </div>
     </div>
 </section>
@@ -32,14 +53,16 @@
 <script>
 import DiscountItem from '../blocks/DiscountItem';
 import DiscountForm from '../blocks/forms/DiscountForm';
+import VoucherForm from '../blocks/forms/VoucherForm';
 export default
 {
     name        :   'Discounts',
     props       :   ['member'],
-    components  :   { DiscountItem, DiscountForm },
+    components  :   { DiscountItem, DiscountForm, VoucherForm },
     data() {
         return {
             discounts       :   [],
+            show_drpdown    :   false,
             is_loading      :   false,
             no_result       :   false
         }
@@ -49,6 +72,8 @@ export default
             if (!this.$route.params.id) {
                 this.get_discounts();
             }
+
+            this.show_drpdown   =   false;
         }
     },
     created() {
@@ -90,7 +115,7 @@ export default
         {
             if (confirm('You are deleting this discount')) {
                 axios.post(
-                    base_url + endpoints.discount + '/' + this.$route.params.id + '/delete'
+                    base_url + endpoints[this.$route.params.type] + '/' + this.$route.params.id + '/delete'
                 ).then(resp => {
                     this.go_back();
                 }).catch(error => {
@@ -101,6 +126,3 @@ export default
     }
 }
 </script>
-
-<style lang="css" scoped>
-</style>

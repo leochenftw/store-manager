@@ -41,7 +41,7 @@ export default new Router({
             component: Discounts
         },
         {
-            path: '/discounts/:id',
+            path: '/discounts/:type/:id',
             name: 'DiscountViewer',
             component: Discounts
         },

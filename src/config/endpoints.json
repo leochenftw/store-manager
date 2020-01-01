@@ -9,6 +9,7 @@
     "discount"      :   "api/v/1/discount",
     "voucher"       :   "api/v/1/voucher",
     "singlelookup"  :   "api/v/1/single-lookup",
+    "lookup"        :   "api/v/1/lookup",
     "member"        :   "api/v/1/member",
     "ranking"       :   "api/v/1/ranking",
     "customer"      :   "api/v/1/customer"

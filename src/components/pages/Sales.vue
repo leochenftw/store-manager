@@ -6,7 +6,7 @@
                 <div class="column is-narrow">
                     <p v-if="!$route.params.id" class="subtitle is-6">
                         <span>Total:</span>
-                        <strong>{{sum.toDollar()}}</strong>
+                        <a @click.prevent="show_splits"><strong class="is-info">{{sum.toDollar()}}</strong></a>
                         <span v-if="total_items"> / {{total_items}} transactions</span>
                     </p>
                     <h1 class="title is-4"><button style="border: none;" v-if="$route.params.id" class="button is-small" @click.prevent="go_back()"><i class="fas fa-chevron-left"></i></button>Transactions</h1>
@@ -47,7 +47,6 @@
                 <template v-if="!no_result">
                     <div class="sales__head">
                         <div class="columns sales__head__item heading">
-
                             <div class="column col-receipt">Receipt No.</div>
                             <div class="column col-when">
                                 <router-link style="white-space: nowrap;" :to="{ name: 'Sales', query: {page: page, by: up_or_down('Created'), sort: 'Created'} }">Date time <template v-if="$route.query.sort == 'Created'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
@@ -100,6 +99,27 @@
                 <em class="is-small">Customer: </em>
                 <router-link :to="{ name: 'MemberViewer', params: {id: customer.id} }"><em class="is-large">{{(customer.first_name + ' ' + customer.surname).trim()}}</em></router-link>
             </div>
+            <div v-else class="column is-narrow">
+                <button v-if="!show_cus_form" @click.prevent="show_cus_form = true" class="button is-info">Bind Customer</button>
+                <form v-else method="post" @submit.prevent="submit">
+                    <div v-if="!found_customer" class="field has-addons has-addons-centered">
+                        <p class="control">
+                            <input ref="phone_field" required class="input" type="tel" v-model="phone" placeholder="02100000000">
+                        </p>
+                        <p class="control">
+                            <button type="submit" :class="['button is-info', {'is-loading': is_loading}]">Lookup</button>
+                        </p>
+                    </div>
+                    <div class="field has-addons has-addons-centered" v-else>
+                        <p class="control">
+                            <input class="input" readonly :value="found_customer.first_name + ' ' + found_customer.surname" />
+                        </p>
+                        <p class="control">
+                            <button  type="submit" :class="['button is-info', {'is-loading': is_loading}]"><i class="fas fa-check"></i></button>
+                        </p>
+                    </div>
+                </form>
+            </div>
             <div class="column is-narrow">
                 <em class="is-small">Operator: </em><em class="is-large">{{operator}}</em>
             </div>
@@ -122,6 +142,7 @@ export default {
             search_term     :   null,
             transactions    :   [],
             sum             :   0,
+            split_sum       :   null,
             total_items     :   0,
             is_loading      :   false,
             show_calendar   :   false,
@@ -130,7 +151,10 @@ export default {
             to_date         :   null,
             operator        :   null,
             receipt         :   null,
-            customer        :   null
+            customer        :   null,
+            show_cus_form   :   false,
+            found_customer  :   null,
+            phone           :   null
         }
     },
     watch       :   {
@@ -267,6 +291,70 @@ export default {
         }
     },
     methods     :   {
+        show_splits()
+        {
+            this.$bus.$emit('showMessage', '<table style="background: none;" class="table is-fullwidth"><tr><td><strong>EFTPOS</strong></td><td>' + (this.split_sum ? this.split_sum.eftpos.toDollar() : '$0.00') + '</td></tr><tr><td><strong>CASH</strong></td><td>' + (this.split_sum ? this.split_sum.cash.toDollar() : '$0.00') + '</td></tr><tr><td><strong>VOUCHER</strong></td><td>' + (this.split_sum ? this.split_sum.voucher.toDollar() : '$0.00') + '</td></tr></table>', 'info');
+        },
+        bind_customer()
+        {
+            if (this.is_loading) return false
+            this.is_loading =   true;
+
+            let me          =   this,
+                params      =   new FormData();
+
+            params.append('customer_id', this.found_customer.id);
+
+            axios.post(
+                base_url + endpoints.order + '/' + this.$route.params.id + '/bind_customer',
+                params
+            ).then(resp => {
+                this.is_loading     =   false;
+                this.customer       =   resp.data;
+                this.found_customer =   null;
+            }).catch(error => {
+                this.is_loading     =   false;
+                if (error.response && error.response.data && error.response.data.message) {
+                    this.$bus.$emit('showMessage', error.response.data.message, 'danger');
+                    this.$nextTick().then(() => {
+                        $('.message-box .button').focus();
+                    });
+                }
+            });
+        },
+        submit(e)
+        {
+            if (!this.phone && this.found_customer) {
+                this.bind_customer();
+                return false;
+            }
+
+            if (this.is_loading) return false
+            this.is_loading =   true;
+
+            let me          =   this,
+                params      =   new FormData();
+
+            params.append('input', 'CUSTOMER-' + this.phone);
+            this.phone          =   null;
+            this.found_customer =   null;
+            // this.error_msg      =   null;
+            axios.post(
+                base_url + endpoints.lookup,
+                params
+            ).then((resp) => {
+                me.is_loading           =   false;
+                this.found_customer     =   resp.data.customer;
+            }).catch((error) => {
+                me.is_loading   =   false;
+                if (error.response && error.response.data && error.response.data.message) {
+                    this.$bus.$emit('showMessage', error.response.data.message, 'danger');
+                    this.$nextTick().then(() => {
+                        $('.message-box .button').focus();
+                    });
+                }
+            });
+        },
         query_maker(i) {
             let data    =   {
                 page    :   i
@@ -315,6 +403,7 @@ export default {
                 base_url + endpoints.order + this.param_organiser
             ).then((resp) => {
                 me.is_loading   =   false;
+                me.split_sum    =   resp.data.split_sum;
                 me.sum          =   resp.data.sum;
                 me.transactions =   resp.data.list;
                 me.total_page   =   resp.data.total_page;

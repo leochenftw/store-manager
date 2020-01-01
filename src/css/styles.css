@@ -27164,6 +27164,10 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   font-size: 12px;
 }
 
+.main-content header.columns .subtitle strong.is-info {
+  color: #209cee;
+}
+
 @media print {
   .main-content header.columns {
     display: none;

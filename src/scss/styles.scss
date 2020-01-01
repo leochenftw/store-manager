@@ -383,6 +383,11 @@ $orange: rgba(207, 146, 74, 1);
             span {
                 font-size: 12px;
             }
+            strong {
+                &.is-info {
+                    color: $info;
+                }
+            }
         }
         @media print {
             display: none;

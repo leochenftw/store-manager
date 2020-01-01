@@ -394,6 +394,15 @@ $orange: rgba(207, 146, 74, 1);
         }
     }
 
+    &.discounts {
+        header.columns {
+            background-color: $white;
+            position: sticky;
+            top: 64px;
+            z-index: 1;
+        }
+    }
+
     &.customers,
     &.profile,
     &.suppliers,

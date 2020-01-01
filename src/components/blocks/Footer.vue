@@ -10,12 +10,12 @@
         </div>
         <ul class="menu">
             <li><router-link class="is-home" :to="{ name: 'Homepage' }"><i class="fas fa-tachometer-alt"></i>Dashboard</router-link></li>
-            <li><router-link :to="{ name: 'Members' }"><i class="fas fa-user-circle"></i>Members</router-link></li>
             <li><router-link :to="{ name: 'Products' }"><i class="fas fa-shopping-bag"></i>Products</router-link></li>
+            <li><router-link :to="{ name: 'Sales' }"><i class="fas fa-dollar-sign"></i>Sales</router-link></li>
+            <li><router-link :to="{ name: 'Members' }"><i class="fas fa-user-circle"></i>Members</router-link></li>
+            <li><router-link :to="{ name: 'Ranking' }"><i class="fas fa-trophy"></i>Ranking</router-link></li>
             <li><router-link :to="{ name: 'Suppliers' }"><i class="fas fa-people-carry"></i></i>Suppliers</router-link></li>
             <li><router-link :to="{ name: 'Discounts' }"><i class="fas fa-percent"></i>Discounts</router-link></li>
-            <li><router-link :to="{ name: 'Sales' }"><i class="fas fa-dollar-sign"></i>Sales</router-link></li>
-            <li><router-link :to="{ name: 'Ranking' }"><i class="fas fa-trophy"></i>Ranking</router-link></li>
             <li><router-link :to="{ name: 'Labels' }"><i class="fas fa-tags"></i>Labels</router-link></li>
         </ul>
     </div>
@@ -71,7 +71,7 @@ export default {
     computed: {
         display_name() {
             if (this.member) {
-                return this.member.first_name + ' ' + this.member.surname;
+                return (this.member.first_name + ' ' + (this.member.surname ? this.member.surname : '')).trim();
             }
             return 'Please sign in';
         }

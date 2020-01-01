@@ -12,5 +12,6 @@
     "lookup"        :   "api/v/1/lookup",
     "member"        :   "api/v/1/member",
     "ranking"       :   "api/v/1/ranking",
-    "customer"      :   "api/v/1/customer"
+    "customer"      :   "api/v/1/customer",
+    "dashboard"     :   "api/v/1/dashboard"
 }

@@ -196,6 +196,14 @@
                                     <div class="field">
                                         <div class="control">
                                             <label class="checkbox">
+                                                <input type="checkbox" v-model="no_point" />
+                                                Item does not contribute ShopPoints
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control">
+                                            <label class="checkbox">
                                                 <input type="checkbox" v-model="outofstock" />
                                                 Item is out of stock
                                             </label>
@@ -244,6 +252,7 @@ export default {
             outofstock      :   null,
             lowpoint        :   null,
             discountable    :   null,
+            no_point        :   false,
             updated         :   null,
             expiries        :   [],
             is_published    :   null,
@@ -292,6 +301,7 @@ export default {
             params.append('outofstock', this.outofstock);
             params.append('lowpoint', this.lowpoint);
             params.append('discountable', this.discountable);
+            params.append('no_point', this.no_point);
             params.append('manufacturer', this.manufacturer);
             params.append('supplier', this.supplier);
             params.append('expiries', JSON.stringify(this.expiries));
@@ -320,21 +330,22 @@ export default {
         place_data(data) {
             let me              =   this;
 
-            this.id             =   data.id;
-            this.barcode        =   data.barcode;
-            this.title          =   data.title;
-            this.alias          =   data.alias;
-            this.unit           =   data.unit;
-            this.stockcount     =   data.stockcount;
-            this.cost           =   data.cost;
-            this.price          =   data.price;
-            this.weight         =   data.weight;
-            this.outofstock     =   data.outofstock;
-            this.lowpoint       =   data.lowpoint;
-            this.discountable   =   data.discountable;
-            this.manufacturer   =   data.manufacturer;
-            this.supplier       =   data.supplier;
-            this.updated        =   data.updated;
+            this.id             =   data.id && data.id != 'null' ? data.id : null;
+            this.barcode        =   data.barcode && data.barcode != 'null' ? data.barcode : null;
+            this.title          =   data.title && data.title != 'null' ? data.title : null;
+            this.alias          =   data.alias && data.alias != 'null' ? data.alias : null;
+            this.unit           =   data.unit && data.unit != 'null' ? data.unit : null;
+            this.stockcount     =   data.stockcount && data.stockcount != 'null' ? data.stockcount : null;
+            this.cost           =   data.cost && data.cost != 'null' ? data.cost : null;
+            this.price          =   data.price && data.price != 'null' ? data.price : null;
+            this.weight         =   data.weight && data.weight != 'null' ? data.weight : null;
+            this.outofstock     =   data.outofstock && data.outofstock != 'null' ? data.outofstock : null;
+            this.lowpoint       =   data.lowpoint && data.lowpoint != 'null' ? data.lowpoint : null;
+            this.discountable   =   data.discountable && data.discountable != 'null' ? data.discountable : null;
+            this.manufacturer   =   data.manufacturer && data.manufacturer != 'null' ? data.manufacturer : null;
+            this.no_point       =   data.no_point;
+            this.supplier       =   data.supplier && data.supplier != 'null' ? data.supplier : null;
+            this.updated        =   data.updated && data.updated != 'null' ? data.updated : null;
             this.is_published   =   data.is_published;
             me.$parent.show_publish   =   !data.is_published;
 

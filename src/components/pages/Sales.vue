@@ -97,7 +97,7 @@
             </div>
             <div class="column is-narrow" v-if="customer">
                 <em class="is-small">Customer: </em>
-                <router-link :to="{ name: 'MemberViewer', params: {id: customer.id} }"><em class="is-large">{{(customer.first_name + ' ' + customer.surname).trim()}}</em></router-link>
+                <router-link :to="{ name: 'MemberViewer', params: {id: customer.id} }"><em class="is-large">{{(customer.first_name + ' ' + (customer.surname ? customer.surname : '')).trim()}}</em></router-link>
             </div>
             <div v-else class="column is-narrow">
                 <button v-if="!show_cus_form" @click.prevent="show_cus_form = true" class="button is-info">Bind Customer</button>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="field has-addons has-addons-centered" v-else>
                         <p class="control">
-                            <input class="input" readonly :value="found_customer.first_name + ' ' + found_customer.surname" />
+                            <input class="input" readonly :value="(found_customer.first_name + ' ' + (found_customer.surname ? found_customer.surname : '')).trim()" />
                         </p>
                         <p class="control">
                             <button  type="submit" :class="['button is-info', {'is-loading': is_loading}]"><i class="fas fa-check"></i></button>
@@ -389,6 +389,8 @@ export default {
         },
         get_transacs() {
             if (this.$route.params.id) return false;
+            this.customer       =   null;
+            this.found_customer =   null;
             this.show_publish   =   null;
             this.no_result      =   false;
             if (this.search_term != null && this.search_term.trim().length > 0) {

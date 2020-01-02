@@ -9,10 +9,8 @@
         <div class="container">
             <div class="columns">
                 <div class="column">
-                    <h2 class="title is-3">
-                        Today: {{sums.total.toDollar()}}
-                        <span style="font-weight: normal; font-size: 14px;">{{sums.trans.kmark()}} transactions</span>
-                    </h2>
+                    <h2 class="title is-3">Today: {{sums.total.toDollar()}}</h2>
+                    <p class="subtitle is-6 is-marginless-bottom">{{sums.trans.kmark()}} transactions</p>
                     <p class="subtitle is-6">
                         <span class="icon"><i class="far fa-credit-card"></i></span> {{sums.eftpos.toDollar()}}
                         <span class="icon"><i class="far fa-money-bill-alt"></i></span> {{sums.cash.toDollar()}}

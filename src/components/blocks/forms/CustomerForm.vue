@@ -39,6 +39,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Wechat</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <input type="tel" class="input" v-model="wechat" placeholder="Wechat" />
+                        </div>
+                    </div>
+                </div>
                 <div class="field is-horizontal" v-if="joined">
                     <div class="field-label is-normal">
                         <label class="label">Date Joined</label>
@@ -94,6 +104,7 @@ export default {
             surname         :   null,
             email           :   null,
             phone           :   null,
+            wechat          :   null,
             points          :   null,
             joined          :   null,
             is_submitting   :   false
@@ -123,6 +134,7 @@ export default {
                     this.surname        =   resp.data.surname;
                     this.email          =   resp.data.email;
                     this.phone          =   resp.data.phone;
+                    this.wechat         =   resp.data.wechat;
                     this.points         =   resp.data.shop_points;
                     this.joined         =   resp.data.date_joined;
                 });
@@ -150,6 +162,10 @@ export default {
 
             if (this.phone) {
                 data.append('phone', this.phone.replace(/ /gi, '').replace(/\-/gi, ''));
+            }
+
+            if (this.wechat) {
+                data.append('wechat', this.wechat);
             }
 
             axios.post(

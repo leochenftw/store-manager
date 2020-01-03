@@ -39,6 +39,7 @@
                     </div>
                     <div class="column is-narrow">
                         <button title="Search in date range" @click.prevent="show_calendar = !show_calendar" :class="['button', {'is-success': show_calendar}]"><i class="far fa-calendar-alt"></i></button>
+                        <button @click.prevent="discount_only = !discount_only" :class="['button', {'is-warning': discount_only}]"><span class="icon"><i class="fas fa-percent"></i></span></button>
                         <button @click.prevent="download" class="button is-info"><span class="icon"><i class="fas fa-download"></i></span></button>
                     </div>
                 </template>
@@ -47,16 +48,16 @@
                 <template v-if="!no_result">
                     <div class="sales__head">
                         <div class="columns sales__head__item heading">
-                            <div class="column col-receipt">Receipt No.</div>
                             <div class="column col-when">
                                 <router-link style="white-space: nowrap;" :to="{ name: 'Sales', query: {page: page, by: up_or_down('Created'), sort: 'Created'} }">Date time <template v-if="$route.query.sort == 'Created'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                             </div>
-                            <div class="column col-amount">
+                            <div class="column col-amount is-2">
                                 <router-link style="white-space: nowrap;" :to="{ name: 'Sales', query: {page: page, by: up_or_down('TotalAmount'), sort: 'TotalAmount'} }">Amount <template v-if="$route.query.sort == 'TotalAmount'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                             </div>
                             <div class="column col-count is-2 has-text-centered">
                                 <router-link style="white-space: nowrap;" :to="{ name: 'Sales', query: {page: page, by: up_or_down('ItemCount'), sort: 'ItemCount'} }">Item(s) <template v-if="$route.query.sort == 'ItemCount'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                             </div>
+                            <div class="column col-discount is-2 has-text-centered">Discounted?</div>
                             <div class="column col-by is-2">Operator</div>
                         </div>
                     </div>
@@ -141,6 +142,7 @@ export default {
             total_page      :   null,
             search_term     :   null,
             transactions    :   [],
+            discount_only   :   false,
             sum             :   0,
             split_sum       :   null,
             total_items     :   0,
@@ -178,6 +180,11 @@ export default {
                 this.from_date  =   null;
                 this.to_date    =   null;
             }
+        },
+        discount_only(nv, ov)
+        {
+            this.page   =   0;
+            this.get_transacs();
         }
     },
     created() {
@@ -204,6 +211,9 @@ export default {
             }
             if (this.to_date) {
                 params.append('to', this.to_date);
+            }
+            if (this.discount_only) {
+                params.append('discount_only', this.discount_only);
             }
             return '?' + params.toString();
         },

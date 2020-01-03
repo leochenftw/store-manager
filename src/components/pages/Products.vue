@@ -361,7 +361,9 @@ export default {
                 this.page           =   0;
                 this.search_term    =   null;
             }
-            this.$router.push({name: 'Products'});
+            if (this.$route.name != 'Products' || this.$route.query.page) {
+                this.$router.push({name: 'Products'});
+            }
             this.get_products();
         },
         download(e)

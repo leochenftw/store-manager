@@ -19,12 +19,11 @@ axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest'
 };
 axios.defaults.withCredentials = true;
-global._ = _;
-global.TweenMax =   TweenMax;
-// global.NProgress = NProgress;
-global.axios = axios;
-global.base_url = 'https://www.one-stop.co.nz/';
-global.endpoints = require('@/config/endpoints');
+global._            =   _;
+global.TweenMax     =   TweenMax;
+global.axios        =   axios;
+global.base_url     =   location.hostname == 'localhost' ? 'https://onestore.leochen.co.nz/' : 'https://www.one-stop.co.nz/';
+global.endpoints    =   require('@/config/endpoints');
 global.store_info   =   null;
 
 axios.get(

@@ -321,8 +321,7 @@ export default {
                 this.prep_data()
             ).then((resp) => {
                 me.is_loading           =   false;
-                me.$parent.search_term  =   resp.data.barcode;
-                me.$parent.go_back();
+                this.$router.go(-1);
             }).catch((error) => {
                 me.is_loading =   false;
             });
@@ -330,22 +329,22 @@ export default {
         place_data(data) {
             let me              =   this;
 
-            this.id             =   data.id && data.id != 'null' ? data.id : null;
-            this.barcode        =   data.barcode && data.barcode != 'null' ? data.barcode : null;
-            this.title          =   data.title && data.title != 'null' ? data.title : null;
-            this.alias          =   data.alias && data.alias != 'null' ? data.alias : null;
-            this.unit           =   data.unit && data.unit != 'null' ? data.unit : null;
-            this.stockcount     =   data.stockcount && data.stockcount != 'null' ? data.stockcount : null;
-            this.cost           =   data.cost && data.cost != 'null' ? data.cost : null;
-            this.price          =   data.price && data.price != 'null' ? data.price : null;
-            this.weight         =   data.weight && data.weight != 'null' ? data.weight : null;
-            this.outofstock     =   data.outofstock && data.outofstock != 'null' ? data.outofstock : null;
-            this.lowpoint       =   data.lowpoint && data.lowpoint != 'null' ? data.lowpoint : null;
-            this.discountable   =   data.discountable && data.discountable != 'null' ? data.discountable : null;
-            this.manufacturer   =   data.manufacturer && data.manufacturer != 'null' ? data.manufacturer : null;
+            this.id             =   data.id != null && data.id != undefined && data.id != 'null' ? data.id : null;
+            this.barcode        =   data.barcode != null && data.barcode != undefined && data.barcode != 'null' ? data.barcode : null;
+            this.title          =   data.title != null && data.title != undefined && data.title != 'null' ? data.title : null;
+            this.alias          =   data.alias != null && data.alias != undefined && data.alias != 'null' ? data.alias : null;
+            this.unit           =   data.unit != null && data.unit != undefined && data.unit != 'null' ? data.unit : null;
+            this.stockcount     =   data.stockcount != null && data.stockcount != undefined && data.stockcount != 'null' ? data.stockcount : null;
+            this.cost           =   data.cost != null && data.cost != undefined && data.cost != 'null' ? data.cost : null;
+            this.price          =   data.price != null && data.price != undefined && data.price != 'null' ? data.price : null;
+            this.weight         =   data.weight != null && data.weight != undefined && data.weight != 'null' ? data.weight : null;
+            this.outofstock     =   data.outofstock != null && data.outofstock != undefined && data.outofstock != 'null' ? data.outofstock : null;
+            this.lowpoint       =   data.lowpoint != null && data.lowpoint != undefined && data.lowpoint != 'null' ? data.lowpoint : null;
+            this.discountable   =   data.discountable != null && data.discountable != undefined && data.discountable != 'null' ? data.discountable : null;
+            this.manufacturer   =   data.manufacturer != null && data.manufacturer != undefined && data.manufacturer != 'null' ? data.manufacturer : null;
             this.no_point       =   data.no_point;
-            this.supplier       =   data.supplier && data.supplier != 'null' ? data.supplier : null;
-            this.updated        =   data.updated && data.updated != 'null' ? data.updated : null;
+            this.supplier       =   data.supplier != null && data.supplier != undefined && data.supplier != 'null' ? data.supplier : null;
+            this.updated        =   data.updated != null && data.updated != undefined && data.updated != 'null' ? data.updated : null;
             this.is_published   =   data.is_published;
             me.$parent.show_publish   =   !data.is_published;
 

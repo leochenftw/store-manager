@@ -100,7 +100,8 @@ export default {
             products        :   [],
             is_loading      :   false,
             show_publish    :   null,
-            no_result       :   false
+            no_result       :   false,
+            pause_get       :   false
         }
     },
     watch       :   {
@@ -108,8 +109,11 @@ export default {
             if (nv.query && nv.query.page != undefined) {
                 $(this.$el).find('.products__body').scrollTop(0);
                 this.page   =   parseInt(nv.query.page);
-                this.get_products();
+                if (!this.pause_get) {
+                    this.get_products();
+                }
             }
+            this.pause_get  =   false;
         }
     },
     created() {
@@ -291,6 +295,14 @@ export default {
 
             let me      =   this,
                 params  =   new FormData();
+
+            if (e) {
+                this.page   =   0;
+                if (this.$route.query.page) {
+                    this.pause_get  =   true;
+                    this.$router.replace({name: 'Products'});
+                }
+            }
 
             params.append('term', this.search_term);
             params.append('page', this.page);

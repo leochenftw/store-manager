@@ -79,7 +79,51 @@
                     </p>
                 </template>
             </template>
-            <CustomerForm v-else />
+            <template v-else>
+                <CustomerForm />
+                <template v-if="$route.params.id != 'new'">
+                    <hr style="height: 0; background: none;" />
+                    <h2 class="title is-4">Transactions</h2>
+                    <template v-if="!no_orders">
+                        <div class="sales__head">
+                            <div class="columns sales__head__item heading">
+                                <div class="column col-when">
+                                    Date time <i class="fas fa-caret-down"></i>
+                                </div>
+                                <div class="column col-amount is-2">
+                                    Amount
+                                </div>
+                                <div class="column col-count is-2 has-text-centered">
+                                    Item(s)
+                                </div>
+                                <div class="column col-discount is-2 has-text-centered">Discounted?</div>
+                                <div class="column col-by is-2">Operator</div>
+                            </div>
+                        </div>
+                        <div class="sales__body" v-if="!orders_loading">
+                            <TransacItem
+                                v-for="item, i in orders"
+                                :key="'order-' + i"
+                                :source="item"
+                            />
+                            <template v-if="total_orders_pages != null">
+                                <p v-if="orders_page < total_orders_pages" ref="lazy_loader" class="sales__foot has-text-centered">
+                                    <em>Loading more...</em>
+                                </p>
+                                <p v-else class="sales__foot has-text-centered">- all loaded -</p>
+                            </template>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <p class="title is-1">&nbsp;</p>
+                        <p class="is-1 title has-text-centered">¯\_(ツ)_/¯</p>
+                        <p class="subtitle is-2 has-text-centered">- no result -</p>
+                        <p class="has-text-centered">
+                            <button @click.prevent="go_back(true)" class="button is-info">Go back</button>
+                        </p>
+                    </template>
+                </template>
+            </template>
         </div>
         <nav v-if="pagination.length > 0 && !$route.params.id && !no_result" class="pagination" role="navigation" aria-label="pagination">
             <router-link v-if="page - 1 >= 0" class="pagination-previous" :to="{ name: 'Members', query: query_maker(page - 1) }">Prev</router-link>
@@ -100,22 +144,28 @@
 <script>
 import CustomerItem from '../blocks/CustomerItem';
 import CustomerForm from '../blocks/forms/CustomerForm';
+import TransacItem from '../blocks/TransacItem';
 export default {
     name        :   'Members',
     props       :   ['member'],
-    components  :   { CustomerItem, CustomerForm },
+    components  :   { CustomerItem, CustomerForm, TransacItem },
     data() {
         return {
-            page_size       :   50,
-            start           :   null,
-            end             :   null,
-            page            :   parseInt(this.$route.query.page ? this.$route.query.page : 0),
-            total_page      :   null,
-            search_type     :   'phone',
-            search_term     :   null,
-            list            :   [],
-            is_loading      :   false,
-            no_result       :   false
+            page_size           :   50,
+            start               :   null,
+            end                 :   null,
+            page                :   parseInt(this.$route.query.page ? this.$route.query.page : 0),
+            total_page          :   null,
+            search_type         :   'phone',
+            search_term         :   null,
+            list                :   [],
+            is_loading          :   false,
+            no_result           :   false,
+            no_orders           :   false,
+            orders_loading      :   false,
+            orders              :   [],
+            orders_page         :   0,
+            total_orders_pages  :   null
         }
     },
     watch       :   {
@@ -151,6 +201,11 @@ export default {
     },
     created() {
         this.get_customer();
+        this.$bus.$on('onWindowScroll', this.handle_scroll);
+    },
+    beforeDestroy()
+    {
+        this.$bus.$off('onWindowScroll', this.handle_scroll);
     },
     computed    :   {
         is_sorting_title() {
@@ -260,6 +315,41 @@ export default {
         }
     },
     methods     :   {
+        handle_scroll(offset)
+        {
+            if (this.$refs.lazy_loader) {
+                if ($(this.$refs.lazy_loader).visible(true)) {
+                    this.get_orders();
+                }
+            }
+        },
+        get_orders()
+        {
+            if (this.orders_loading) return false;
+            this.orders_loading   =   true;
+
+            let me  =   this;
+            axios.get(
+                base_url + endpoints.order + '?customer=' + this.$route.params.id
+            ).then((resp) => {
+                me.orders_loading       =   false;
+                me.orders               =   me.orders.concat(resp.data.list);
+
+                me.total_orders_pages   =   resp.data.total_page;
+                if (me.orders.length == 0) {
+                    me.no_orders        =   true;
+                } else {
+                    this.orders_page++;
+                }
+            }).catch((error) => {
+                me.orders_loading   =   false;
+                if (error.response && error.response.data && error.response.data.code) {
+                    if (error.response.data.code == '404') {
+                        me.no_orders    =   true;
+                    }
+                }
+            });
+        },
         query_maker(i) {
             let data    =   {
                 page    :   i

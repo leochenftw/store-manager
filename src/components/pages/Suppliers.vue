@@ -94,10 +94,12 @@
                                 :key="'product-' + item.id"
                                 :source="item"
                             />
-                            <p v-if="prod_page < total_prod_pages" ref="lazy_loader" class="products__foot has-text-centered">
-                                <em>Loading more...</em>
-                            </p>
-                            <p v-else class="products__foot has-text-centered">- all loaded -</p>
+                            <template v-if="total_prod_pages != null">
+                                <p v-if="prod_page < total_prod_pages" ref="lazy_loader" class="products__foot has-text-centered">
+                                    <em>Loading more...</em>
+                                </p>
+                                <p v-else class="products__foot has-text-centered">- all loaded -</p>
+                            </template>
                         </div>
                     </template>
                     <template v-else>
@@ -151,7 +153,7 @@ export default {
             prod_loading        :   false,
             no_product          :   false,
             prod_page           :   0,
-            total_prod_pages    :   0
+            total_prod_pages    :   null
         }
     },
     watch       :   {

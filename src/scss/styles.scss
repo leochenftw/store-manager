@@ -711,11 +711,13 @@ svg.barcode {
 }
 
 .main-content {
+    &.customers,
     &.suppliers {
         .section {
             height: auto;
         }
 
+        .sales,
         .suppliers,
         .products {
             &__head {

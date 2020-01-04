@@ -16,7 +16,7 @@
         {{item.phone}}
     </div>
     <div class="column is-1 col-points has-text-centered">
-        {{item.shop_points}}
+        {{item.shop_points.kmark()}}
     </div>
     <div class="column col-joined has-text-centered">
         {{item.date_joined.nzst()}}

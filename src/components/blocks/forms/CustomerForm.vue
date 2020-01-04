@@ -137,6 +137,7 @@ export default {
                     this.wechat         =   resp.data.wechat;
                     this.points         =   resp.data.shop_points;
                     this.joined         =   resp.data.date_joined;
+                    this.$parent.get_orders();
                 });
             }
         },

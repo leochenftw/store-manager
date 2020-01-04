@@ -175,7 +175,7 @@ export default {
                 this.prod_loading       =   false;
                 this.no_product         =   false;
                 this.prod_page          =   0;
-                this.total_prod_pages   =   0;
+                this.total_prod_pages   =   null;
             }
         },
     },

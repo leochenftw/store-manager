@@ -178,6 +178,14 @@ export default {
             if (!this.$route.params.id) {
                 this.get_customer();
             }
+
+            if (!this.$route.params.id || this.$route.params.id == 'new') {
+                this.orders             =   [];
+                this.orders_loading     =   false;
+                this.no_orders          =   false;
+                this.orders_page        =   0;
+                this.total_orders_pages =   null;
+            }
         },
         search_type(nv, ov)
         {

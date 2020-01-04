@@ -216,6 +216,7 @@ export default {
                     this.email  =   node.Email;
                     this.phone  =   node.Phone;
                     this.memo   =   node.Memo;
+                    this.$parent.get_products();
                 }
             }).catch(error => {
                 me.is_submitting    =   false;

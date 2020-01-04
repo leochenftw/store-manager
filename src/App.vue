@@ -60,6 +60,11 @@ export default {
                 me.$router.replace('/');
             }, 1000);
         });
+
+        $(window).on('scroll', function(e)
+        {
+            me.$bus.$emit('onWindowScroll', $(window).scrollTop());
+        });
     },
     methods :   {
         alive() {

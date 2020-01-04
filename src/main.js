@@ -11,6 +11,7 @@ import TweenMax from "gsap/TweenMax";
 require('@/utils/utilities');
 require('jquery.scrollto');
 // require('lightbox2');
+require('jquery-visible');
 require("babel-polyfill"); // Enable promises on IE11 etc
 
 Vue.config.productionTip = false;

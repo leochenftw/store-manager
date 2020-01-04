@@ -66,20 +66,65 @@
                     </p>
                 </template>
             </template>
-            <SupplierForm v-if="$route.params.id"/>
+            <template v-if="$route.params.id">
+                <SupplierForm />
+                <template v-if="$route.params.id != 'new'">
+                    <hr style="height: 0; background: none;" />
+                    <h2 class="title is-4">Products</h2>
+                    <template v-if="!no_product">
+                        <div class="products__head">
+                            <div class="columns products__head__item heading">
+                                <div class="column col-product">
+                                    <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('Title'), sort: 'Title'} }">Product <template v-if="is_sorting_title"><i :class="['fas', {'fa-caret-up': !$route.query.by || $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                                </div>
+                                <div class="column col-stock">
+                                    <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('StockCount'), sort: 'StockCount'} }">Stock <template v-if="$route.query.sort == 'StockCount'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                                </div>
+                                <div class="column col-price">
+                                    <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('Price'), sort: 'Price'} }">Price <template v-if="$route.query.sort == 'Price'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                                </div>
+                                <div class="column col-update">
+                                    <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('LastEdited'), sort: 'LastEdited'} }">Updated <template v-if="$route.query.sort == 'LastEdited'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="products__body">
+                            <ProductItem
+                                v-for="item in products"
+                                :key="'product-' + item.id"
+                                :source="item"
+                            />
+                            <p v-if="prod_page < total_prod_pages" ref="lazy_loader" class="products__foot has-text-centered">
+                                <em>Loading more...</em>
+                            </p>
+                            <p v-else class="products__foot has-text-centered">- all loaded -</p>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <p class="title is-1">&nbsp;</p>
+                        <p class="is-1 title has-text-centered">¯\_(ツ)_/¯</p>
+                        <p class="subtitle is-2 has-text-centered">- this supplier does not have any product -</p>
+                    </template>
+                </template>
+            </template>
         </div>
-        <nav v-if="pagination.length > 0 && !$route.params.id && !no_result" class="pagination" role="navigation" aria-label="pagination">
-            <router-link v-if="page - 1 >= 0" class="pagination-previous" :to="{ name: 'Suppliers', query: query_maker(page - 1) }">Prev</router-link>
-            <a v-else disabled="disabled" class="pagination-previous">Prev</a>
-            <router-link v-if="page + 1 < total_page" class="pagination-next" :to="{ name: 'Suppliers', query: query_maker(page + 1) }">Next</router-link>
-            <a v-else disabled="disabled" class="pagination-next">Next</a>
-            <ul class="pagination-list">
-                <li v-for="item in pagination">
-                    <span v-if="item.index == null" class="pagination-ellipsis">&hellip;</span>
-                    <router-link :class="['pagination-link', {'is-current': page == item.index}]" v-else :to="{ name: 'Suppliers', query: query_maker(item.index) }">{{item.label}}</router-link>
-                </li>
-            </ul>
-        </nav>
+        <div class="navigation-container columns is-marginless">
+            <div class="column is-paddingless is-narrow"><div class="shim"></div></div>
+            <div class="column is-paddingless">
+                <nav v-if="pagination.length > 0 && !$route.params.id && !no_result" class="pagination" role="navigation" aria-label="pagination">
+                    <router-link v-if="page - 1 >= 0" class="pagination-previous" :to="{ name: 'Suppliers', query: query_maker(page - 1) }">Prev</router-link>
+                    <a v-else disabled="disabled" class="pagination-previous">Prev</a>
+                    <router-link v-if="page + 1 < total_page" class="pagination-next" :to="{ name: 'Suppliers', query: query_maker(page + 1) }">Next</router-link>
+                    <a v-else disabled="disabled" class="pagination-next">Next</a>
+                    <ul class="pagination-list">
+                        <li v-for="item in pagination">
+                            <span v-if="item.index == null" class="pagination-ellipsis">&hellip;</span>
+                            <router-link :class="['pagination-link', {'is-current': page == item.index}]" v-else :to="{ name: 'Suppliers', query: query_maker(item.index) }">{{item.label}}</router-link>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
 </section>
 </template>
@@ -87,19 +132,26 @@
 <script>
 import SupplierItem from '../blocks/SupplierItem';
 import SupplierForm from '../blocks/forms/SupplierForm';
+import ProductItem from '../blocks/ProductItem';
+
 export default {
     name        :   'Suppliers',
     props       :   ['member'],
-    components  :   { SupplierItem, SupplierForm },
+    components  :   { SupplierItem, SupplierForm, ProductItem },
     data() {
         return {
-            page_size       :   50,
-            page            :   parseInt(this.$route.query.page ? this.$route.query.page : 0),
-            total_page      :   null,
-            search_term     :   null,
-            list            :   [],
-            is_loading      :   false,
-            no_result       :   false
+            page_size           :   50,
+            page                :   parseInt(this.$route.query.page ? this.$route.query.page : 0),
+            total_page          :   null,
+            search_term         :   null,
+            list                :   [],
+            is_loading          :   false,
+            no_result           :   false,
+            products            :   [],
+            prod_loading        :   false,
+            no_product          :   false,
+            prod_page           :   0,
+            total_prod_pages    :   0
         }
     },
     watch       :   {
@@ -115,10 +167,23 @@ export default {
                 }
                 this.get_suppliers();
             }
+
+            if (!this.$route.params.id || this.$route.params.id == 'new') {
+                this.products           =   [];
+                this.prod_loading       =   false;
+                this.no_product         =   false;
+                this.prod_page          =   0;
+                this.total_prod_pages   =   0;
+            }
         },
     },
     created() {
         this.get_suppliers();
+        this.$bus.$on('onWindowScroll', this.handle_scroll);
+    },
+    beforeDestroy()
+    {
+        this.$bus.$off('onWindowScroll', this.handle_scroll);
     },
     computed    :   {
         is_sorting_title() {
@@ -129,19 +194,18 @@ export default {
         },
         param_organiser() {
             let params  =   new URLSearchParams();
-            params.append('page', this.page);
+            params.append('page', this.prod_page);
             if (this.$route.query.sort) {
                 let sort    =   this.$route.query.sort,
                     by      =   this.$route.query.by;
                 params.append('sort', sort);
                 params.append('by', by);
             }
-            if (this.from_date) {
-                params.append('from', this.from_date);
+
+            if (this.$route.params.id && this.$route.params.id != 'new') {
+                params.append('supplier', this.$route.params.id);
             }
-            if (this.to_date) {
-                params.append('to', this.to_date);
-            }
+
             return '?' + params.toString();
         },
         pagination() {
@@ -228,6 +292,40 @@ export default {
         }
     },
     methods     :   {
+        handle_scroll(offset)
+        {
+            if (this.$refs.lazy_loader) {
+                if ($(this.$refs.lazy_loader).visible(true)) {
+                    this.get_products();
+                }
+            }
+        },
+        get_products()
+        {
+            if (this.prod_loading) return false;
+            this.prod_loading   =   true;
+
+            let me  =   this;
+            axios.get(
+                base_url + endpoints.product + this.param_organiser
+            ).then((resp) => {
+                me.prod_loading     =   false;
+                me.products         =   me.products.concat(resp.data.list);
+                me.total_prod_pages =   resp.data.total_page;
+                if (me.products.length == 0) {
+                    me.no_product   =   true;
+                } else {
+                    this.prod_page++;
+                }
+            }).catch((error) => {
+                me.prod_loading   =   false;
+                if (error.response && error.response.data && error.response.data.code) {
+                    if (error.response.data.code == '404') {
+                        me.no_product    =   true;
+                    }
+                }
+            });
+        },
         query_maker(i) {
             let data    =   {
                 page    :   i
@@ -255,10 +353,6 @@ export default {
         },
         reset_search_field() {
             this.go_back(true);
-        },
-        re_range(f)
-        {
-            console.log(f);
         },
         lookup(e) {
             this.show_publish   =   null;
@@ -346,6 +440,7 @@ export default {
                 base_url + 'graphql',
                 data
             ).then(resp => {
+                $.scrollTo($('#app'), 200, {axis: 'y'});
                 let pagination  =   resp.data.data.readAppSuppliers.pageInfo;
                 this.list       =   resp.data.data.readAppSuppliers.edges;
                 this.total_page =   Math.ceil(pagination.totalCount / this.page_size);

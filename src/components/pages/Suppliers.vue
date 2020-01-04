@@ -75,16 +75,16 @@
                         <div class="products__head">
                             <div class="columns products__head__item heading">
                                 <div class="column col-product">
-                                    <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('Title'), sort: 'Title'} }">Product <template v-if="is_sorting_title"><i :class="['fas', {'fa-caret-up': !$route.query.by || $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                                    Product
                                 </div>
                                 <div class="column col-stock">
-                                    <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('StockCount'), sort: 'StockCount'} }">Stock <template v-if="$route.query.sort == 'StockCount'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                                    Stock <i class="fas fa-caret-up"></i>
                                 </div>
                                 <div class="column col-price">
-                                    <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('Price'), sort: 'Price'} }">Price <template v-if="$route.query.sort == 'Price'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                                    Price
                                 </div>
                                 <div class="column col-update">
-                                    <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('LastEdited'), sort: 'LastEdited'} }">Updated <template v-if="$route.query.sort == 'LastEdited'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
+                                    Updated
                                 </div>
                             </div>
                         </div>

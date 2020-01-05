@@ -22,11 +22,22 @@
     <div class="sales__body">
         <GoodsItem v-for="item, i in tran_data.goods" :item="item" :key="i" />
         <div class="columns sales__body__item goods" v-if="tran_data.discount">
-            <div class="column col-product-title"><p class="help is-paddingless"><em>{{tran_data.discount.title}}</em></p></div>
-            <div class="column col-subtotal is-2 has-text-centered"><p class="help is-paddingless">
-                <em v-if="tran_data.discount.by == '%'">-{{tran_data.discount.rate}}%</em>
-                <em v-else>-{{tran_data.discount.rate.toDollar()}}</em>
-            </p></div>
+            <div class="column col-product-title"><p class="help is-paddingless"><em>Discount: {{tran_data.discount.title}}</em></p></div>
+            <div class="column col-subtotal is-2 has-text-centered">
+                <p class="help is-paddingless">
+                    <em v-if="tran_data.discount.by == '%'">-{{tran_data.discount.rate}}%</em>
+                    <em v-else>-{{tran_data.discount.rate.toDollar()}}</em>
+                </p>
+            </div>
+            <div class="column col-action has-text-centered is-narrow"><span style="display: block; width: 72px;" class="is-invisible"></span></div>
+        </div>
+        <div class="columns sales__body__item goods" v-if="tran_data.order.shop_points">
+            <div class="column col-product-title"><p class="help is-paddingless"><em>Point(s) contributed</em></p></div>
+            <div class="column col-subtotal is-2 has-text-centered">
+                <p class="help is-paddingless">
+                    <em>{{tran_data.order.shop_points}}</em>
+                </p>
+            </div>
             <div class="column col-action has-text-centered is-narrow"><span style="display: block; width: 72px;" class="is-invisible"></span></div>
         </div>
     </div>

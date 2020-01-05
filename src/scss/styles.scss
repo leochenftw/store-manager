@@ -711,7 +711,7 @@ svg.barcode {
 }
 
 .main-content {
-    &.customers,
+    &.customers.freestyle,
     &.suppliers {
         .section {
             height: auto;

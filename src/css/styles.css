@@ -28203,13 +28203,13 @@ svg.barcode {
   z-index: 8;
 }
 
-.main-content.customers .section, .main-content.suppliers .section {
+.main-content.customers.freestyle .section, .main-content.suppliers .section {
   height: auto;
 }
 
-.main-content.customers .sales__head,
-.main-content.customers .suppliers__head,
-.main-content.customers .products__head, .main-content.suppliers .sales__head,
+.main-content.customers.freestyle .sales__head,
+.main-content.customers.freestyle .suppliers__head,
+.main-content.customers.freestyle .products__head, .main-content.suppliers .sales__head,
 .main-content.suppliers .suppliers__head,
 .main-content.suppliers .products__head {
   position: -webkit-sticky;
@@ -28219,9 +28219,9 @@ svg.barcode {
   background-color: white;
 }
 
-.main-content.customers .sales__body,
-.main-content.customers .suppliers__body,
-.main-content.customers .products__body, .main-content.suppliers .sales__body,
+.main-content.customers.freestyle .sales__body,
+.main-content.customers.freestyle .suppliers__body,
+.main-content.customers.freestyle .products__body, .main-content.suppliers .sales__body,
 .main-content.suppliers .suppliers__body,
 .main-content.suppliers .products__body {
   height: auto;

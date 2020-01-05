@@ -1,5 +1,5 @@
 <template>
-<section class="main-content customers">
+<section :class="['main-content customers', {'freestyle': $route.params.id}]">
     <div class="section">
         <div class="container">
             <header class="columns">

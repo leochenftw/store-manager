@@ -31,7 +31,7 @@ export default
                     list.push(o.date);
                 });
 
-                return list;
+                return list.reverse();
             }
 
             return null;
@@ -44,7 +44,7 @@ export default
                     list.push(o.total);
                 });
 
-                return list;
+                return list.reverse();
             }
 
             return null;

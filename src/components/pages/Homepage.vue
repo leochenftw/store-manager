@@ -3,7 +3,7 @@
     <h1 class="title is-1 is-hidden">Dashboard</h1>
     <div id="charts" :class="{'auto': member}">
         <h2 class="title is-6 has-text-centered">Sales over last 7 days</h2>
-        <SalesChart :id="'sales-overview'" :feed="feed" />
+        <SalesChart v-if="feed" :id="'sales-overview'" :feed="feed" />
     </div>
     <div class="section">
         <div class="container">

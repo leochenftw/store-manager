@@ -52,6 +52,7 @@ export default
     },
     methods     :   {
         do_chart() {
+            if (!this.feed) return false;
             this.chart = new Chart($('#' + this.id), {
                 type: 'line',
                 data: {

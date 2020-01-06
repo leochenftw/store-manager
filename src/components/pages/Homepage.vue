@@ -3,7 +3,7 @@
     <h1 class="title is-1 is-hidden">Dashboard</h1>
     <div id="charts" :class="{'auto': member}">
         <h2 class="title is-6 has-text-centered">Sales over last 7 days</h2>
-        <SalesChart :id="'sales-overview'" />
+        <SalesChart :id="'sales-overview'" :feed="feed" />
     </div>
     <div class="section">
         <div class="container">
@@ -69,7 +69,8 @@ export default {
             members     :   {
                 active      :   0,
                 suspended   :   0
-            }
+            },
+            feed        :   null
         };
     },
     created()
@@ -92,6 +93,7 @@ export default {
                 this.products   =   resp.data.products;
                 this.suppliers  =   resp.data.suppliers;
                 this.members    =   resp.data.members;
+                this.feed       =   resp.data.summaries;
             }).catch(error => {
 
             });

@@ -10,7 +10,7 @@ import Chart from 'chart.js';
 export default
 {
     name    :   'SalesChart',
-    props   :   ['id'],
+    props   :   ['id', 'feed'],
     data() {
         return {
             chart   :   null
@@ -22,15 +22,43 @@ export default
             me.do_chart();
         });
     },
-    methods :   {
+    computed    :   {
+        chart_labels()
+        {
+            if (this.feed) {
+                let list    =   [];
+                this.feed.forEach(o => {
+                    list.push(o.date);
+                });
+
+                return list;
+            }
+
+            return null;
+        },
+        chart_data()
+        {
+            if (this.feed) {
+                let list    =   [];
+                this.feed.forEach(o => {
+                    list.push(o.total);
+                });
+
+                return list;
+            }
+
+            return null;
+        }
+    },
+    methods     :   {
         do_chart() {
             this.chart = new Chart($('#' + this.id), {
                 type: 'line',
                 data: {
-                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    labels: this.chart_labels ? this.chart_labels : ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
                     datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3,12, 19, 3, 5, 2, 3],
+                        label: 'Turnover',
+                        data: this.chart_data ? this.chart_data : [12, 19, 3, 5, 2, 3,12, 19, 3, 5, 2, 3],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
@@ -82,7 +110,16 @@ export default
                         }]
                     },
                     maintainAspectRatio: false,
-                    responsiveAnimationDuration: 0
+                    responsiveAnimationDuration: 0,
+                    tooltips: {
+                        enabled: true,
+                        mode: 'single',
+                        callbacks: {
+                            label: function(tooltipItems, data) {
+                                return ' ' + tooltipItems.yLabel.toDollar();
+                            }
+                        }
+                    },
                 }
             });
         }

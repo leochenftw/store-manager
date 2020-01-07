@@ -23,16 +23,16 @@
                         <template v-if="products.ceased">({{products.ceased.kmark()}} ceased)</template>
                     </p>
                     <hr />
-                    <h2 class="title is-3">Suppliers</h2>
-                    <p class="subtitle is-6">
-                        {{suppliers.active.kmark()}} active supplier{{suppliers.active > 1 ? 's' : ''}}
-                        <template v-if="suppliers.inactive">({{suppliers.inactive.kmark()}} inactive)</template>
-                    </p>
-                    <hr />
                     <h2 class="title is-3">Members</h2>
                     <p class="subtitle is-6">
                         {{members.active.kmark()}} active member{{members.active > 1 ? 's' : ''}}
                         <template v-if="members.suspended">({{members.suspended.kmark()}} inactive)</template>
+                    </p>
+                    <hr />
+                    <h2 class="title is-3">Suppliers</h2>
+                    <p class="subtitle is-6">
+                        {{suppliers.active.kmark()}} active supplier{{suppliers.active > 1 ? 's' : ''}}
+                        <template v-if="suppliers.inactive">({{suppliers.inactive.kmark()}} inactive)</template>
                     </p>
                 </div>
                 <div class="column">

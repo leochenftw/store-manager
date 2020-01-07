@@ -303,7 +303,9 @@ export default {
             params.append('discountable', this.discountable);
             params.append('no_point', this.no_point);
             params.append('manufacturer', this.manufacturer);
-            params.append('supplier', this.supplier);
+            if (this.supplier) {
+                params.append('supplier', this.supplier);
+            }
             params.append('expiries', JSON.stringify(this.expiries));
             return params;
         },

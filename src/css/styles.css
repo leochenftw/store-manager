@@ -28247,3 +28247,11 @@ svg.barcode {
   -webkit-transform: none !important;
           transform: none !important;
 }
+
+.content .low-stock-level__list, .expiring-products .content .expiring-products__list,
+.expiring-products .content .expired-products__list,
+.expired-products .content .expiring-products__list,
+.expired-products .content .expired-products__list {
+  margin: 0.5em 0 0;
+  padding-left: 1em;
+}

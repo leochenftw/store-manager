@@ -35,7 +35,53 @@
                         <template v-if="members.suspended">({{members.suspended.kmark()}} inactive)</template>
                     </p>
                 </div>
-                <div class="column">col 2</div>
+                <div class="column">
+                    <h2 class="title is-3">Low Stocks</h2>
+                    <p class="subtitle is-6 has-text-success" v-if="low_stocks && !low_stocks.length">
+                        All stock levels are good :)
+                    </p>
+                    <div class="content" v-else>
+                        <ul class="low-stock-level__list">
+                            <li v-for="product, i in low_stocks">
+                                <router-link :to="{ name: 'ProductViewer', params: {id: product.id} }">{{product.title}}</router-link> ({{product.stock}}/{{product.low_stock}})
+                            </li>
+                        </ul>
+                    </div>
+                    <hr />
+                    <h2 class="title is-3">Expired Products</h2>
+                    <p v-if="expiries.expired && !expiries.expired.length" class="subtitle is-6 has-text-success">
+                        List seems clean :)
+                    </p>
+                    <template v-else>
+                        <div class="expired-products" v-for="expired, i in expiries.expired">
+                            <h3 class="title is-5 has-text-danger is-marginless">{{expired.date}}</h3>
+                            <div class="content">
+                                <ul class="expired-products__list">
+                                    <li v-for="product, i in expired.products">
+                                        <router-link :to="{ name: 'ProductViewer', params: {id: product.id} }">{{product.title}}</router-link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </template>
+                    <hr />
+                    <h2 class="title is-3">Expiring Products</h2>
+                    <p v-if="expiries.expired && !expiries.expired.length" class="subtitle is-6 has-text-success">
+                        List seems clean :)
+                    </p>
+                    <template v-else>
+                        <div class="expiring-products" v-for="expiring, i in expiries.expiring">
+                            <h3 class="title is-5 has-text-danger is-marginless">{{expiring.date}}</h3>
+                            <div class="content">
+                                <ul class="expiring-products__list">
+                                    <li v-for="product, i in expiring.products">
+                                        <router-link :to="{ name: 'ProductViewer', params: {id: product.id} }">{{product.title}}</router-link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </template>
+                </div>
             </div>
         </div>
     </div>
@@ -70,6 +116,11 @@ export default {
                 active      :   0,
                 suspended   :   0
             },
+            expiries    :   {
+                expired     :   null,
+                expiring    :   null
+            },
+            low_stocks  :   null,
             feed        :   null
         };
     },
@@ -140,6 +191,8 @@ export default {
                 this.products   =   resp.data.products;
                 this.suppliers  =   resp.data.suppliers;
                 this.members    =   resp.data.members;
+                this.expiries   =   resp.data.expiries;
+                this.low_stocks =   resp.data.low_stocks;
                 this.feed       =   resp.data.summaries;
             }).catch(error => {
 

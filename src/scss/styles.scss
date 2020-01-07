@@ -751,3 +751,20 @@ svg.barcode {
         }
     }
 }
+
+.content .low-stock-level__list {
+    margin: 0.5em 0 0;
+    padding-left: 1em;
+}
+
+.expiring-products,
+.expired-products {
+    .content {
+        .expiring-products,
+        .expired-products {
+            &__list {
+                @extend .low-stock-level__list;
+            }
+        }
+    }
+}

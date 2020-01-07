@@ -7,6 +7,7 @@ import axios from 'axios';
 // import NProgress from 'nprogress';
 import _ from 'lodash';
 import TweenMax from "gsap/TweenMax";
+import VueSocketIO from 'vue-socket.io';
 
 require('@/utils/utilities');
 require('jquery.scrollto');
@@ -26,6 +27,10 @@ global.axios        =   axios;
 global.base_url     =   location.hostname == 'localhost' ? 'https://onestore.leochen.co.nz/' : 'https://www.one-stop.co.nz/';
 global.endpoints    =   require('@/config/endpoints');
 global.store_info   =   null;
+
+Vue.use(new VueSocketIO({
+    connection: 'https://ws.one-stop.co.nz'//'http://localhost:8731'
+}))
 
 axios.get(
     base_url + endpoints.store

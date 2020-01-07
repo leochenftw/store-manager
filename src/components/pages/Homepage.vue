@@ -76,12 +76,59 @@ export default {
     created()
     {
         this.$bus.$on('onLive', this.fetch_data);
-
         this.fetch_data();
+        this.$socket.emit('admin_online', 'yo');
     },
     beforeDestroy()
     {
         this.$bus.$off('onLive', this.fetch_data);
+    },
+    sockets: {
+        new_order(data)
+        {
+            axios.get(
+                base_url + endpoints.dashboard + '/today_sums'
+            ).then(resp => {
+                this.sums   =   resp.data;
+            }).catch(error => {
+
+            });
+        },
+        new_member(data)
+        {
+            axios.get(
+                base_url + endpoints.dashboard + '/num_customers'
+            ).then(resp => {
+                this.members    =   resp.data;
+            }).catch(error => {
+
+            });
+        },
+        new_supplier(data)
+        {
+            axios.get(
+                base_url + endpoints.dashboard + '/num_active_suppliers'
+            ).then(resp => {
+                this.suppliers  =   resp.data;
+            }).catch(error => {
+
+            });
+        },
+        product_change(data)
+        {
+            axios.get(
+                base_url + endpoints.dashboard + '/num_products'
+            ).then(resp => {
+                this.products   =   resp.data;
+            }).catch(error => {
+
+            });
+        },
+        expiry_change(data)
+        {
+
+        }
+        // sys_message
     },
     methods :   {
         fetch_data()

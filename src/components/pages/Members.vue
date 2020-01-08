@@ -41,7 +41,7 @@
             <template v-if="!$route.params.id">
                 <template v-if="!no_result">
                     <div class="customers__head">
-                        <div class="columns customers__head__item heading">
+                        <div class="columns customers__head__item heading is-mobile">
                             <div class="column is-1 col-id">
                                 <router-link style="white-space: nowrap;" :to="{ name: 'Members', query: {page: page, by: up_or_down('ID'), sort: 'ID'} }"># <template v-if="$route.query.sort == 'ID'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                             </div>
@@ -64,10 +64,12 @@
                                 <router-link style="white-space: nowrap;" :to="{ name: 'Members', query: {page: page, by: up_or_down('Created'), sort: 'Created'} }">Joined <template v-if="$route.query.sort == 'Created'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                             </div>
                         </div>
+                        <div v-show="show_click_updater" @click.prevent="click_update" class="customers__head__overlay">
+                            There is an update on this page. <strong>Click to refresh</strong>
+                        </div>
                     </div>
                     <div class="customers__body" v-if="!is_loading">
                         <CustomerItem :key="i" :item="item"  v-for="item, i in list" />
-
                     </div>
                 </template>
                 <template v-else>
@@ -151,6 +153,7 @@ export default {
     components  :   { CustomerItem, CustomerForm, TransacItem },
     data() {
         return {
+            show_click_updater  :   false,
             page_size           :   50,
             start               :   null,
             end                 :   null,
@@ -404,11 +407,24 @@ export default {
                 this.end            =   null;
                 this.search_type    =   'phone';
             }
-            this.$router.push({name: 'Members'});
+
+            if (this.$route.query && this.$route.query.page) {
+                this.$router.push({name: 'Members'});
+            }
+
             this.get_customer();
         },
         lookup()
         {
+            this.get_customer();
+        },
+        click_update(e)
+        {
+            this.page   =   0;
+            if (this.$route.query && this.$route.query.page) {
+                this.$router.push({name: 'Members'});
+            }
+
             this.get_customer();
         },
         get_customer()
@@ -418,6 +434,7 @@ export default {
             if (this.page) {
                 query.page  =   this.page;
             }
+            this.show_click_updater =   false;
             axios.get(
                 base_url + endpoints.customer,
                 {
@@ -449,6 +466,12 @@ export default {
                     me.$bus.$emit('showMessage', error.response.data.message, 'danger');
                 });
             }
+        }
+    },
+    sockets :   {
+        new_member(data)
+        {
+            this.show_click_updater =   true;
         }
     }
 }

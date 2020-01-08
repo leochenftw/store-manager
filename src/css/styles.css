@@ -28255,3 +28255,25 @@ svg.barcode {
   margin: 0.5em 0 0;
   padding-left: 1em;
 }
+
+.customers__head {
+  position: relative;
+}
+
+.customers__head__overlay {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 1px);
+  text-align: center;
+  color: #ff3860;
+  background-color: rgba(255, 255, 255, 0.8);
+  line-height: 40px;
+}
+
+.customers__head__overlay strong,
+.customers__head__overlay span {
+  text-decoration: underline;
+}

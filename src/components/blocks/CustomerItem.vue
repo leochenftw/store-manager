@@ -31,6 +31,14 @@ export default {
         view_customer() {
             this.$router.push('/members/' + this.item.id);
         }
+    },
+    sockets     :   {
+        member_point_updated(data)
+        {
+            if (this.item.id == data.id) {
+                this.item.shop_points    =   data.points;
+            }
+        }
     }
 }
 </script>

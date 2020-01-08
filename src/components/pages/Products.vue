@@ -106,9 +106,11 @@ export default {
     },
     watch       :   {
         $route(nv, ov) {
-            if (nv.query && (!nv.params || !nv.params.id || nv.params.id == 'new')) {
+            console.log(nv.params.id);
+            if (nv.query && !nv.params.id) {
                 $(this.$el).find('.products__body').scrollTop(0);
                 this.page   =   parseInt(nv.query.page);
+                this.page   =   isNaN(this.page) ? 0 : this.page;
                 if (!this.pause_get) {
                     this.get_products();
                 }
@@ -256,8 +258,6 @@ export default {
                 this.lookup();
                 return false;
             }
-
-            this.page   =   isNaN(this.page) ? 0 : this.page;
 
             if (this.is_loading) return false;
             this.is_loading =   true;

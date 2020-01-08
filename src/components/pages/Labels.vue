@@ -59,7 +59,10 @@ export default {
         remove_label(id, e)
         {
             if (confirm('You are going to remove this label from the list. Continue?')) {
-                this.labels.removeById(id);
+                let i   =   this.labels.findIndex((o) => o.id == id);
+                if (i > -1) {
+                    this.labels.splice(i, 1);
+                }
             }
         },
         lookup(e) {

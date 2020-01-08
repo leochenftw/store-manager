@@ -27067,7 +27067,7 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 }
 
 #footer.mini {
-  width: 20%;
+  width: 20vw;
 }
 
 #footer.mini .section .menu {

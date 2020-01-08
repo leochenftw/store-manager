@@ -29,7 +29,7 @@ global.endpoints    =   require('@/config/endpoints');
 global.store_info   =   null;
 
 Vue.use(new VueSocketIO({
-    connection: 'https://ws.one-stop.co.nz', //'http://localhost:8731'
+    connection: 'https://ws' + (location.hostname == 'localhost' ? '-staging' : '') + '.one-stop.co.nz',
     options: {
         transports: ['websocket', 'polling']
     }

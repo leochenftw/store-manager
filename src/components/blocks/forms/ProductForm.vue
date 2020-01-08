@@ -54,7 +54,7 @@
                 <div class="field-body">
                     <div class="field">
                         <div class="control is-expanded has-icons-left">
-                            <input type="number" class="input" required v-model="stockcount" />
+                            <input type="number" class="input" step="0.01" required v-model="stockcount" />
                             <span class="icon is-small is-left">
                                 <i class="fas fa-sort-numeric-up"></i>
                             </span>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="field">
                         <div class="control is-expanded has-icons-left">
-                            <input type="number" class="input" v-model="lowpoint" />
+                            <input type="number" step="0.01" class="input" v-model="lowpoint" />
                             <span class="icon is-small is-left">
                                 <i class="fas fa-eye"></i>
                             </span>

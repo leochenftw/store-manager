@@ -56,6 +56,12 @@ export default {
         do_print() {
             window.print();
         },
+        remove_label(id, e)
+        {
+            if (confirm('You are going to remove this label from the list. Continue?')) {
+                this.labels.removeById(id);
+            }
+        },
         lookup(e) {
             if (e) {
                 e.preventDefault();

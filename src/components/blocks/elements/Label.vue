@@ -1,5 +1,5 @@
 <template>
-<div class="column price-label is-half" v-if="source">
+<div @click.prevent="$parent.remove_label(source.id, $event)" class="column price-label is-half" v-if="source">
     <div class="columns is-gapless">
         <div class="column is-3 price-label__price">
             {{source.price.toDollar()}}

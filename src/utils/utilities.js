@@ -1,6 +1,24 @@
 /*
  * Prototypes
  * */
+
+ Array.prototype.remove = function(item)
+ {
+     let i   =   this.indexOf(item);
+     if (i > -1) {
+         this.splice(i, 1);
+     }
+ }
+
+ Array.prototype.removeById = function(item)
+ {
+     let i   =   this.findIndex((o) => o.id == item);
+     if (i > -1) {
+         this.splice(i, 1);
+     }
+ }
+
+
 String.prototype.kmark = function() {
     if (this.length === 0) {
         return this;

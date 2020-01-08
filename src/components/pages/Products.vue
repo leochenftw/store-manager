@@ -106,7 +106,6 @@ export default {
     },
     watch       :   {
         $route(nv, ov) {
-            console.log(nv.params.id);
             if (nv.query && !nv.params.id) {
                 $(this.$el).find('.products__body').scrollTop(0);
                 this.page   =   parseInt(nv.query.page);

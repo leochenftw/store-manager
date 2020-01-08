@@ -175,6 +175,16 @@ export default {
 
             });
         },
+        stock_change(data)
+        {
+            axios.get(
+                base_url + endpoints.dashboard + '/stock_lows'
+            ).then(resp => {
+                this.low_stocks =   resp.data;
+            }).catch(error => {
+
+            });
+        },
         expiry_change(data)
         {
 

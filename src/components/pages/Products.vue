@@ -49,6 +49,9 @@
                                 <router-link style="white-space: nowrap;" :to="{ name: 'Products', query: {page: page, by: up_or_down('LastEdited'), sort: 'LastEdited'} }">Updated <template v-if="$route.query.sort == 'LastEdited'"><i :class="['fas', {'fa-caret-up': $route.query.by == 'ASC'}, {'fa-caret-down': $route.query.by == 'DESC'}]"></i></template></router-link>
                             </div>
                         </div>
+                        <div v-show="show_click_updater" @click.prevent="click_update" class="customers__head__overlay">
+                            There is an update on this page. <strong>Click to refresh</strong>
+                        </div>
                     </div>
                     <div class="products__body" v-if="!is_loading">
                         <ProductItem
@@ -94,14 +97,15 @@ export default {
     components  :   { ProductItem, ProductForm },
     data() {
         return {
-            page            :   parseInt(this.$route.query.page ? this.$route.query.page : 0),
-            total_page      :   null,
-            search_term     :   null,
-            products        :   [],
-            is_loading      :   false,
-            show_publish    :   null,
-            no_result       :   false,
-            pause_get       :   false
+            page                :   parseInt(this.$route.query.page ? this.$route.query.page : 0),
+            total_page          :   null,
+            search_term         :   null,
+            products            :   [],
+            is_loading          :   false,
+            show_publish        :   null,
+            no_result           :   false,
+            pause_get           :   false,
+            show_click_updater  :   false
         }
     },
     watch       :   {
@@ -258,6 +262,8 @@ export default {
                 return false;
             }
 
+            this.show_click_updater =   false;
+
             if (this.is_loading) return false;
             this.is_loading =   true;
             let me      =   this;
@@ -371,6 +377,21 @@ export default {
         {
             let win =   window.open(base_url + endpoints.product + '/All/download', '_blank');
             win.focus();
+        },
+        click_update(e)
+        {
+            this.page   =   0;
+            if (this.$route.query && this.$route.query.page) {
+                this.$router.push({name: 'Products'});
+            }
+
+            this.get_products();
+        }
+    },
+    sockets :   {
+        product_change(data)
+        {
+            this.show_click_updater =   true;
         }
     }
 }

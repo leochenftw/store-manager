@@ -28256,10 +28256,14 @@ svg.barcode {
   padding-left: 1em;
 }
 
+.sales__head,
+.products__head,
 .customers__head {
   position: relative;
 }
 
+.sales__head__overlay,
+.products__head__overlay,
 .customers__head__overlay {
   cursor: pointer;
   position: absolute;
@@ -28273,6 +28277,10 @@ svg.barcode {
   line-height: 40px;
 }
 
+.sales__head__overlay strong,
+.sales__head__overlay span,
+.products__head__overlay strong,
+.products__head__overlay span,
 .customers__head__overlay strong,
 .customers__head__overlay span {
   text-decoration: underline;

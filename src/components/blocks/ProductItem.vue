@@ -18,6 +18,15 @@ export default {
         edit_product() {
             this.$router.push('/products/' + this.source.id);
         }
+    },
+    sockets :   {
+        stock_change(data)
+        {
+            if (data.id == this.source.id) {
+                this.source.stockcount  =   data.stock;
+                this.source.lowpoint    =   data.low_stock;
+            }
+        }
     }
 }
 </script>

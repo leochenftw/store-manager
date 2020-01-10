@@ -60,6 +60,9 @@
                             <div class="column col-discount is-2 has-text-centered">Discounted?</div>
                             <div class="column col-by is-2">Operator</div>
                         </div>
+                        <div v-show="show_click_updater" @click.prevent="click_update" class="customers__head__overlay">
+                            There is an update on this page. <strong>Click to refresh</strong>
+                        </div>
                     </div>
                     <div class="sales__body" v-if="!is_loading">
                         <TransacItem
@@ -94,7 +97,8 @@
         </nav>
         <div v-else-if="$route.params.id" class="columns misc-footer">
             <div class="column">
-                <a class="button is-primary" :href="'https://store.one-stop.co.nz?receipt=' + receipt" target="_blank">re-Print</a>
+                <a class="button is-primary" :href="store_url + '?receipt=' + receipt" target="_blank">re-Print</a>
+                <a class="button is-danger" :href="store_url + '?receipt=' + receipt + '&refund=1'" target="_blank">Refund</a>
             </div>
             <div class="column is-narrow" v-if="customer">
                 <em class="is-small">Customer: </em>
@@ -138,25 +142,28 @@ export default {
     components  :   { TransacItem, TransactionViewer },
     data() {
         return {
-            page            :   parseInt(this.$route.query.page ? this.$route.query.page : 0),
-            total_page      :   null,
-            search_term     :   null,
-            transactions    :   [],
-            discount_only   :   false,
-            sum             :   0,
-            split_sum       :   null,
-            total_items     :   0,
-            is_loading      :   false,
-            show_calendar   :   false,
-            no_result       :   false,
-            from_date       :   null,
-            to_date         :   null,
-            operator        :   null,
-            receipt         :   null,
-            customer        :   null,
-            show_cus_form   :   false,
-            found_customer  :   null,
-            phone           :   null
+            store_url           :   location.hostname == 'localhost' ?
+                                    'https://localhost:8081/' : 'https://store.one-stop.co.nz',
+            page                :   parseInt(this.$route.query.page ? this.$route.query.page : 0),
+            total_page          :   null,
+            search_term         :   null,
+            transactions        :   [],
+            discount_only       :   false,
+            sum                 :   0,
+            split_sum           :   null,
+            total_items         :   0,
+            is_loading          :   false,
+            show_calendar       :   false,
+            no_result           :   false,
+            from_date           :   null,
+            to_date             :   null,
+            operator            :   null,
+            receipt             :   null,
+            customer            :   null,
+            show_cus_form       :   false,
+            found_customer      :   null,
+            phone               :   null,
+            show_click_updater  :   false
         }
     },
     watch       :   {
@@ -408,6 +415,8 @@ export default {
                 return false;
             }
 
+            this.show_click_updater =   false;
+
             if (this.is_loading) return false;
             this.is_loading =   true;
             let me      =   this;
@@ -497,6 +506,21 @@ export default {
         {
             let win =   window.open(base_url + endpoints.order + '/All/download' + this.param_organiser, '_blank');
             win.focus();
+        },
+        click_update(e)
+        {
+            this.page   =   0;
+            if (this.$route.query && this.$route.query.page) {
+                this.$router.push({name: 'Sales'});
+            }
+
+            this.get_transacs();
+        }
+    },
+    sockets :   {
+        new_order(data)
+        {
+            this.show_click_updater =   true;
         }
     }
 }

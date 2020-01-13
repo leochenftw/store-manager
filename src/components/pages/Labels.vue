@@ -49,7 +49,26 @@ export default {
             search_term     :   null,
             labels          :   [],
             is_loading      :   false,
-            show_qr         :   true
+            show_qr         :   false
+        }
+    },
+    created()
+    {
+        if (localStorage.working_labels) {
+            try {
+                this.labels =   JSON.parse(localStorage.working_labels);
+                delete localStorage.working_labels;
+            } catch (e) {
+                console.error('Something not right');
+            }
+        }
+    },
+    beforeDestroy()
+    {
+        if (this.labels.length > 0) {
+            localStorage.working_labels =   JSON.stringify(this.labels);
+        } else {
+            delete localStorage.working_labels;
         }
     },
     methods     :   {

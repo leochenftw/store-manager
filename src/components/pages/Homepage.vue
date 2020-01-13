@@ -137,13 +137,14 @@ export default {
     sockets: {
         new_order(data)
         {
-            axios.get(
-                base_url + endpoints.dashboard + '/today_sums'
-            ).then(resp => {
-                this.sums   =   resp.data;
-            }).catch(error => {
-
-            });
+            // axios.get(
+            //     base_url + endpoints.dashboard + '/today_sums'
+            // ).then(resp => {
+            //     this.sums   =   resp.data;
+            // }).catch(error => {
+            //
+            // });
+            this.handle_new_order();
         },
         new_member(data)
         {
@@ -192,6 +193,17 @@ export default {
         // sys_message
     },
     methods :   {
+        handle_new_order()
+        {
+            axios.get(
+                base_url + endpoints.dashboard
+            ).then(resp => {
+                this.sums       =   resp.data.sums;
+                this.low_stocks =   resp.data.low_stocks;
+            }).catch(error => {
+
+            });
+        },
         fetch_data()
         {
             axios.get(

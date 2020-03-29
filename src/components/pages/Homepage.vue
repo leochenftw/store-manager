@@ -14,6 +14,7 @@
                     <p class="subtitle is-6">
                         <span class="icon"><i class="far fa-credit-card"></i></span> {{sums.eftpos.toDollar()}}
                         <span class="icon"><i class="far fa-money-bill-alt"></i></span> {{sums.cash.toDollar()}}
+                        <span class="icon"><i class="fas fa-globe"></i></span> {{sums.web.toDollar()}}
                         <span class="icon"><i class="fas fa-ticket-alt"></i></span> {{sums.voucher.toDollar()}}
                     </p>
                     <hr />
@@ -137,13 +138,6 @@ export default {
     sockets: {
         new_order(data)
         {
-            // axios.get(
-            //     base_url + endpoints.dashboard + '/today_sums'
-            // ).then(resp => {
-            //     this.sums   =   resp.data;
-            // }).catch(error => {
-            //
-            // });
             this.handle_new_order();
         },
         new_member(data)

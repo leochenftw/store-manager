@@ -24,12 +24,13 @@ axios.defaults.withCredentials = true;
 global._            =   _;
 global.TweenMax     =   TweenMax;
 global.axios        =   axios;
-global.base_url     =   location.hostname == 'localhost' ? 'https://onestore.leochen.co.nz/' : 'https://www.one-stop.co.nz/';
+// global.base_url     =   location.hostname == 'localhost' ? 'https://onestore.leochen.co.nz/' : 'https://www.one-stop.co.nz/';
+global.base_url     =   'https://www.one-stop.co.nz/';
 global.endpoints    =   require('@/config/endpoints');
 global.store_info   =   null;
 
 Vue.use(new VueSocketIO({
-    connection: 'https://ws' + (location.hostname == 'localhost' ? '-staging' : '') + '.one-stop.co.nz',
+    connection: 'https://ws.one-stop.co.nz',
     options: {
         transports: ['websocket', 'polling']
     }

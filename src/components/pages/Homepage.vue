@@ -14,7 +14,7 @@
                     <p class="subtitle is-6">
                         <span class="icon"><i class="far fa-credit-card"></i></span> {{sums.eftpos.toDollar()}}
                         <span class="icon"><i class="far fa-money-bill-alt"></i></span> {{sums.cash.toDollar()}}
-                        <span class="icon"><i class="fas fa-globe"></i></span> {{sums.web.toDollar()}}
+                        <template v-if="sums.web"><span class="icon"><i class="fas fa-globe"></i></span> {{sums.web.toDollar()}}</template>
                         <span class="icon"><i class="fas fa-ticket-alt"></i></span> {{sums.voucher.toDollar()}}
                     </p>
                     <hr />
@@ -55,19 +55,21 @@
                     </p>
                     <template v-else>
                         <div class="expired-products" v-for="expired, i in expiries.expired">
-                            <h3 class="title is-5 has-text-danger is-marginless">{{expired.date}}</h3>
-                            <div class="content">
-                                <ul class="expired-products__list">
-                                    <li v-for="product, i in expired.products">
-                                        <router-link :to="{ name: 'ProductViewer', params: {id: product.id} }">{{product.title}}</router-link>
-                                    </li>
-                                </ul>
-                            </div>
+                            <template v-if="expired.products.length">
+                                <h3 class="title is-5 has-text-danger is-marginless">{{expired.date}}</h3>
+                                <div class="content">
+                                    <ul class="expired-products__list">
+                                        <li v-for="product, i in expired.products">
+                                            <router-link :to="{ name: 'ProductViewer', params: {id: product.id} }">{{product.title}}</router-link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </template>
                         </div>
                     </template>
                     <hr />
                     <h2 class="title is-3">Expiring Products</h2>
-                    <p v-if="expiries.expired && !expiries.expired.length" class="subtitle is-6 has-text-success">
+                    <p v-if="expiries.expiring && !expiries.expiring.length" class="subtitle is-6 has-text-success">
                         List seems clean :)
                     </p>
                     <template v-else>
